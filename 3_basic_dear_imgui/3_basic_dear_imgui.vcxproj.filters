@@ -39,6 +39,9 @@
     <ClCompile Include="external\gl3w\GL\gl3w.c">
       <Filter>gl3w</Filter>
     </ClCompile>
+    <ClCompile Include="example_imgui.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="external\imgui-1.53\imgui.h">

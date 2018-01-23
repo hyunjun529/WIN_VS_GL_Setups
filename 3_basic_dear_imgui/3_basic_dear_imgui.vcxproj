@@ -127,12 +127,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="example_imgui.cpp" />
     <ClCompile Include="external\gl3w\GL\gl3w.c" />
     <ClCompile Include="external\imgui-1.53\imgui.cpp" />
     <ClCompile Include="external\imgui-1.53\imgui_demo.cpp" />
     <ClCompile Include="external\imgui-1.53\imgui_draw.cpp" />
     <ClCompile Include="external\imgui-1.53\imgui_impl_glfw_gl3.cpp" />
-    <ClCompile Include="glfw-quick-old.cpp" />
+    <ClCompile Include="glfw-quick-old.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="external\gl3w\GL\gl3w.h" />
