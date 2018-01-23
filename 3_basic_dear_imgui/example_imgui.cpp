@@ -8,7 +8,7 @@
 
 #include "linmath.h"
 
-static const struct
+static struct
 {
 	float x, y;
 	float r, g, b;
@@ -69,7 +69,7 @@ int main(int, char**)
 	// Setup Triangle
 	glGenBuffers(1, &vertex_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 	
 	vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex_shader, 1, &vertex_shader_text, NULL);
@@ -97,8 +97,14 @@ int main(int, char**)
 	ImGui_ImplGlfwGL3_Init(window, true);
 	ImGui::StyleColorsClassic();
 
+	// params
 	bool show_demo_window = false;
-	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+	float param_speed_spin = 1.0f;
+	float param_resize = 1.0f;
+	ImVec4 param_color_clear = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+	ImVec4 param_color_vertex_r = ImVec4(1.00f, 0.00f, 0.00f, 1.00f);
+	ImVec4 param_color_vertex_g = ImVec4(0.00f, 1.00f, 0.00f, 1.00f);
+	ImVec4 param_color_vertex_b = ImVec4(0.00f, 0.00f, 1.00f, 1.00f);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -109,31 +115,52 @@ int main(int, char**)
 		glfwGetFramebufferSize(window, &width, &height);
 		ratio = width / (float)height;
 		glViewport(0, 0, width, height);
-		glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+		glClearColor(param_color_clear.x, param_color_clear.y, param_color_clear.z, param_color_clear.w);
 		glClear(GL_COLOR_BUFFER_BIT);
-		
+
 		// render Triangle
+		vertices[0].r = param_color_vertex_r.x;
+		vertices[0].g = param_color_vertex_r.y;
+		vertices[0].b = param_color_vertex_r.z;
+		vertices[1].r = param_color_vertex_g.x;
+		vertices[1].g = param_color_vertex_g.y;
+		vertices[1].b = param_color_vertex_g.z;
+		vertices[2].r = param_color_vertex_b.x;
+		vertices[2].g = param_color_vertex_b.y;
+		vertices[2].b = param_color_vertex_b.z;
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+
 		mat4x4_identity(m);
-		mat4x4_rotate_Z(m, m, (float)glfwGetTime());
+		mat4x4_rotate_Z(m, m, (float)glfwGetTime() * -param_speed_spin);
 		mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+		mat4x4_scale_aniso(p, p, param_resize, param_resize, param_resize);
 		mat4x4_mul(mvp, p, m);
 
 		glUseProgram(program);
 		glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)mvp);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
-		
+
 		// render ImGui
 		ImGui_ImplGlfwGL3_NewFrame();
 
 		{
 			ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
 			ImGui::Begin("example control window");
+			ImGui::Text("Hell world!");
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-			ImGui::Text("Hello, world!");
-			static float f = 0.0f;
-			ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-			ImGui::ColorEdit3("clear color", (float*)&clear_color);
 			if (ImGui::Button("Demo Window")) show_demo_window ^= 1;
+			ImGui::Spacing();
+			ImGui::Separator();
+			ImGui::Spacing();
+			ImGui::SliderFloat("spin", &param_speed_spin, -2.0f, 2.0f);
+			ImGui::SliderFloat("size", &param_resize, 0.0f, 2.0f);
+			ImGui::ColorEdit3("clear color", (float*)&param_color_clear);
+			ImGui::Spacing();
+			ImGui::Separator();
+			ImGui::Spacing();
+			ImGui::ColorEdit3("vertex r", (float*)&param_color_vertex_r);
+			ImGui::ColorEdit3("vertex g", (float*)&param_color_vertex_g);
+			ImGui::ColorEdit3("vertex b", (float*)&param_color_vertex_b);
 			ImGui::End();
 		}
 		if (show_demo_window)
