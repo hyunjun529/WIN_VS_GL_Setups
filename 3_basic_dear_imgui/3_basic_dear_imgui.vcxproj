@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>./external/imgui-1.53;./external/gl3w;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -87,6 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>./external/imgui-1.53;./external/gl3w;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -100,6 +102,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>./external/imgui-1.53;./external/gl3w;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -115,6 +118,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>./external/imgui-1.53;./external/gl3w;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -123,7 +127,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="external\gl3w\GL\gl3w.c" />
+    <ClCompile Include="external\imgui-1.53\imgui.cpp" />
+    <ClCompile Include="external\imgui-1.53\imgui_demo.cpp" />
+    <ClCompile Include="external\imgui-1.53\imgui_draw.cpp" />
+    <ClCompile Include="external\imgui-1.53\imgui_impl_glfw_gl3.cpp" />
     <ClCompile Include="glfw-quick-old.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="external\gl3w\GL\gl3w.h" />
+    <ClInclude Include="external\gl3w\GL\glcorearb.h" />
+    <ClInclude Include="external\imgui-1.53\imconfig.h" />
+    <ClInclude Include="external\imgui-1.53\imgui.h" />
+    <ClInclude Include="external\imgui-1.53\imgui_impl_glfw_gl3.h" />
+    <ClInclude Include="external\imgui-1.53\imgui_internal.h" />
+    <ClInclude Include="external\imgui-1.53\stb_rect_pack.h" />
+    <ClInclude Include="external\imgui-1.53\stb_textedit.h" />
+    <ClInclude Include="external\imgui-1.53\stb_truetype.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

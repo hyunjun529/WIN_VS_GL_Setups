@@ -1,6 +1,10 @@
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+#include <imgui.h>
+#include "imgui_impl_glfw_gl3.h"
+
 static void error_callback(int error, const char* description)
 {
 	fputs(description, stderr);
