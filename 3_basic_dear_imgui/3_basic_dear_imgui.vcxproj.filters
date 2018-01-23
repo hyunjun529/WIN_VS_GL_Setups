@@ -71,5 +71,8 @@
     <ClInclude Include="external\gl3w\GL\gl3w.h">
       <Filter>gl3w</Filter>
     </ClInclude>
+    <ClInclude Include="external\linmath.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
