@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="external">
+      <UniqueIdentifier>{d30a43a9-e9a9-461f-834f-aee087a4b114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GL">
+      <UniqueIdentifier>{91cb906a-2720-4649-8bfa-31453a1ba078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{1e7dcfa5-5310-4616-bfb1-c75922902c7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\gl3w">
+      <UniqueIdentifier>{98b44249-159c-461f-96c8-921447e57f21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\glfw">
+      <UniqueIdentifier>{4499029f-abd5-4663-b20f-0a3f23a268d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\imgui">
+      <UniqueIdentifier>{a272d04f-794b-4742-83e4-17b1ae8fcba8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\linmath.h">
+      <UniqueIdentifier>{2fd323da-bb4e-4468-971d-73bb1e591fec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GL\shader">
+      <UniqueIdentifier>{9863bb44-c84b-40ea-9503-3169665e9080}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="external\imgui-1.53\imgui_draw.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui-1.53\imgui_impl_glfw_gl3.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui-1.53\imgui.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui-1.53\imgui_demo.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\gl3w\GL\gl3w.c">
+      <Filter>external\gl3w</Filter>
+    </ClCompile>
+    <ClCompile Include="GL\GLShader.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\Scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="external\linmath.h\linmath.h">
+      <Filter>external\linmath.h</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\imgui_impl_glfw_gl3.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\imgui_internal.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\stb_rect_pack.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\stb_textedit.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\stb_truetype.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\imconfig.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\imgui.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw-3.2.1\include\GLFW\glfw3.h">
+      <Filter>external\glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="external\gl3w\GL\gl3w.h">
+      <Filter>external\gl3w</Filter>
+    </ClInclude>
+    <ClInclude Include="external\gl3w\GL\glcorearb.h">
+      <Filter>external\gl3w</Filter>
+    </ClInclude>
+    <ClInclude Include="GL\GLShader.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\Scene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="GL\shader\basic.frag.hlsl">
+      <Filter>GL\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="GL\shader\basic.vert.hlsl">
+      <Filter>GL\shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
