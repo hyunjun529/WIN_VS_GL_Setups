@@ -25,6 +25,9 @@
     <Filter Include="GL\shader">
       <UniqueIdentifier>{9863bb44-c84b-40ea-9503-3169665e9080}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external\spdlog">
+      <UniqueIdentifier>{6dddc7ff-8838-4280-bbe0-62a0162dcafd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -48,6 +51,9 @@
     </ClCompile>
     <ClCompile Include="scene\Scene.cpp">
       <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GL\GLVertex.cpp">
+      <Filter>GL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,13 +96,19 @@
     <ClInclude Include="scene\Scene.h">
       <Filter>scene</Filter>
     </ClInclude>
+    <ClInclude Include="GL\GLVertex.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="external\spdlog\spdlog\spdlog.h">
+      <Filter>external\spdlog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="GL\shader\basic.frag.hlsl">
+    <None Include="GL\shader\basic.frag.glsl">
       <Filter>GL\shader</Filter>
-    </FxCompile>
-    <FxCompile Include="GL\shader\basic.vert.hlsl">
+    </None>
+    <None Include="GL\shader\basic.vert.glsl">
       <Filter>GL\shader</Filter>
-    </FxCompile>
+    </None>
   </ItemGroup>
 </Project>
