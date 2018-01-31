@@ -4,12 +4,6 @@
     <Filter Include="external">
       <UniqueIdentifier>{d30a43a9-e9a9-461f-834f-aee087a4b114}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GL">
-      <UniqueIdentifier>{91cb906a-2720-4649-8bfa-31453a1ba078}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="scene">
-      <UniqueIdentifier>{1e7dcfa5-5310-4616-bfb1-c75922902c7b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="external\gl3w">
       <UniqueIdentifier>{98b44249-159c-461f-96c8-921447e57f21}</UniqueIdentifier>
     </Filter>
@@ -21,12 +15,6 @@
     </Filter>
     <Filter Include="external\linmath.h">
       <UniqueIdentifier>{2fd323da-bb4e-4468-971d-73bb1e591fec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GL\shader">
-      <UniqueIdentifier>{9863bb44-c84b-40ea-9503-3169665e9080}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="external\spdlog">
-      <UniqueIdentifier>{6dddc7ff-8838-4280-bbe0-62a0162dcafd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,15 +33,6 @@
     </ClCompile>
     <ClCompile Include="external\gl3w\GL\gl3w.c">
       <Filter>external\gl3w</Filter>
-    </ClCompile>
-    <ClCompile Include="GL\GLShader.cpp">
-      <Filter>GL</Filter>
-    </ClCompile>
-    <ClCompile Include="scene\Scene.cpp">
-      <Filter>scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GL\GLVertex.cpp">
-      <Filter>GL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,25 +69,5 @@
     <ClInclude Include="external\gl3w\GL\glcorearb.h">
       <Filter>external\gl3w</Filter>
     </ClInclude>
-    <ClInclude Include="GL\GLShader.h">
-      <Filter>GL</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\Scene.h">
-      <Filter>scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GL\GLVertex.h">
-      <Filter>GL</Filter>
-    </ClInclude>
-    <ClInclude Include="external\spdlog\spdlog\spdlog.h">
-      <Filter>external\spdlog</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="GL\shader\basic.frag.glsl">
-      <Filter>GL\shader</Filter>
-    </None>
-    <None Include="GL\shader\basic.vert.glsl">
-      <Filter>GL\shader</Filter>
-    </None>
   </ItemGroup>
 </Project>

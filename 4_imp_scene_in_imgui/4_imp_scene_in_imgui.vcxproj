@@ -136,10 +136,7 @@
     <ClCompile Include="external\imgui-1.53\imgui_demo.cpp" />
     <ClCompile Include="external\imgui-1.53\imgui_draw.cpp" />
     <ClCompile Include="external\imgui-1.53\imgui_impl_glfw_gl3.cpp" />
-    <ClCompile Include="GL\GLShader.cpp" />
-    <ClCompile Include="GL\GLVertex.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="scene\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="external\gl3w\GL\gl3w.h" />
@@ -153,14 +150,6 @@
     <ClInclude Include="external\imgui-1.53\stb_textedit.h" />
     <ClInclude Include="external\imgui-1.53\stb_truetype.h" />
     <ClInclude Include="external\linmath.h\linmath.h" />
-    <ClInclude Include="external\spdlog\spdlog\spdlog.h" />
-    <ClInclude Include="GL\GLShader.h" />
-    <ClInclude Include="GL\GLVertex.h" />
-    <ClInclude Include="scene\Scene.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="GL\shader\basic.frag.glsl" />
-    <None Include="GL\shader\basic.vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
