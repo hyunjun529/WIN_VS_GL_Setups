@@ -17,8 +17,8 @@ static struct
 } vertices[3] =
 {
 	{ -0.6f, -0.4f, 1.f, 0.f, 0.f },
-	{ 0.6f, -0.4f, 0.f, 1.f, 0.f },
-	{ 0.f,   0.6f, 0.f, 0.f, 1.f }
+	{  0.6f, -0.4f, 0.f, 1.f, 0.f },
+	{  0.f,   0.6f, 0.f, 0.f, 1.f }
 };
 
 static const char* vertex_shader_text =
@@ -40,7 +40,7 @@ static const char* fragment_shader_text =
 "}\n";
 
 
-// 원래 이러면 안됨
+// 원래 이러면 안됨, 편의상 전역에 올려둠
 bool show_demo_window = false;
 bool show_hidden = false;
 float param_speed_spin = 1.0f;
@@ -53,6 +53,8 @@ ImVec4 param_color_vertex_b = ImVec4(0.00f, 0.00f, 1.00f, 1.00f);
 static GLuint texture_id = 0;
 GLuint *data = (GLuint*)malloc(400 * 400 * 4 * sizeof(GLuint));
 
+// gl3w는 한 번만 초기화해야함
+// 이게 하는 역할에 대해서 다시 정리해야함
 bool is_Init_gl3w = false;
 
 
@@ -65,7 +67,7 @@ private:
 	int windowH = 0;
 
 public:
-	GLFWwindow *window; // 원래는 이러면 안됨
+	GLFWwindow *window; // 원래는 이러면 안됨, 원리 설명하려고 해뒀다
 	int spin = -1;
 
 	GLWindow(int _w, int _h)
@@ -77,7 +79,7 @@ public:
 			// assert?
 		}
 		glfwMakeContextCurrent(window);
-		if (gl3wInit() && !is_Init_gl3w) {
+		if (gl3wInit() && !is_Init_gl3w) { // 나중에 한 번만 처리할 수 있도록 따로 묶어야함
 			fprintf(stderr, "failed to initialize OpenGL\n");
 			// assert?
 			is_Init_gl3w = true;
@@ -92,10 +94,12 @@ public:
 
 	void setup() {
 		glfwMakeContextCurrent(window);
+		// 버택스 바인딩은 따로 때야함
 		glGenBuffers(1, &vertex_buffer);
 		glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 
+		// 여기서부터 쉐이더 프로그램
 		vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vertex_shader, 1, &vertex_shader_text, NULL);
 		glCompileShader(vertex_shader);
@@ -109,7 +113,7 @@ public:
 		glAttachShader(program, fragment_shader);
 		glLinkProgram(program);
 
-		mvp_location = glGetUniformLocation(program, "MVP");
+		mvp_location = glGetUniformLocation(program, "MVP"); 
 		vpos_location = glGetAttribLocation(program, "vPos");
 		vcol_location = glGetAttribLocation(program, "vCol");
 
@@ -190,7 +194,8 @@ int main(int, char**)
 			ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
 			ImGui::Begin("example control window");
 			ImGui::Text("Hell world!");
-			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
+				1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 			if (ImGui::Button("Demo Window")) show_demo_window ^= 1;
 
 			ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
@@ -224,7 +229,7 @@ int main(int, char**)
 		}
 		if (show_demo_window)
 		{
-			ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver); // Normally user code doesn't need/want to call this because positions are saved in .ini file anyway. Here we just want to make the demo initial state a bit more friendly!
+			ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
 			ImGui::ShowDemoWindow(&show_demo_window);
 		}
 		if (show_hidden) {
