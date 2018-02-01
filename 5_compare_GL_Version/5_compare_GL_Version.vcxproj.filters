@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="external">
+      <UniqueIdentifier>{f7fa2883-6346-4212-89a5-cb5bce5ac21f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{7d72a987-a115-48dc-a653-cd3a7ed3fc59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\gl3w">
+      <UniqueIdentifier>{a9427401-64f2-4c1d-be6d-d33de4512a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\glfw">
+      <UniqueIdentifier>{8716ee29-39ff-436e-8a64-6cf4c92692ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\imgui">
+      <UniqueIdentifier>{e8ae97cd-a797-48da-be9f-8a00d4fd8c16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\linmath.h">
+      <UniqueIdentifier>{34db7b58-9081-4313-822b-3d39bd8cc4e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\spdlog">
+      <UniqueIdentifier>{f10fac4b-304b-46c2-b0c3-281f331f0e63}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="scene\Scene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\SceneGL20.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\SceneGL32.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\SceneGL33.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\SceneGL40.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="external\gl3w\GL\gl3w.h">
+      <Filter>external\gl3w</Filter>
+    </ClInclude>
+    <ClInclude Include="external\gl3w\GL\glcorearb.h">
+      <Filter>external\gl3w</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw-3.2.1\include\GLFW\glfw3.h">
+      <Filter>external\glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\imgui_impl_glfw_gl3.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\imgui_internal.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\stb_rect_pack.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\stb_textedit.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\stb_truetype.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\imconfig.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui-1.53\imgui.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\linmath.h\linmath.h">
+      <Filter>external\linmath.h</Filter>
+    </ClInclude>
+    <ClInclude Include="external\spdlog\spdlog\spdlog.h">
+      <Filter>external\spdlog</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="scene\SceneGL20.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\SceneGL32.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\SceneGL33.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\SceneGL40.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\Scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="external\gl3w\GL\gl3w.c">
+      <Filter>external\gl3w</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui-1.53\imgui_draw.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui-1.53\imgui_impl_glfw_gl3.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui-1.53\imgui.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui-1.53\imgui_demo.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+</Project>
