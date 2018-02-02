@@ -143,11 +143,15 @@
     <ClInclude Include="external\imgui-1.53\stb_truetype.h" />
     <ClInclude Include="external\linmath.h\linmath.h" />
     <ClInclude Include="external\spdlog\spdlog\spdlog.h" />
-    <ClInclude Include="scene\Scene.h" />
-    <ClInclude Include="scene\SceneGL20.h" />
-    <ClInclude Include="scene\SceneGL32.h" />
-    <ClInclude Include="scene\SceneGL33.h" />
-    <ClInclude Include="scene\SceneGL40.h" />
+    <ClInclude Include="util\File.h" />
+    <ClInclude Include="util\Log.h" />
+    <ClInclude Include="viewer\GL\GLWindow.h" />
+    <ClInclude Include="viewer\scene\Scene.h" />
+    <ClInclude Include="viewer\scene\SceneGL20.h" />
+    <ClInclude Include="viewer\scene\SceneGL32.h" />
+    <ClInclude Include="viewer\scene\SceneGL33.h" />
+    <ClInclude Include="viewer\scene\SceneGL40.h" />
+    <ClInclude Include="viewer\Viewer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\gl3w\GL\gl3w.c" />
@@ -156,11 +160,19 @@
     <ClCompile Include="external\imgui-1.53\imgui_draw.cpp" />
     <ClCompile Include="external\imgui-1.53\imgui_impl_glfw_gl3.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="scene\Scene.cpp" />
-    <ClCompile Include="scene\SceneGL20.cpp" />
-    <ClCompile Include="scene\SceneGL32.cpp" />
-    <ClCompile Include="scene\SceneGL33.cpp" />
-    <ClCompile Include="scene\SceneGL40.cpp" />
+    <ClCompile Include="util\File.cpp" />
+    <ClCompile Include="util\Log.cpp" />
+    <ClCompile Include="viewer\GL\GLWindow.cpp" />
+    <ClCompile Include="viewer\scene\Scene.cpp" />
+    <ClCompile Include="viewer\scene\SceneGL20.cpp" />
+    <ClCompile Include="viewer\scene\SceneGL32.cpp" />
+    <ClCompile Include="viewer\scene\SceneGL33.cpp" />
+    <ClCompile Include="viewer\scene\SceneGL40.cpp" />
+    <ClCompile Include="viewer\Viewer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="viewer\GL\shader\basicGL20.farg.glsl" />
+    <None Include="viewer\GL\shader\basicGL20.vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
