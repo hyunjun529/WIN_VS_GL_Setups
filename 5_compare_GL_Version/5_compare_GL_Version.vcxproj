@@ -131,6 +131,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="component\Component.h" />
+    <ClInclude Include="component\GraphicsComponent.h" />
+    <ClInclude Include="component\ImguiComponent\ImguiComponent.h" />
+    <ClInclude Include="component\InputComponent.h" />
+    <ClInclude Include="component\PhysicsComponent.h" />
     <ClInclude Include="external\gl3w\GL\gl3w.h" />
     <ClInclude Include="external\gl3w\GL\glcorearb.h" />
     <ClInclude Include="external\glfw-3.2.1\include\GLFW\glfw3.h" />
@@ -143,9 +148,11 @@
     <ClInclude Include="external\imgui-1.53\stb_truetype.h" />
     <ClInclude Include="external\linmath.h\linmath.h" />
     <ClInclude Include="external\spdlog\spdlog\spdlog.h" />
+    <ClInclude Include="GL\GLShaderUtil.h" />
+    <ClInclude Include="GL\GLVertexUtil.h" />
+    <ClInclude Include="GL\GLWindow.h" />
     <ClInclude Include="util\File.h" />
     <ClInclude Include="util\Log.h" />
-    <ClInclude Include="viewer\GL\GLWindow.h" />
     <ClInclude Include="viewer\scene\Scene.h" />
     <ClInclude Include="viewer\scene\SceneGL20.h" />
     <ClInclude Include="viewer\scene\SceneGL32.h" />
@@ -154,15 +161,22 @@
     <ClInclude Include="viewer\Viewer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="component\Component.cpp" />
+    <ClCompile Include="component\GraphicsComponent.cpp" />
+    <ClCompile Include="component\ImguiComponent\ImguiComponent.cpp" />
+    <ClCompile Include="component\InputComponent.cpp" />
+    <ClCompile Include="component\PhysicsComponent.cpp" />
     <ClCompile Include="external\gl3w\GL\gl3w.c" />
     <ClCompile Include="external\imgui-1.53\imgui.cpp" />
     <ClCompile Include="external\imgui-1.53\imgui_demo.cpp" />
     <ClCompile Include="external\imgui-1.53\imgui_draw.cpp" />
     <ClCompile Include="external\imgui-1.53\imgui_impl_glfw_gl3.cpp" />
+    <ClCompile Include="GL\GLShaderUtil.cpp" />
+    <ClCompile Include="GL\GLVertexUtil.cpp" />
+    <ClCompile Include="GL\GLWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="util\File.cpp" />
     <ClCompile Include="util\Log.cpp" />
-    <ClCompile Include="viewer\GL\GLWindow.cpp" />
     <ClCompile Include="viewer\scene\Scene.cpp" />
     <ClCompile Include="viewer\scene\SceneGL20.cpp" />
     <ClCompile Include="viewer\scene\SceneGL32.cpp" />
@@ -171,8 +185,8 @@
     <ClCompile Include="viewer\Viewer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="viewer\GL\shader\basicGL20.farg.glsl" />
-    <None Include="viewer\GL\shader\basicGL20.vert.glsl" />
+    <None Include="GL\shader\basicGL20.farg.glsl" />
+    <None Include="GL\shader\basicGL20.vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

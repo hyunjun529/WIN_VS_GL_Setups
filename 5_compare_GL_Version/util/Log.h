@@ -36,6 +36,18 @@ namespace kata
 			{
 				m_loggerConsole->info(message, args...);
 			}
+
+			template <typename... Args>
+			void warn(const char* message, const Args&... args)
+			{
+				m_loggerConsole->warn(message, args...);
+			}
+
+			template <typename... Args>
+			void error(const char* message, const Args&... args)
+			{
+				m_loggerConsole->error(message, args...);
+			}
 		};
 
 		// macro
@@ -44,11 +56,27 @@ namespace kata
 		{
 			Log::getInstance()->info(message, args...);
 		}
+		template <typename... Args>
+		void warn(const char* message, const Args&... args)
+		{
+			Log::getInstance()->warn(message, args...);
+		}
+		template <typename... Args>
+		void error(const char* message, const Args&... args)
+		{
+			Log::getInstance()->error(message, args...);
+		}
 	}
 }
 
 // define macro
 #define CONSOLE_INFO(message, ...)\
 	kata::util::Info(message, ##__VA_ARGS__)
+
+#define CONSOLE_WARN(message, ...)\
+	kata::util::warn(message, ##__VA_ARGS__)
+
+#define CONSOLE_ERROR(message, ...)\
+	kata::util::error(message, ##__VA_ARGS__)
 
 #endif // KATA_UTIL_LOG_H_
