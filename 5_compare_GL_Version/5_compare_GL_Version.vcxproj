@@ -76,7 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./external/gl3w;./external/glfw-3.2.1/include;./external/imgui-1.53;./external/linmath.h;./external/spdlog;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./external/gl3w;./external/glfw-3.2.1/include;./external/imgui-1.53;./external/linmath.h;./external/spdlog</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>./external/glfw-3.2.1/lib;</AdditionalLibraryDirectories>
@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./external/gl3w;./external/glfw-3.2.1/include;./external/imgui-1.53;./external/linmath.h;./external/spdlog;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./external/gl3w;./external/glfw-3.2.1/include;./external/imgui-1.53;./external/linmath.h;./external/spdlog</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>./external/glfw-3.2.1/lib;</AdditionalLibraryDirectories>
@@ -104,7 +104,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./external/gl3w;./external/glfw-3.2.1/include;./external/imgui-1.53;./external/linmath.h;./external/spdlog;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./external/gl3w;./external/glfw-3.2.1/include;./external/imgui-1.53;./external/linmath.h;./external/spdlog</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -121,7 +121,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./external/gl3w;./external/glfw-3.2.1/include;./external/imgui-1.53;./external/linmath.h;./external/spdlog;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./external/gl3w;./external/glfw-3.2.1/include;./external/imgui-1.53;./external/linmath.h;./external/spdlog</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -136,6 +136,7 @@
     <ClInclude Include="component\ImguiComponent\ImguiComponent.h" />
     <ClInclude Include="component\InputComponent.h" />
     <ClInclude Include="component\PhysicsComponent.h" />
+    <ClInclude Include="component\SceneComponenet\SceneComponent.h" />
     <ClInclude Include="external\gl3w\GL\gl3w.h" />
     <ClInclude Include="external\gl3w\GL\glcorearb.h" />
     <ClInclude Include="external\glfw-3.2.1\include\GLFW\glfw3.h" />
@@ -166,6 +167,7 @@
     <ClCompile Include="component\ImguiComponent\ImguiComponent.cpp" />
     <ClCompile Include="component\InputComponent.cpp" />
     <ClCompile Include="component\PhysicsComponent.cpp" />
+    <ClCompile Include="component\SceneComponenet\SceneComponent.cpp" />
     <ClCompile Include="external\gl3w\GL\gl3w.c" />
     <ClCompile Include="external\imgui-1.53\imgui.cpp" />
     <ClCompile Include="external\imgui-1.53\imgui_demo.cpp" />

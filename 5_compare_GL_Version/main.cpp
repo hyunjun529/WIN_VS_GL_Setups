@@ -5,7 +5,7 @@
 
 int main(int argc, char** argv)
 {
-	CONSOLE_INFO("start");
+	KATA_CONSOLE_INFO("start");
 
 	kata::Viewer *viewer = new kata::Viewer();
 

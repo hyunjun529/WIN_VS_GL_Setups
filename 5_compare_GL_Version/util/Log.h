@@ -70,13 +70,13 @@ namespace kata
 }
 
 // define macro
-#define CONSOLE_INFO(message, ...)\
+#define KATA_CONSOLE_INFO(message, ...)\
 	kata::util::Info(message, ##__VA_ARGS__)
 
-#define CONSOLE_WARN(message, ...)\
+#define KATA_CONSOLE_WARN(message, ...)\
 	kata::util::warn(message, ##__VA_ARGS__)
 
-#define CONSOLE_ERROR(message, ...)\
+#define KATA_CONSOLE_ERROR(message, ...)\
 	kata::util::error(message, ##__VA_ARGS__)
 
 #endif // KATA_UTIL_LOG_H_

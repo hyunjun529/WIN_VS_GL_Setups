@@ -3,8 +3,6 @@
 
 #include "Component.h"
 
-#include "../viewer/scene/Scene.h"
-
 namespace kata
 {
 	namespace component

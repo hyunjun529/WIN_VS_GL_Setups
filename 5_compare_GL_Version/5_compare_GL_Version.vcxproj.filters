@@ -19,12 +19,6 @@
     <Filter Include="external\spdlog">
       <UniqueIdentifier>{f10fac4b-304b-46c2-b0c3-281f331f0e63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="viewer">
-      <UniqueIdentifier>{f894a95e-1967-4acc-a2e9-ea5360b1bc8a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="viewer\scene">
-      <UniqueIdentifier>{87a09123-e539-4254-8733-71539a1ba633}</UniqueIdentifier>
-    </Filter>
     <Filter Include="util">
       <UniqueIdentifier>{fd468ace-2c93-4396-8aae-03c1f1e4a67f}</UniqueIdentifier>
     </Filter>
@@ -39,6 +33,15 @@
     </Filter>
     <Filter Include="Component\ImguiComponent">
       <UniqueIdentifier>{78b433bd-364c-41f8-8101-b8a6fc0d1430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\SceneComponent">
+      <UniqueIdentifier>{a19b0163-5d09-4d3d-9ef2-c152653db880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="viewer">
+      <UniqueIdentifier>{f894a95e-1967-4acc-a2e9-ea5360b1bc8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="viewer\scene">
+      <UniqueIdentifier>{87a09123-e539-4254-8733-71539a1ba633}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +129,9 @@
     <ClInclude Include="GL\GLShaderUtil.h">
       <Filter>GL</Filter>
     </ClInclude>
+    <ClInclude Include="component\SceneComponenet\SceneComponent.h">
+      <Filter>Component\SceneComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\gl3w\GL\gl3w.c">
@@ -191,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="GL\GLVertexUtil.cpp">
       <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="component\SceneComponenet\SceneComponent.cpp">
+      <Filter>Component\SceneComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

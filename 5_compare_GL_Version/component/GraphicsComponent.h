@@ -3,8 +3,6 @@
 
 #include "Component.h"
 
-#include "../viewer/scene/Scene.h"
-
 namespace kata
 {
 	namespace component
@@ -12,7 +10,7 @@ namespace kata
 		class GraphicsComponent : public Component
 		{
 		public:
-			virtual void update() {}
+			virtual void render() {}
 		};
 	}
 }
