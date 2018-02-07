@@ -105,6 +105,7 @@ namespace kata
 
 				// pixel
 				m_sceneWindow.push_back(new SceneWindow());
+				m_sceneWindow.back()->m_texture_id = m_sceneWindow.size() + 1;
 				m_sceneWindow.back()->m_windowTitle = "scene " + std::to_string(m_sceneWindow.size());
 				m_sceneWindow.back()->m_scenePixel = s->getPixel();
 			}
