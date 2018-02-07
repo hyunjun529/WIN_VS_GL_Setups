@@ -30,6 +30,9 @@ namespace kata
 		private:
 			ImguiInputComponent * m_imguiInputComponenet = nullptr;
 			GL::GLWindow *m_GLWindow = nullptr;
+			GLuint *m_pixel = nullptr;
+
+			int m_spinSpeed = 1;
 
 			GLuint vertex_buffer, vertex_shader, fragment_shader, program;
 			GLint mvp_location, vpos_location, vcol_location;
@@ -77,6 +80,16 @@ namespace kata
 				m_imguiInputComponenet = imguiInputComponent;
 			}
 
+			void setPixel(GLuint *pixel)
+			{
+				m_pixel = pixel;
+			}
+
+			void setSpinSpeed(int _ss)
+			{
+				m_spinSpeed = _ss;
+			}
+
 			void setup()
 			{
 				if (!m_GLWindow)
@@ -112,6 +125,8 @@ namespace kata
 				glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)0);
 				glEnableVertexAttribArray(vcol_location);
 				glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)(sizeof(float) * 2));
+
+				// glfwHideWindow(m_GLWindow->m_window);
 			}
 
 			void render()
@@ -149,7 +164,7 @@ namespace kata
 				glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
 
 				mat4x4_identity(m);
-				mat4x4_rotate_Z(m, m, (float)glfwGetTime() * m_imguiInputComponenet->param_speed_spin * m_imguiInputComponenet->spin);
+				mat4x4_rotate_Z(m, m, (float)glfwGetTime() * m_imguiInputComponenet->param_speed_spin * m_imguiInputComponenet->spin * m_spinSpeed);
 				mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 				mat4x4_scale_aniso(p, p, m_imguiInputComponenet->param_resize, m_imguiInputComponenet->param_resize, m_imguiInputComponenet->param_resize);
 				mat4x4_mul(mvp, p, m);
@@ -160,11 +175,11 @@ namespace kata
 				glUseProgram(0);
 
 				glfwSwapBuffers(m_GLWindow->m_window);
+
+				glReadPixels(0, 0, 400, 400, GL_RGBA, GL_UNSIGNED_INT, m_pixel);
 			}
 
-			void renderScene() {}
 
-			void showWindow() {}
 		};
 	}
 }

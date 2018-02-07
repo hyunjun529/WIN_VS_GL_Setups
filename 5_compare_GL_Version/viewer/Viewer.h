@@ -4,6 +4,8 @@
 #include <memory>
 #include <vector>
 #include <assert.h>
+#include <string>
+#include <malloc.h>
 
 #include <GL/gl3w.h>
 #include <GLFW/glfw3.h>
@@ -41,8 +43,15 @@ namespace kata
 
 		int m_windowW = 0;
 		int m_windowH = 0;
-
 		
+		struct SceneWindow
+		{
+			std::string m_windowTitle = "tmp";
+			GLuint m_texture_id;
+			GLuint* m_scenePixel;
+		};
+		std::vector<SceneWindow*> m_sceneWindow;
+
 	public:
 		Viewer(int _w = 1280, int _h = 720)
 			: m_windowW(_w), m_windowH(_h)
@@ -76,6 +85,11 @@ namespace kata
 			m_imguiComponents.push_back((component::ImguiInputComponent*)t_input);
 		}
 
+		~Viewer()
+		{
+			
+		}
+
 		void reset()
 		{
 			for (std::shared_ptr<kata::scene::Scene> s : m_scenes) {
@@ -88,6 +102,11 @@ namespace kata
 			reset();
 			for (std::shared_ptr<kata::scene::Scene> s : m_scenes) {
 				s->setup();
+
+				// pixel
+				m_sceneWindow.push_back(new SceneWindow());
+				m_sceneWindow.back()->m_windowTitle = "scene " + std::to_string(m_sceneWindow.size());
+				m_sceneWindow.back()->m_scenePixel = s->getPixel();
 			}
 		}
 
@@ -125,16 +144,37 @@ namespace kata
 				}
 
 				glfwMakeContextCurrent(m_window);
+				ImGui_ImplGlfwGL3_NewFrame();
+				// GUI Input Compnents
+				ImTextureID tmp_fontTexture_id = ImGui::GetIO().Fonts->TexID;
+				glBindTexture(GL_TEXTURE_2D, (GLuint)tmp_fontTexture_id);
 				for (component::ImguiInputComponent* _imguiComponent
 					: m_imguiComponents)
 				{
 					_imguiComponent->render();
 				}
+				// Scene Componenets
+				for (SceneWindow* sceneWindow : m_sceneWindow)
+				{
+					ImGui::Begin(sceneWindow->m_windowTitle.c_str());
+					glBindTexture(GL_TEXTURE_2D, sceneWindow->m_texture_id);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 400, 400, 0,
+						GL_RGBA, GL_UNSIGNED_INT, sceneWindow->m_scenePixel);
+					ImGui::Image((ImTextureID)sceneWindow->m_texture_id,
+						ImVec2(400, 400),
+						ImVec2(0, 1),
+						ImVec2(1, 0)
+					);
+					ImGui::End();
+				}
+				ImGui::Render();
 				glfwSwapBuffers(m_window);
 			}
 		}
 
-		void addScene()
+		void addScene(int _ss)
 		{
 			component::InputComponent *t_input = m_imguiComponenetsMain;
 			component::PhysicsComponent *t_physics
@@ -148,6 +188,8 @@ namespace kata
 					(component::ScenePhysicsComponent*) t_physics,
 					(component::SceneGraphicsComponent*) t_graphics
 					);
+
+			tmp_scene->setSpinSpeed(_ss);
 
 			m_inputComponents.push_back(t_input);
 			m_physicsComponents.push_back(t_physics);

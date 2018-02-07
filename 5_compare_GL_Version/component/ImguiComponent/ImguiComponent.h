@@ -38,35 +38,33 @@ namespace kata
 
 			void render()
 			{
-				ImGui_ImplGlfwGL3_NewFrame();
+				// need check ImGui context is exist
+
+				ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
+				ImGui::Begin("wtf");
+				ImGui::Text("Hell world!");
+				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
+					1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+				if (ImGui::Button("Demo Window")) show_demo_window ^= 1;
+
+				ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
+
+				ImGui::SliderFloat("spin", &param_speed_spin, -2.0f, 2.0f);
+				ImGui::SliderFloat("size", &param_resize, 0.0f, 2.0f);
+				ImGui::ColorEdit3("clear color", (float*)&param_color_clear);
+
+				ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
+
+				ImGui::ColorEdit3("vertex r", (float*)&param_color_vertex_r);
+				ImGui::ColorEdit3("vertex g", (float*)&param_color_vertex_g);
+				ImGui::ColorEdit3("vertex b", (float*)&param_color_vertex_b);
+
+				if (show_demo_window)
 				{
-					ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_FirstUseEver);
-					ImGui::Begin("wtf");
-					ImGui::Text("Hell world!");
-					ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
-						1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-					if (ImGui::Button("Demo Window")) show_demo_window ^= 1;
-
-					ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
-
-					ImGui::SliderFloat("spin", &param_speed_spin, -2.0f, 2.0f);
-					ImGui::SliderFloat("size", &param_resize, 0.0f, 2.0f);
-					ImGui::ColorEdit3("clear color", (float*)&param_color_clear);
-
-					ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
-
-					ImGui::ColorEdit3("vertex r", (float*)&param_color_vertex_r);
-					ImGui::ColorEdit3("vertex g", (float*)&param_color_vertex_g);
-					ImGui::ColorEdit3("vertex b", (float*)&param_color_vertex_b);
-
-					if (show_demo_window)
-					{
-						ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
-						ImGui::ShowDemoWindow(&show_demo_window);
-					}
-					ImGui::End();
+					ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
+					ImGui::ShowDemoWindow(&show_demo_window);
 				}
-				ImGui::Render();
+				ImGui::End();
 			}
 
 			const ImVec4* getVec4Clear() {

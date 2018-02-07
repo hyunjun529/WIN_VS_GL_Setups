@@ -1,6 +1,8 @@
 #ifndef KATA_SCENE_SCENE_H_
 #define KATA_SCENE_SCENE_H_
 
+#include <malloc.h>
+
 #include "../../GL/GLWindow.h"
 
 #include "../../component/ImguiComponent/ImguiComponent.h"
@@ -19,6 +21,10 @@ namespace kata
 			component::ScenePhysicsComponent *m_physics;
 			component::SceneGraphicsComponent *m_graphics;
 
+			GLuint *m_pixel = (GLuint*)malloc(400 * 400 * 4 * sizeof(GLuint));
+
+			int m_spinSpeed = 1;
+
 		public:
 			Scene(component::ImguiInputComponent *input,
 				  component::ScenePhysicsComponent *phyiscs,
@@ -28,8 +34,15 @@ namespace kata
 				  m_graphics(graphics)
 			{
 				m_GLWindow = new GL::GLWindow();
+
 				m_graphics->setImguiInput(m_input);
 				m_graphics->setGLWindow(m_GLWindow);
+				m_graphics->setPixel(m_pixel);
+			}
+
+			void setSpinSpeed(int _m_spinSpeed)
+			{
+				m_graphics->setSpinSpeed(_m_spinSpeed);
 			}
 
 			void reset()
@@ -40,6 +53,11 @@ namespace kata
 			void setup()
 			{
 				m_graphics->setup();
+			}
+
+			GLuint* getPixel()
+			{
+				return m_pixel;
 			}
 		};
 	}
