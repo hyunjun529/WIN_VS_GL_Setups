@@ -16,14 +16,15 @@ namespace kata
 		class GLWindow
 		{
 		private:
-			GLFWwindow *m_window;
 			GLVertexUtil m_vertexUtil;
 			GLShaderUtil m_shaderUtil;
 
 		public:
+			GLFWwindow * m_window;
+
 			GLWindow()
 			{
-
+				m_window = glfwCreateWindow(400, 400, "???", NULL, NULL);
 			}
 
 		};

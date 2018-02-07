@@ -84,6 +84,10 @@ namespace kata
 				glfwMakeContextCurrent(m_window);
 				glfwPollEvents();
 
+				for (std::shared_ptr<kata::scene::Scene> s : m_scenes) {
+					s->render();
+				}
+
 				glfwMakeContextCurrent(m_window);
 				glfwSwapBuffers(m_window);
 			}
