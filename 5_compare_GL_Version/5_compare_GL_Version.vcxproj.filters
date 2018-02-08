@@ -123,6 +123,9 @@
     <ClInclude Include="component\SceneComponenet\SceneGL20Component.h">
       <Filter>Component\SceneComponent</Filter>
     </ClInclude>
+    <ClInclude Include="component\SceneComponenet\SceneGL32Component.h">
+      <Filter>Component\SceneComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\gl3w\GL\gl3w.c">
@@ -181,6 +184,9 @@
       <Filter>Component\SceneComponent</Filter>
     </ClCompile>
     <ClCompile Include="component\SceneComponenet\SceneGL20Component.cpp">
+      <Filter>Component\SceneComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="component\SceneComponenet\SceneGL32Component.cpp">
       <Filter>Component\SceneComponent</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,7 @@
-#ifndef KATA_COMPONENT_SCENECOMPONENT_H_
-#define KATA_COMPONENT_SCENECOMPONENT_H_
+#ifndef KATA_COMPONENT_SCENEGL32COMPONENT_H_
+#define KATA_COMPONENT_SCENEGL32COMPONENT_H_
+
+#include <string>
 
 #include <GL/gl3w.h>
 #include <GLFW/glfw3.h>
@@ -13,77 +15,83 @@
 
 #include "../ImguiComponent/ImguiComponent.h"
 
+#include "SceneComponent.h"
+
 
 namespace kata
 {
 	namespace component
 	{
-		class ScenePhysicsComponent : public PhysicsComponent
-		{
-		public:
-			ScenePhysicsComponent() {}
-			void update() {}
-		};
-
-		class SceneGraphicsComponent : public GraphicsComponent
+		class SceneGL32GraphicsComponent : public SceneGraphicsComponent
 		{
 		private:
-			ImguiInputComponent * m_imguiInputComponenet = nullptr;
-			
-			GL::GLWindow *m_GLWindow = nullptr;
-			
-			GLuint *m_pixel = nullptr;
+			// https://www.khronos.org/opengl/wiki/Tutorial2:_VAOs,_VBOs,_Vertex_and_Fragment_Shaders_(C_/_SDL)
+			// tutorial2.c > drawscene function
 
-			GLuint vertex_buffer, vertex_shader, fragment_shader, program;
-			GLint mvp_location, vpos_location, vcol_location;
+			GLuint vao, vbo[2]; /* Create handles for our Vertex Array Object and two Vertex Buffer Objects */
+			int IsCompiled_VS, IsCompiled_FS;
+			int IsLinked;
+			int maxLength;
+			char *vertexInfoLog;
+			char *fragmentInfoLog;
+			char *shaderProgramInfoLog;
 
-			struct
-			{
-				float x, y;
-				float r, g, b;
-			} vertices[3] =
-			{
-				{ -0.6f, -0.4f, 1.f, 0.f, 0.f },
-				{ 0.6f, -0.4f, 0.f, 1.f, 0.f },
-				{ 0.f,   0.6f, 0.f, 0.f, 1.f }
-			};
+			/* We're going to create a simple diamond made from lines */
+			const GLfloat diamond[4][2] = {
+				{ 0.0,  1.0 }, /* Top point */
+				{ 1.0,  0.0 }, /* Right point */
+				{ 0.0, -1.0 }, /* Bottom point */
+				{ -1.0,  0.0 } }; /* Left point */
 
-			const char* vertex_shader_text =
-				"uniform mat4 MVP;\n"
-				"attribute vec3 vCol;\n"
-				"attribute vec2 vPos;\n"
-				"varying vec3 color;\n"
-				"void main()\n"
-				"{\n"
-				"    gl_Position = MVP * vec4(vPos, 0.0, 1.0);\n"
-				"    color = vCol;\n"
-				"}\n";
+			const GLfloat colors[4][3] = {
+				{ 1.0,  0.0,  0.0 }, /* Red */
+				{ 0.0,  1.0,  0.0 }, /* Green */
+				{ 0.0,  0.0,  1.0 }, /* Blue */
+				{ 1.0,  1.0,  1.0 } }; /* White */
 
-			const char* fragment_shader_text =
-				"varying vec3 color;\n"
-				"void main()\n"
-				"{\n"
-				"    gl_FragColor = vec4(color, 1.0);\n"
-				"}\n";
+			/* These pointers will receive the contents of our shader source code files */
+			GLchar *vertexsource, *fragmentsource;
 
+			const char *vert = "#version 150/w"
+				"// in_Position was bound to attribute index 0 and in_Color was bound to attribute index 1/w"
+				"in  vec2 in_Position;/w"
+				"in  vec3 in_Color;/w"
+				"/w"
+				"// We output the ex_Color variable to the next shader in the chain/w"
+				"out vec3 ex_Color;/w"
+				"void main(void) {/w"
+				"    // Since we are using flat lines, our input only had two points: x and y./w"
+				"    // Set the Z coordinate to 0 and W coordinate to 1/w"
+				"/w"
+				"    gl_Position = vec4(in_Position.x, in_Position.y, 0.0, 1.0);/w"
+				"/w"
+				"    // GLSL allows shorthand use of vectors too, the following is also valid:/w"
+				"    // gl_Position = vec4(in_Position, 0.0, 1.0);/w"
+				"    // We're simply passing the color through unmodified/w"
+				"/w"
+				"    ex_Color = in_Color;/w"
+				"}/w";
+
+			const char *frag = "#version 150/w"
+				"// It was expressed that some drivers required this next line to function properly/w"
+				"precision highp float;/w"
+				"/w"
+				"in  vec3 ex_Color;/w"
+				"out vec4 gl_FragColor;/w"
+				"/w"
+				"void main(void) {/w"
+				"    // Pass through our original color with full opacity./w"
+				"    gl_FragColor = vec4(ex_Color,1.0);/w"
+				"}/w";
+
+			/* These are handles used to reference the shaders */
+			GLuint vertexshader, fragmentshader;
+
+			/* This is a handle to the shader program */
+			GLuint shaderprogram;
 
 		public:
-			SceneGraphicsComponent() {}
-
-			void setGLWindow(GL::GLWindow *GLWindow)
-			{
-				m_GLWindow = GLWindow;
-			}
-
-			void setImguiInput(ImguiInputComponent *imguiInputComponent)
-			{
-				m_imguiInputComponenet = imguiInputComponent;
-			}
-
-			void setPixel(GLuint *pixel)
-			{
-				m_pixel = pixel;
-			}
+			SceneGL32GraphicsComponent() {}
 
 			void setup()
 			{
@@ -93,35 +101,147 @@ namespace kata
 				}
 
 				glfwMakeContextCurrent(m_GLWindow->m_window);
-				// 버택스 바인딩은 따로 때야함
-				glGenBuffers(1, &vertex_buffer);
-				glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-				glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+				//glfwHideWindow(m_GLWindow->m_window);
 
-				// 여기서부터 쉐이더 프로그램
-				vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-				glShaderSource(vertex_shader, 1, &vertex_shader_text, NULL);
-				glCompileShader(vertex_shader);
+				/* Allocate and assign a Vertex Array Object to our handle */
+				glGenVertexArrays(1, &vao);
 
-				fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-				glShaderSource(fragment_shader, 1, &fragment_shader_text, NULL);
-				glCompileShader(fragment_shader);
+				/* Bind our Vertex Array Object as the current used object */
+				glBindVertexArray(vao);
 
-				program = glCreateProgram();
-				glAttachShader(program, vertex_shader);
-				glAttachShader(program, fragment_shader);
-				glLinkProgram(program);
+				/* Allocate and assign two Vertex Buffer Objects to our handle */
+				glGenBuffers(2, vbo);
 
-				mvp_location = glGetUniformLocation(program, "MVP");
-				vpos_location = glGetAttribLocation(program, "vPos");
-				vcol_location = glGetAttribLocation(program, "vCol");
+				/* Bind our first VBO as being the active buffer and storing vertex attributes (coordinates) */
+				glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
 
-				glEnableVertexAttribArray(vpos_location);
-				glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)0);
-				glEnableVertexAttribArray(vcol_location);
-				glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)(sizeof(float) * 2));
+				/* Copy the vertex data from diamond to our buffer */
+				/* 8 * sizeof(GLfloat) is the size of the diamond array, since it contains 8 GLfloat values */
+				glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(GLfloat), diamond, GL_STATIC_DRAW);
+				
+				/* Specify that our coordinate data is going into attribute index 0, and contains two floats per vertex */
+				glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
-				glfwHideWindow(m_GLWindow->m_window);
+				/* Enable attribute index 0 as being used */
+				glEnableVertexAttribArray(0);
+
+				/* Bind our second VBO as being the active buffer and storing vertex attributes (colors) */
+				glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
+
+				/* Copy the color data from colors to our buffer */
+				/* 12 * sizeof(GLfloat) is the size of the colors array, since it contains 12 GLfloat values */
+				glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(GLfloat), colors, GL_STATIC_DRAW);
+
+				/* Specify that our color data is going into attribute index 1, and contains three floats per vertex */
+				glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+				
+				/* Enable attribute index 1 as being used */
+				glEnableVertexAttribArray(1);
+
+				/* Read our shaders into the appropriate buffers */
+				/* 파일 읽기가 귀찮으니 그냥 const char*에서 복사해서 쓰자 */
+				char _vert[9999];
+				char _frag[9999];
+				strcpy_s(_vert, vert);
+				strcpy_s(_frag, frag);
+				
+				vertexsource = _vert;
+				fragmentsource = _frag;
+
+				/* Create an empty vertex shader handle */
+				vertexshader = glCreateShader(GL_VERTEX_SHADER);
+
+				/* Send the vertex shader source code to GL */
+				/* Note that the source code is NULL character terminated. */
+				/* GL will automatically detect that therefore the length info can be 0 in this case (the last parameter) */
+				glShaderSource(vertexshader, 1, (const GLchar**)&vertexsource, 0);
+
+				/* Compile the vertex shader */
+				glCompileShader(vertexshader);
+
+				glGetShaderiv(vertexshader, GL_COMPILE_STATUS, &IsCompiled_VS);
+				if (IsCompiled_VS == FALSE)
+				{
+					glGetShaderiv(vertexshader, GL_INFO_LOG_LENGTH, &maxLength);
+
+					/* The maxLength includes the NULL character */
+					vertexInfoLog = (char *)malloc(maxLength);
+
+					glGetShaderInfoLog(vertexshader, maxLength, &maxLength, vertexInfoLog);
+
+					/* Handle the error in an appropriate way such as displaying a message or writing to a log file. */
+					/* In this simple program, we'll just leave */
+					free(vertexInfoLog);
+					return;
+				}
+
+				/* Create an empty fragment shader handle */
+				fragmentshader = glCreateShader(GL_FRAGMENT_SHADER);
+
+				/* Send the fragment shader source code to GL */
+				/* Note that the source code is NULL character terminated. */
+				/* GL will automatically detect that therefore the length info can be 0 in this case (the last parameter) */
+				glShaderSource(fragmentshader, 1, (const GLchar**)&fragmentsource, 0);
+				
+				/* Compile the fragment shader */
+				glCompileShader(fragmentshader);
+
+				glGetShaderiv(fragmentshader, GL_COMPILE_STATUS, &IsCompiled_FS);
+				if (IsCompiled_FS == FALSE)
+				{
+					glGetShaderiv(fragmentshader, GL_INFO_LOG_LENGTH, &maxLength);
+
+					/* The maxLength includes the NULL character */
+					fragmentInfoLog = (char *)malloc(maxLength);
+
+					glGetShaderInfoLog(fragmentshader, maxLength, &maxLength, fragmentInfoLog);
+
+					/* Handle the error in an appropriate way such as displaying a message or writing to a log file. */
+					/* In this simple program, we'll just leave */
+					free(fragmentInfoLog);
+					return;
+				}
+
+				/* If we reached this point it means the vertex and fragment shaders compiled and are syntax error free. */
+				/* We must link them together to make a GL shader program */
+				/* GL shader programs are monolithic. It is a single piece made of 1 vertex shader and 1 fragment shader. */
+				/* Assign our program handle a "name" */
+				shaderprogram = glCreateProgram();
+
+				/* Attach our shaders to our program */
+				glAttachShader(shaderprogram, vertexshader);
+				glAttachShader(shaderprogram, fragmentshader);
+
+				/* Bind attribute index 0 (coordinates) to in_Position and attribute index 1 (color) to in_Color */
+				/* Attribute locations must be setup before calling glLinkProgram. */
+				glBindAttribLocation(shaderprogram, 0, "in_Position");
+				glBindAttribLocation(shaderprogram, 1, "in_Color");
+
+				/* Link our program */
+				/* At this stage, the vertex and fragment programs are inspected, optimized and a binary code is generated for the shader. */
+				/* The binary code is uploaded to the GPU, if there is no error. */
+				glLinkProgram(shaderprogram);
+
+				/* Again, we must check and make sure that it linked. If it fails, it would mean either there is a mismatch between the vertex */
+				/* and fragment shaders. It might be that you have surpassed your GPU's abilities. Perhaps too many ALU operations or */
+				/* too many texel fetch instructions or too many interpolators or dynamic loops. */
+				glGetProgramiv(shaderprogram, GL_LINK_STATUS, (int *)&IsLinked);
+				if (IsLinked == FALSE)
+				{
+					/* Noticed that glGetProgramiv is used to get the length for a shader program, not glGetShaderiv. */
+					glGetProgramiv(shaderprogram, GL_INFO_LOG_LENGTH, &maxLength);
+
+					/* The maxLength includes the NULL character */
+					shaderProgramInfoLog = (char *)malloc(maxLength);
+
+					/* Notice that glGetProgramInfoLog, not glGetShaderInfoLog. */
+					glGetProgramInfoLog(shaderprogram, maxLength, &maxLength, shaderProgramInfoLog);
+
+					/* Handle the error in an appropriate way such as displaying a message or writing to a log file. */
+					/* In this simple program, we'll just leave */
+					free(shaderProgramInfoLog);
+					return;
+				}
 			}
 
 			void render()
@@ -130,53 +250,29 @@ namespace kata
 				{
 					assert("check init order");
 				}
-
-				float ratio;
-				int width, height;
-				mat4x4 m, p, mvp;
-
 				glfwMakeContextCurrent(m_GLWindow->m_window);
-				glfwGetFramebufferSize(m_GLWindow->m_window, &width, &height);
-				ratio = width / (float)height;
-				glViewport(0, 0, width, height);
-				glClearColor(
-					m_imguiInputComponenet->getVec4Clear()->x,
-					m_imguiInputComponenet->getVec4Clear()->y,
-					m_imguiInputComponenet->getVec4Clear()->z,
-					m_imguiInputComponenet->getVec4Clear()->w
-				);
-				glClear(GL_COLOR_BUFFER_BIT);
 
-				vertices[0].r = m_imguiInputComponenet->param_color_vertex_r.x;
-				vertices[0].g = m_imguiInputComponenet->param_color_vertex_r.y;
-				vertices[0].b = m_imguiInputComponenet->param_color_vertex_r.z;
-				vertices[1].r = m_imguiInputComponenet->param_color_vertex_g.x;
-				vertices[1].g = m_imguiInputComponenet->param_color_vertex_g.y;
-				vertices[1].b = m_imguiInputComponenet->param_color_vertex_g.z;
-				vertices[2].r = m_imguiInputComponenet->param_color_vertex_b.x;
-				vertices[2].g = m_imguiInputComponenet->param_color_vertex_b.y;
-				vertices[2].b = m_imguiInputComponenet->param_color_vertex_b.z;
-				glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+				/* Load the shader into the rendering pipeline */
+				glUseProgram(shaderprogram);
 
-				mat4x4_identity(m);
-				mat4x4_rotate_Z(m, m, (float)glfwGetTime() * m_imguiInputComponenet->param_speed_spin * m_imguiInputComponenet->spin);
-				mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-				mat4x4_scale_aniso(p, p, m_imguiInputComponenet->param_resize, m_imguiInputComponenet->param_resize, m_imguiInputComponenet->param_resize);
-				mat4x4_mul(mvp, p, m);
+				/* Loop our display increasing the number of shown vertexes each time.
+				* Start with 2 vertexes (a line) and increase to 3 (a triangle) and 4 (a diamond) */
+				for (int i = 2; i <= 4; i++)
+				{
+					/* Make our background black */
+					glClearColor(0.0, 0.0, 0.0, 1.0);
+					glClear(GL_COLOR_BUFFER_BIT);
 
-				glUseProgram(program);
-				glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)mvp);
-				glDrawArrays(GL_TRIANGLES, 0, 3);
-				glUseProgram(0);
+					/* Invoke glDrawArrays telling that our data is a line loop and we want to draw 2-4 vertexes */
+					glDrawArrays(GL_LINE_LOOP, 0, i);
+				}
 
 				glfwSwapBuffers(m_GLWindow->m_window);
 
 				glReadPixels(0, 0, 400, 400, GL_RGBA, GL_UNSIGNED_INT, m_pixel);
 			}
-
-
 		};
 	}
 }
 
-#endif // KATA_COMPONENT_SCENECOMPONENT_H_
+#endif // KATA_COMPONENT_SCENEGL32COMPONENT_H_

@@ -9,12 +9,10 @@ int main(int argc, char** argv)
 
 	kata::Viewer *viewer = new kata::Viewer();
 
-	viewer->addScene();
-	viewer->addScene();
-	viewer->addScene();
-	viewer->addScene();
-	viewer->addScene();
-	viewer->addScene();
+	viewer->addScene(20);
+	viewer->addScene(32);
+	viewer->addScene(33);
+	viewer->addScene(40);
 
 	viewer->run();
 

@@ -27,6 +27,7 @@
 
 #include "../component/SceneComponenet/SceneComponent.h"
 #include "../component/SceneComponenet/SceneGL20Component.h"
+#include "../component/SceneComponenet/SceneGL32Component.h"
 
 
 namespace kata
@@ -177,13 +178,23 @@ namespace kata
 			}
 		}
 
-		void addScene()
+		void addScene(int _vGL)
 		{
 			component::InputComponent *t_input = m_imguiComponenetsMain;
 			component::PhysicsComponent *t_physics
 				= new component::ScenePhysicsComponent();
-			component::GraphicsComponent *t_graphics
-				= new component::SceneGL20GraphicsComponent();
+			component::GraphicsComponent *t_graphics;
+
+			switch (_vGL) {
+			case 40:
+			case 33:
+			case 32:
+				t_graphics = new component::SceneGL32GraphicsComponent();
+				break;
+			case 20:
+			default:
+				t_graphics = new component::SceneGL20GraphicsComponent();
+			}
 
 			std::shared_ptr<kata::scene::Scene> tmp_scene
 				= std::make_shared<kata::scene::Scene>(
