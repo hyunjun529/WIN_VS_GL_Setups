@@ -139,6 +139,8 @@
     <ClInclude Include="component\SceneComponenet\SceneComponent.h" />
     <ClInclude Include="component\SceneComponenet\SceneGL20Component.h" />
     <ClInclude Include="component\SceneComponenet\SceneGL32Component.h" />
+    <ClInclude Include="component\SceneComponenet\SceneGL33Component.h" />
+    <ClInclude Include="component\SceneComponenet\SceneGL40Component.h" />
     <ClInclude Include="external\gl3w\GL\gl3w.h" />
     <ClInclude Include="external\gl3w\GL\glcorearb.h" />
     <ClInclude Include="external\glfw-3.2.1\include\GLFW\glfw3.h" />
@@ -168,6 +170,8 @@
     <ClCompile Include="component\SceneComponenet\SceneComponent.cpp" />
     <ClCompile Include="component\SceneComponenet\SceneGL20Component.cpp" />
     <ClCompile Include="component\SceneComponenet\SceneGL32Component.cpp" />
+    <ClCompile Include="component\SceneComponenet\SceneGL33Component.cpp" />
+    <ClCompile Include="component\SceneComponenet\SceneGL40Component.cpp" />
     <ClCompile Include="external\gl3w\GL\gl3w.c" />
     <ClCompile Include="external\imgui-1.53\imgui.cpp" />
     <ClCompile Include="external\imgui-1.53\imgui_demo.cpp" />

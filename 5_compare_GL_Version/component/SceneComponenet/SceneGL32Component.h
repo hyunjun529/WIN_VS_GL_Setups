@@ -1,7 +1,7 @@
 #ifndef KATA_COMPONENT_SCENEGL32COMPONENT_H_
 #define KATA_COMPONENT_SCENEGL32COMPONENT_H_
 
-#include <string>
+#include <memory>
 
 #include <GL/gl3w.h>
 #include <GLFW/glfw3.h>
@@ -101,7 +101,9 @@ namespace kata
 				}
 
 				glfwMakeContextCurrent(m_GLWindow->m_window);
-				//glfwHideWindow(m_GLWindow->m_window);
+				glfwHideWindow(m_GLWindow->m_window);
+				glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+				glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 
 				/* Allocate and assign a Vertex Array Object to our handle */
 				glGenVertexArrays(1, &vao);

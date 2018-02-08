@@ -28,6 +28,8 @@
 #include "../component/SceneComponenet/SceneComponent.h"
 #include "../component/SceneComponenet/SceneGL20Component.h"
 #include "../component/SceneComponenet/SceneGL32Component.h"
+#include "../component/SceneComponenet/SceneGL33Component.h"
+#include "../component/SceneComponenet/SceneGL40Component.h"
 
 
 namespace kata
@@ -187,7 +189,11 @@ namespace kata
 
 			switch (_vGL) {
 			case 40:
+				t_graphics = new component::SceneGL40GraphicsComponent();
+				break;
 			case 33:
+				t_graphics = new component::SceneGL33GraphicsComponent();
+				break;
 			case 32:
 				t_graphics = new component::SceneGL32GraphicsComponent();
 				break;
