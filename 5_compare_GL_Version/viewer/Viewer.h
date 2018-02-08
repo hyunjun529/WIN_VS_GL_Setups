@@ -24,7 +24,9 @@
 #include "../component/GraphicsComponent.h"
 
 #include "../component/ImguiComponent/ImguiComponent.h"
+
 #include "../component/SceneComponenet/SceneComponent.h"
+#include "../component/SceneComponenet/SceneGL20Component.h"
 
 
 namespace kata
@@ -53,7 +55,7 @@ namespace kata
 		std::vector<SceneWindow*> m_sceneWindow;
 
 	public:
-		Viewer(int _w = 1280, int _h = 720)
+		Viewer(int _w = 1920, int _h = 1080)
 			: m_windowW(_w), m_windowH(_h)
 		{
 			if (!glfwInit()) assert("failed glfwinit"); 
@@ -175,13 +177,13 @@ namespace kata
 			}
 		}
 
-		void addScene(int _ss)
+		void addScene()
 		{
 			component::InputComponent *t_input = m_imguiComponenetsMain;
 			component::PhysicsComponent *t_physics
 				= new component::ScenePhysicsComponent();
 			component::GraphicsComponent *t_graphics
-				= new component::SceneGraphicsComponent();
+				= new component::SceneGL20GraphicsComponent();
 
 			std::shared_ptr<kata::scene::Scene> tmp_scene
 				= std::make_shared<kata::scene::Scene>(
@@ -189,8 +191,6 @@ namespace kata
 					(component::ScenePhysicsComponent*) t_physics,
 					(component::SceneGraphicsComponent*) t_graphics
 					);
-
-			tmp_scene->setSpinSpeed(_ss);
 
 			m_inputComponents.push_back(t_input);
 			m_physicsComponents.push_back(t_physics);

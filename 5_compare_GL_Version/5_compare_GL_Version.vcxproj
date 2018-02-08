@@ -137,6 +137,7 @@
     <ClInclude Include="component\InputComponent.h" />
     <ClInclude Include="component\PhysicsComponent.h" />
     <ClInclude Include="component\SceneComponenet\SceneComponent.h" />
+    <ClInclude Include="component\SceneComponenet\SceneGL20Component.h" />
     <ClInclude Include="external\gl3w\GL\gl3w.h" />
     <ClInclude Include="external\gl3w\GL\glcorearb.h" />
     <ClInclude Include="external\glfw-3.2.1\include\GLFW\glfw3.h" />
@@ -155,10 +156,6 @@
     <ClInclude Include="util\File.h" />
     <ClInclude Include="util\Log.h" />
     <ClInclude Include="viewer\scene\Scene.h" />
-    <ClInclude Include="viewer\scene\SceneGL20.h" />
-    <ClInclude Include="viewer\scene\SceneGL32.h" />
-    <ClInclude Include="viewer\scene\SceneGL33.h" />
-    <ClInclude Include="viewer\scene\SceneGL40.h" />
     <ClInclude Include="viewer\Viewer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +165,7 @@
     <ClCompile Include="component\InputComponent.cpp" />
     <ClCompile Include="component\PhysicsComponent.cpp" />
     <ClCompile Include="component\SceneComponenet\SceneComponent.cpp" />
+    <ClCompile Include="component\SceneComponenet\SceneGL20Component.cpp" />
     <ClCompile Include="external\gl3w\GL\gl3w.c" />
     <ClCompile Include="external\imgui-1.53\imgui.cpp" />
     <ClCompile Include="external\imgui-1.53\imgui_demo.cpp" />
@@ -180,10 +178,6 @@
     <ClCompile Include="util\File.cpp" />
     <ClCompile Include="util\Log.cpp" />
     <ClCompile Include="viewer\scene\Scene.cpp" />
-    <ClCompile Include="viewer\scene\SceneGL20.cpp" />
-    <ClCompile Include="viewer\scene\SceneGL32.cpp" />
-    <ClCompile Include="viewer\scene\SceneGL33.cpp" />
-    <ClCompile Include="viewer\scene\SceneGL40.cpp" />
     <ClCompile Include="viewer\Viewer.cpp" />
   </ItemGroup>
   <ItemGroup>

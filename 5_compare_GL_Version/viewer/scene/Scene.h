@@ -23,8 +23,6 @@ namespace kata
 
 			GLuint *m_pixel = (GLuint*)malloc(400 * 400 * 4 * sizeof(GLuint));
 
-			int m_spinSpeed = 1;
-
 		public:
 			Scene(component::ImguiInputComponent *input,
 				  component::ScenePhysicsComponent *phyiscs,
@@ -38,11 +36,6 @@ namespace kata
 				m_graphics->setImguiInput(m_input);
 				m_graphics->setGLWindow(m_GLWindow);
 				m_graphics->setPixel(m_pixel);
-			}
-
-			void setSpinSpeed(int _m_spinSpeed)
-			{
-				m_graphics->setSpinSpeed(_m_spinSpeed);
 			}
 
 			void reset()

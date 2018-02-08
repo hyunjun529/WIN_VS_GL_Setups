@@ -87,18 +87,6 @@
     <ClInclude Include="viewer\scene\Scene.h">
       <Filter>viewer\scene</Filter>
     </ClInclude>
-    <ClInclude Include="viewer\scene\SceneGL20.h">
-      <Filter>viewer\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="viewer\scene\SceneGL32.h">
-      <Filter>viewer\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="viewer\scene\SceneGL33.h">
-      <Filter>viewer\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="viewer\scene\SceneGL40.h">
-      <Filter>viewer\scene</Filter>
-    </ClInclude>
     <ClInclude Include="util\File.h">
       <Filter>util</Filter>
     </ClInclude>
@@ -132,6 +120,9 @@
     <ClInclude Include="component\SceneComponenet\SceneComponent.h">
       <Filter>Component\SceneComponent</Filter>
     </ClInclude>
+    <ClInclude Include="component\SceneComponenet\SceneGL20Component.h">
+      <Filter>Component\SceneComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\gl3w\GL\gl3w.c">
@@ -152,18 +143,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="viewer\Viewer.cpp">
       <Filter>viewer</Filter>
-    </ClCompile>
-    <ClCompile Include="viewer\scene\SceneGL20.cpp">
-      <Filter>viewer\scene</Filter>
-    </ClCompile>
-    <ClCompile Include="viewer\scene\SceneGL32.cpp">
-      <Filter>viewer\scene</Filter>
-    </ClCompile>
-    <ClCompile Include="viewer\scene\SceneGL33.cpp">
-      <Filter>viewer\scene</Filter>
-    </ClCompile>
-    <ClCompile Include="viewer\scene\SceneGL40.cpp">
-      <Filter>viewer\scene</Filter>
     </ClCompile>
     <ClCompile Include="viewer\scene\Scene.cpp">
       <Filter>viewer\scene</Filter>
@@ -199,6 +178,9 @@
       <Filter>GL</Filter>
     </ClCompile>
     <ClCompile Include="component\SceneComponenet\SceneComponent.cpp">
+      <Filter>Component\SceneComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="component\SceneComponenet\SceneGL20Component.cpp">
       <Filter>Component\SceneComponent</Filter>
     </ClCompile>
   </ItemGroup>
