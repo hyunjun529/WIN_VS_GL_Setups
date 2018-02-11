@@ -61,6 +61,24 @@ namespace kata
 				"}\n"
 			};
 
+			const GLfloat VerticesOrigin[3][4] = {
+				-0.8f, -0.8f, 0.0f, 1.0f,
+				0.0f,  0.8f, 0.0f, 1.0f,
+				0.8f, -0.8f, 0.0f, 1.0f
+			};
+
+			GLfloat Vertices[3][4] = {
+				-0.6f, -0.4f, 1.0f, 1.0f,
+				 0.6f, -0.4f, 0.0f, 1.0f,
+				 0.0f,  0.6f, 0.0f, 1.0f
+			};
+
+			GLfloat Colors[3][4] = {
+				1.0f, 0.0f, 0.0f, 1.0f,
+				0.0f, 1.0f, 0.0f, 1.0f,
+				0.0f, 0.0f, 1.0f, 1.0f
+			};
+
 			void Cleanup(void)
 			{
 				DestroyShaders();
@@ -69,18 +87,6 @@ namespace kata
 
 			void CreateVBO(void)
 			{
-				GLfloat Vertices[] = {
-					-0.8f, -0.8f, 0.0f, 1.0f,
-					0.0f,  0.8f, 0.0f, 1.0f,
-					0.8f, -0.8f, 0.0f, 1.0f
-				};
-
-				GLfloat Colors[] = {
-					1.0f, 0.0f, 0.0f, 1.0f,
-					0.0f, 1.0f, 0.0f, 1.0f,
-					0.0f, 0.0f, 1.0f, 1.0f
-				};
-
 				GLenum ErrorCheckValue = glGetError();
 
 				glGenVertexArrays(1, &VaoId);
@@ -183,7 +189,7 @@ namespace kata
 				}
 
 				glfwMakeContextCurrent(m_GLWindow->m_window);
-				// glfwHideWindow(m_GLWindow->m_window);
+				glfwHideWindow(m_GLWindow->m_window);
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
@@ -198,6 +204,45 @@ namespace kata
 					assert("check init order");
 				}
 				glfwMakeContextCurrent(m_GLWindow->m_window);
+
+				// clear buffer
+				glClear(GL_COLOR_BUFFER_BIT);
+
+				// vertex color
+				glBindBuffer(GL_ARRAY_BUFFER, ColorBufferId);
+				Colors[0][0] = m_imguiInputComponenet->param_color_vertex_r.x;
+				Colors[0][1] = m_imguiInputComponenet->param_color_vertex_r.y;
+				Colors[0][2] = m_imguiInputComponenet->param_color_vertex_r.z;
+				Colors[1][0] = m_imguiInputComponenet->param_color_vertex_g.x;
+				Colors[1][1] = m_imguiInputComponenet->param_color_vertex_g.y;
+				Colors[1][2] = m_imguiInputComponenet->param_color_vertex_g.z;
+				Colors[2][0] = m_imguiInputComponenet->param_color_vertex_b.x;
+				Colors[2][1] = m_imguiInputComponenet->param_color_vertex_b.y;
+				Colors[2][2] = m_imguiInputComponenet->param_color_vertex_b.z;
+				glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Colors), Colors);
+
+				glBindBuffer(GL_ARRAY_BUFFER, VboId);
+				// vertex rotation
+				mat4x4 mat4Rotate;
+				mat4x4_identity(mat4Rotate);
+				mat4x4_rotate_Z(mat4Rotate, mat4Rotate, (float)glfwGetTime() * m_imguiInputComponenet->param_speed_spin * m_imguiInputComponenet->spin);
+
+				// mat4 mul
+				for (int c = 0; c<4; ++c) for (int r = 0; r<4; ++r) {
+					Vertices[c][r] = 0;
+					for (int k = 0; k<4; ++k)
+						Vertices[c][r] += mat4Rotate[k][r] * VerticesOrigin[c][k];
+				}
+
+				// vertex resize
+				for (int i = 0; i < 3; i++) {
+					for (int j = 0; j < 3; j++) {
+						Vertices[i][j] *= m_imguiInputComponenet->param_resize;
+					}
+				}
+
+				// send to buffer
+				glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Vertices), Vertices);
 
 				glDrawArrays(GL_TRIANGLES, 0, 3);
 

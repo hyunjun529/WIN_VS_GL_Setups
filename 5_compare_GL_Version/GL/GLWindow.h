@@ -6,8 +6,6 @@
 
 #include <linmath.h>
 
-#include "GLVertexUtil.h"
-#include "GLShaderUtil.h"
 
 namespace kata
 {
@@ -15,10 +13,6 @@ namespace kata
 	{
 		class GLWindow
 		{
-		private:
-			GLVertexUtil m_vertexUtil;
-			GLShaderUtil m_shaderUtil;
-
 		public:
 			GLFWwindow * m_window;
 

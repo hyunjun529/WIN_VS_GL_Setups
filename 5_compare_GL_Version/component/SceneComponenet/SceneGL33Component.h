@@ -66,7 +66,7 @@ namespace kata
 				}
 
 				glfwMakeContextCurrent(m_GLWindow->m_window);
-				// glfwHideWindow(m_GLWindow->m_window);
+				glfwHideWindow(m_GLWindow->m_window);
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 

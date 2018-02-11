@@ -28,9 +28,6 @@
     <Filter Include="GL">
       <UniqueIdentifier>{90fe7e3f-c597-4cc9-9204-aa031fea6813}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GL\shader">
-      <UniqueIdentifier>{e8e5d34b-577a-4d9f-b6ab-325966eebd05}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Component\ImguiComponent">
       <UniqueIdentifier>{78b433bd-364c-41f8-8101-b8a6fc0d1430}</UniqueIdentifier>
     </Filter>
@@ -87,9 +84,6 @@
     <ClInclude Include="viewer\scene\Scene.h">
       <Filter>viewer\scene</Filter>
     </ClInclude>
-    <ClInclude Include="util\File.h">
-      <Filter>util</Filter>
-    </ClInclude>
     <ClInclude Include="util\Log.h">
       <Filter>util</Filter>
     </ClInclude>
@@ -108,13 +102,7 @@
     <ClInclude Include="component\ImguiComponent\ImguiComponent.h">
       <Filter>Component\ImguiComponent</Filter>
     </ClInclude>
-    <ClInclude Include="GL\GLVertexUtil.h">
-      <Filter>GL</Filter>
-    </ClInclude>
     <ClInclude Include="GL\GLWindow.h">
-      <Filter>GL</Filter>
-    </ClInclude>
-    <ClInclude Include="GL\GLShaderUtil.h">
       <Filter>GL</Filter>
     </ClInclude>
     <ClInclude Include="component\SceneComponenet\SceneComponent.h">
@@ -159,9 +147,6 @@
     <ClCompile Include="util\Log.cpp">
       <Filter>util</Filter>
     </ClCompile>
-    <ClCompile Include="util\File.cpp">
-      <Filter>util</Filter>
-    </ClCompile>
     <ClCompile Include="component\Component.cpp">
       <Filter>Component</Filter>
     </ClCompile>
@@ -180,12 +165,6 @@
     <ClCompile Include="GL\GLWindow.cpp">
       <Filter>GL</Filter>
     </ClCompile>
-    <ClCompile Include="GL\GLShaderUtil.cpp">
-      <Filter>GL</Filter>
-    </ClCompile>
-    <ClCompile Include="GL\GLVertexUtil.cpp">
-      <Filter>GL</Filter>
-    </ClCompile>
     <ClCompile Include="component\SceneComponenet\SceneComponent.cpp">
       <Filter>Component\SceneComponent</Filter>
     </ClCompile>
@@ -201,13 +180,5 @@
     <ClCompile Include="component\SceneComponenet\SceneGL40Component.cpp">
       <Filter>Component\SceneComponent</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="GL\shader\basicGL20.farg.glsl">
-      <Filter>GL\shader</Filter>
-    </None>
-    <None Include="GL\shader\basicGL20.vert.glsl">
-      <Filter>GL\shader</Filter>
-    </None>
   </ItemGroup>
 </Project>

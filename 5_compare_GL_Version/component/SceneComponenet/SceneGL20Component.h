@@ -127,12 +127,12 @@ namespace kata
 				vertices[0].r = m_imguiInputComponenet->param_color_vertex_r.x;
 				vertices[0].g = m_imguiInputComponenet->param_color_vertex_r.y;
 				vertices[0].b = m_imguiInputComponenet->param_color_vertex_r.z;
-				vertices[1].r = m_imguiInputComponenet->param_color_vertex_g.x;
-				vertices[1].g = m_imguiInputComponenet->param_color_vertex_g.y;
-				vertices[1].b = m_imguiInputComponenet->param_color_vertex_g.z;
-				vertices[2].r = m_imguiInputComponenet->param_color_vertex_b.x;
-				vertices[2].g = m_imguiInputComponenet->param_color_vertex_b.y;
-				vertices[2].b = m_imguiInputComponenet->param_color_vertex_b.z;
+				vertices[2].r = m_imguiInputComponenet->param_color_vertex_g.x;
+				vertices[2].g = m_imguiInputComponenet->param_color_vertex_g.y;
+				vertices[2].b = m_imguiInputComponenet->param_color_vertex_g.z;
+				vertices[1].r = m_imguiInputComponenet->param_color_vertex_b.x;
+				vertices[1].g = m_imguiInputComponenet->param_color_vertex_b.y;
+				vertices[1].b = m_imguiInputComponenet->param_color_vertex_b.z;
 				glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
 
 				mat4x4_identity(m);
