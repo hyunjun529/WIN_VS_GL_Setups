@@ -262,7 +262,8 @@ namespace kata
 				for (int i = 2; i <= 4; i++)
 				{
 					/* Make our background black */
-					glClearColor(0.0, 0.0, 0.0, 1.0);
+					// glClearColor(0.0, 0.0, 0.0, 1.0);
+					glClearColor(0.0, 0.0, 0.0, 0.0);
 					glClear(GL_COLOR_BUFFER_BIT);
 
 					/* Invoke glDrawArrays telling that our data is a line loop and we want to draw 2-4 vertexes */

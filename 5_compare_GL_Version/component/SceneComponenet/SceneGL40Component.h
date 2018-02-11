@@ -206,6 +206,12 @@ namespace kata
 				glfwMakeContextCurrent(m_GLWindow->m_window);
 
 				// clear buffer
+				glClearColor(
+					m_imguiInputComponenet->getVec4Clear()->x,
+					m_imguiInputComponenet->getVec4Clear()->y,
+					m_imguiInputComponenet->getVec4Clear()->z,
+					0 //m_imguiInputComponenet->getVec4Clear()->w
+				);
 				glClear(GL_COLOR_BUFFER_BIT);
 
 				// vertex color
