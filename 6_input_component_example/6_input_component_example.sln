@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine.vcxproj", "{94838FEB-9EA6-44B9-9EC3-247FA7D31BCA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine/Engine.vcxproj", "{94838FEB-9EA6-44B9-9EC3-247FA7D31BCA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SingleWindowScene", "..\SingleWindowScene\SingleWindowScene.vcxproj", "{CA10A099-9950-4833-BB82-E941F03BC09E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SingleWindowScene", "SingleWindowScene\SingleWindowScene.vcxproj", "{CA10A099-9950-4833-BB82-E941F03BC09E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SceneViewer", "..\SceneViewer\SceneViewer.vcxproj", "{5077D02B-6EF0-4097-8BA7-5C79B9BEC490}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SceneViewer", "SceneViewer\SceneViewer.vcxproj", "{5077D02B-6EF0-4097-8BA7-5C79B9BEC490}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -60,15 +60,6 @@
     <ClCompile Include="component\SceneComponenet\SceneGL40Component.cpp">
       <Filter>component\SceneComponent</Filter>
     </ClCompile>
-    <ClCompile Include="component\SceneComponenet\SceneGL32Component.cpp">
-      <Filter>component\SceneComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="component\SceneComponenet\SceneGL33Component.cpp">
-      <Filter>component\SceneComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="component\SceneComponenet\SceneGL20Component.cpp">
-      <Filter>component\SceneComponent</Filter>
-    </ClCompile>
     <ClCompile Include="..\external\gl3w\GL\gl3w.c">
       <Filter>external\gl3w\GL</Filter>
     </ClCompile>
@@ -111,15 +102,6 @@
       <Filter>component\ImguiComponent</Filter>
     </ClInclude>
     <ClInclude Include="component\SceneComponenet\SceneGL40Component.h">
-      <Filter>component\SceneComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="component\SceneComponenet\SceneGL32Component.h">
-      <Filter>component\SceneComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="component\SceneComponenet\SceneGL33Component.h">
-      <Filter>component\SceneComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="component\SceneComponenet\SceneGL20Component.h">
       <Filter>component\SceneComponent</Filter>
     </ClInclude>
     <ClInclude Include="..\external\gl3w\GL\gl3w.h">

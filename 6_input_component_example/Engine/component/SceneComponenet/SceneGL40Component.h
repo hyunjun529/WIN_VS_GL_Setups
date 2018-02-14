@@ -189,7 +189,7 @@ namespace kata
 				}
 
 				glfwMakeContextCurrent(m_GLWindow->m_window);
-				glfwHideWindow(m_GLWindow->m_window);
+				// glfwHideWindow(m_GLWindow->m_window);
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
@@ -212,7 +212,7 @@ namespace kata
 					m_imguiInputComponenet->getVec4Clear()->z,
 					0 //m_imguiInputComponenet->getVec4Clear()->w
 				);
-				glClear(GL_COLOR_BUFFER_BIT);
+				// glClear(GL_COLOR_BUFFER_BIT);
 
 				// vertex color
 				glBindBuffer(GL_ARRAY_BUFFER, ColorBufferId);
@@ -252,7 +252,7 @@ namespace kata
 
 				glDrawArrays(GL_TRIANGLES, 0, 3);
 
-				glfwSwapBuffers(m_GLWindow->m_window);
+				// glfwSwapBuffers(m_GLWindow->m_window);
 
 				glReadPixels(0, 0, 400, 400, GL_RGBA, GL_UNSIGNED_INT, m_pixel);
 			}

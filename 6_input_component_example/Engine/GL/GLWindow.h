@@ -18,7 +18,7 @@ namespace kata
 
 			GLWindow()
 			{
-				m_window = glfwCreateWindow(400, 400, "???", NULL, NULL);
+				m_window = glfwCreateWindow(800, 800, "???", NULL, NULL);
 			}
 
 		};

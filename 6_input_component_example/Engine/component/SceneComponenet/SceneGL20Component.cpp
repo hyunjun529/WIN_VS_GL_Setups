@@ -1,1 +1,0 @@
-#include "SceneGL20Component.h"

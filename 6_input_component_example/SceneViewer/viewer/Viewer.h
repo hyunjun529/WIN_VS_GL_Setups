@@ -26,9 +26,6 @@
 #include "component/ImguiComponent/ImguiComponent.h"
 
 #include "component/SceneComponenet/SceneComponent.h"
-#include "component/SceneComponenet/SceneGL20Component.h"
-#include "component/SceneComponenet/SceneGL32Component.h"
-#include "component/SceneComponenet/SceneGL33Component.h"
 #include "component/SceneComponenet/SceneGL40Component.h"
 
 
@@ -187,20 +184,7 @@ namespace kata
 				= new component::ScenePhysicsComponent();
 			component::GraphicsComponent *t_graphics;
 
-			switch (_vGL) {
-			case 40:
-				t_graphics = new component::SceneGL40GraphicsComponent();
-				break;
-			case 33:
-				t_graphics = new component::SceneGL33GraphicsComponent();
-				break;
-			case 32:
-				t_graphics = new component::SceneGL32GraphicsComponent();
-				break;
-			case 20:
-			default:
-				t_graphics = new component::SceneGL20GraphicsComponent();
-			}
+			t_graphics = new component::SceneGL40GraphicsComponent();
 
 			std::shared_ptr<kata::scene::Scene> tmp_scene
 				= std::make_shared<kata::scene::Scene>(
