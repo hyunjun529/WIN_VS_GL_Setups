@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="GL">
+      <UniqueIdentifier>{8d795d4d-6386-4a61-8c21-b1d751057a5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{9bec5628-5809-4ef3-b9b8-71e6bc916bba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="component">
+      <UniqueIdentifier>{5ab7a199-87bc-4bb4-8120-3a16f653c6ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="component\ImguiComponent">
+      <UniqueIdentifier>{ee97ccfb-6cf2-4afc-9b6f-899a82e652ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="component\SceneComponent">
+      <UniqueIdentifier>{507b4f50-2b72-4783-bd33-7acd84847ebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{1ee80db5-1e51-4892-a0ca-4053fa00d3b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\gl3w">
+      <UniqueIdentifier>{c0a8f5bc-9167-4540-8984-faafe2a61456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\imgui">
+      <UniqueIdentifier>{46ae4d95-a5b3-48ea-bfbd-8188fe9468ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\linmath.h">
+      <UniqueIdentifier>{22cf429a-3d24-4672-abe7-067abbdc0915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\gl3w\GL">
+      <UniqueIdentifier>{a7b2d45d-585c-43bc-92b4-3792526e8ee3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="util\Log.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="GL\GLWindow.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="component\GraphicsComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="component\InputComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="component\PhysicsComponent.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="component\Component.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="component\SceneComponenet\SceneComponent.cpp">
+      <Filter>component\SceneComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="component\ImguiComponent\ImguiComponent.cpp">
+      <Filter>component\ImguiComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="component\SceneComponenet\SceneGL40Component.cpp">
+      <Filter>component\SceneComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="component\SceneComponenet\SceneGL32Component.cpp">
+      <Filter>component\SceneComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="component\SceneComponenet\SceneGL33Component.cpp">
+      <Filter>component\SceneComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="component\SceneComponenet\SceneGL20Component.cpp">
+      <Filter>component\SceneComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\gl3w\GL\gl3w.c">
+      <Filter>external\gl3w\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui-1.53\imgui_impl_glfw_gl3.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui-1.53\imgui.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui-1.53\imgui_demo.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui-1.53\imgui_draw.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="util\Log.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="GL\GLWindow.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="component\GraphicsComponent.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="component\InputComponent.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="component\PhysicsComponent.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="component\Component.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="component\SceneComponenet\SceneComponent.h">
+      <Filter>component\SceneComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="component\ImguiComponent\ImguiComponent.h">
+      <Filter>component\ImguiComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="component\SceneComponenet\SceneGL40Component.h">
+      <Filter>component\SceneComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="component\SceneComponenet\SceneGL32Component.h">
+      <Filter>component\SceneComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="component\SceneComponenet\SceneGL33Component.h">
+      <Filter>component\SceneComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="component\SceneComponenet\SceneGL20Component.h">
+      <Filter>component\SceneComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\gl3w\GL\gl3w.h">
+      <Filter>external\gl3w\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\gl3w\GL\glcorearb.h">
+      <Filter>external\gl3w\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\imgui_impl_glfw_gl3.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\imgui_internal.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\stb_rect_pack.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\stb_textedit.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\stb_truetype.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\imconfig.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\imgui.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\linmath.h\linmath.h">
+      <Filter>external\linmath.h</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
