@@ -33,6 +33,8 @@ namespace kata
 			GL::GLWindow *m_GLWindow = nullptr;
 			
 			GLuint *m_pixel = nullptr;
+			
+			bool isSingleWindow = false;
 
 		public:
 			SceneGraphicsComponent() {}
@@ -50,6 +52,11 @@ namespace kata
 			void setPixel(GLuint *pixel)
 			{
 				m_pixel = pixel;
+			}
+
+			void onSingleWindowMode()
+			{
+				isSingleWindow = true;
 			}
 
 			virtual void setup() {}

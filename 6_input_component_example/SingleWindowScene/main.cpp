@@ -9,6 +9,7 @@
 #include "GL/GLWindow.h"
 
 #include "component/ImguiComponent/ImguiComponent.h"
+
 #include "component/SceneComponenet/SceneGL40Component.h"
 
 
@@ -42,6 +43,7 @@ int main(int argc, char** argv)
 	kata::component::SceneGL40GraphicsComponent *scene 
 		= new kata::component::SceneGL40GraphicsComponent();
 
+	scene->onSingleWindowMode();
 	scene->setGLWindow(glWindow);
 	scene->setImguiInput(imguiComponent);
 
