@@ -199,10 +199,12 @@ int main(int argc, char** argv)
 				camera->Pan((float)m_dx, (float)m_dy);
 			}
 		}
-		//if (m_scrollY != 0 && (!ImGui::GetIO().WantCaptureMouse))
-		//{
-		//	camera->Dolly((float)m_scrollY * 0.1f);
-		//}
+		if (m_scrollY != 0 && (!ImGui::GetIO().WantCaptureMouse))
+		{
+			camera->Dolly((float)m_scrollY * 0.1f);
+		}
+		m_scrollX = 0;
+		m_scrollY = 0;
 		camera->UpdateMatrix();
 
 		auto world = glm::mat4(1.0);

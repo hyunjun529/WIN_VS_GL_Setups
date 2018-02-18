@@ -84,7 +84,7 @@ void Camera::Orbit(float x, float y)
 void Camera::Dolly(float z)
 {
 	const float minLen = 0.01f * m_radius;
-	const float maxLen = 10.0f * m_radius;
+	const float maxLen = 50.0f * m_radius;
 
 	auto toTarget = m_target - m_eye;
 	auto toTargetLen = glm::length(toTarget);
