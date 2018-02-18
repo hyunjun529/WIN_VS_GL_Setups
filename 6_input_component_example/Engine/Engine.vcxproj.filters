@@ -31,6 +31,18 @@
     <Filter Include="external\gl3w\GL">
       <UniqueIdentifier>{a7b2d45d-585c-43bc-92b4-3792526e8ee3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external\tinyobjloaer">
+      <UniqueIdentifier>{27683283-3f07-4728-b531-f9e40e7ce84f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GL\shader">
+      <UniqueIdentifier>{32836014-7139-495f-8845-65af1c54a3d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="loader">
+      <UniqueIdentifier>{6451a1e4-64a2-41b0-9041-b4b4d879d82c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="loader\OBJ">
+      <UniqueIdentifier>{d88e0f32-9377-4c03-9a50-062a2bcc8c6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="util\Log.cpp">
@@ -74,6 +86,15 @@
     </ClCompile>
     <ClCompile Include="..\external\imgui-1.53\imgui_draw.cpp">
       <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="loader\OBJ\OBJLoader.cpp">
+      <Filter>loader\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="GL\GLVertexUtil.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="GL\GLShaderUtil.cpp">
+      <Filter>GL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +154,18 @@
     </ClInclude>
     <ClInclude Include="..\external\linmath.h\linmath.h">
       <Filter>external\linmath.h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\tinyobjloader\tiny_obj_loader.h">
+      <Filter>external\tinyobjloaer</Filter>
+    </ClInclude>
+    <ClInclude Include="loader\OBJ\OBJLoader.h">
+      <Filter>loader\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="GL\GLShaderUtil.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="GL\GLVertexUtil.h">
+      <Filter>GL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

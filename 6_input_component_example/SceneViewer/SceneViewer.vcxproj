@@ -93,7 +93,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../external/gl3w;../external/glfw-3.2.1/include;../external/imgui-1.53;../external/linmath.h;../external/spdlog;../Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../external/gl3w;../external/glfw-3.2.1/include;../external/imgui-1.53;../external/linmath.h;../external/spdlog;../external/tinyobjloader;../Engine;../external/stb;../external/glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>../external/glfw-3.2.1/lib;../Engine/build/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -122,7 +122,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../external/gl3w;../external/glfw-3.2.1/include;../external/imgui-1.53;../external/linmath.h;../external/spdlog;../Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../external/gl3w;../external/glfw-3.2.1/include;../external/imgui-1.53;../external/linmath.h;../external/spdlog;../external/tinyobjloader;../Engine;../external/stb;../external/glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

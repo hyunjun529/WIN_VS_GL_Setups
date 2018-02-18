@@ -4,6 +4,9 @@
 #include <GL/gl3w.h>
 #include <GLFW/glfw3.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "../../GL/GLWindow.h"
 
 #include "../Component.h"
@@ -31,7 +34,8 @@ namespace kata
 				ProgramId,
 				VaoId,
 				VboId,
-				ColorBufferId;
+				ColorBufferId,
+				WvpId;
 			
 			const GLchar* VertexShader =
 			{
@@ -41,9 +45,11 @@ namespace kata
 				"layout(location=1) in vec4 in_Color;\n"\
 				"out vec4 ex_Color;\n"\
 
+				"uniform mat4 WVP;\n"\
+
 				"void main(void)\n"\
 				"{\n"\
-				"  gl_Position = in_Position;\n"\
+				"  gl_Position = WVP * in_Position;\n"\
 				"  ex_Color = in_Color;\n"\
 				"}\n"
 			};
@@ -150,6 +156,8 @@ namespace kata
 				glLinkProgram(ProgramId);
 				glUseProgram(ProgramId);
 
+				WvpId = glGetUniformLocation(ProgramId, "WVP");
+
 				ErrorCheckValue = glGetError();
 				if (ErrorCheckValue != GL_NO_ERROR)
 				{
@@ -197,7 +205,7 @@ namespace kata
 				CreateVBO();
 			}
 
-			void render()
+			void render(const glm::mat4 &WVP)
 			{
 				if (!m_imguiInputComponenet)
 				{
@@ -246,6 +254,9 @@ namespace kata
 						Vertices[i][j] *= m_imguiInputComponenet->param_resize;
 					}
 				}
+
+				// MVP
+				glUniformMatrix4fv(WvpId, 1, GL_FALSE, &WVP[0][0]);
 
 				// send to buffer
 				glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Vertices), Vertices);
