@@ -156,6 +156,7 @@
     <ClCompile Include="component\PhysicsComponent.cpp" />
     <ClCompile Include="component\SceneComponenet\SceneComponent.cpp" />
     <ClCompile Include="component\SceneComponenet\SceneGL40Component.cpp" />
+    <ClCompile Include="component\SceneComponenet\SceneOBJComponent.cpp" />
     <ClCompile Include="GL\GLShaderUtil.cpp" />
     <ClCompile Include="GL\GLVertexUtil.cpp" />
     <ClCompile Include="GL\GLWindow.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="component\PhysicsComponent.h" />
     <ClInclude Include="component\SceneComponenet\SceneComponent.h" />
     <ClInclude Include="component\SceneComponenet\SceneGL40Component.h" />
+    <ClInclude Include="component\SceneComponenet\SceneOBJComponent.h" />
     <ClInclude Include="GL\GLShaderUtil.h" />
     <ClInclude Include="GL\GLVertexUtil.h" />
     <ClInclude Include="GL\GLWindow.h" />

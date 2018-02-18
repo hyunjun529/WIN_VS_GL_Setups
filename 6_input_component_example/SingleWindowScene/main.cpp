@@ -1,11 +1,5 @@
 #include "util/Log.h"
 
-#define TINYOBJLOADER_IMPLEMENTATION
-#include "tiny_obj_loader.h"
-
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
 #include <assert.h>
 
 #include <GL/gl3w.h>
@@ -19,25 +13,11 @@
 #include "component/ImguiComponent/ImguiComponent.h"
 
 #include "component/SceneComponenet/SceneGL40Component.h"
+#include "component/SceneComponenet/SceneOBJComponent.h"
 
 #include "camera.h"
 
 Camera *camera = new Camera();
-
-void OnScroll(double offsetx, double offsety)
-{
-	camera->Pan((float)offsetx, (float)offsety);
-	camera->UpdateMatrix();
-}
-
-void OnScrollStub(GLFWwindow * window, double offsetx, double offsety)
-{
-	ImGui_ImplGlfwGL3_ScrollCallback(window, offsetx, offsety);
-
-	glfwGetWindowUserPointer(window);
-	
-	OnScroll(offsetx, offsety);
-}
 
 enum class CameraMode
 {
@@ -55,6 +35,25 @@ enum class MouseLockMode
 	Lock,
 };
 MouseLockMode m_mouseLockMode;
+
+double m_dx, m_dy;
+double m_prevX, m_prevY;
+double m_scrollX, m_scrollY;
+
+void OnScroll(double offsetx, double offsety)
+{
+	m_scrollX = offsetx;
+	m_scrollY = offsety;
+}
+
+void OnScrollStub(GLFWwindow * window, double offsetx, double offsety)
+{
+	ImGui_ImplGlfwGL3_ScrollCallback(window, offsetx, offsety);
+
+	glfwGetWindowUserPointer(window);
+	
+	OnScroll(offsetx, offsety);
+}
 
 void OnMouseButton(GLFWwindow * m_window, int button, int action, int mods)
 {
@@ -95,7 +94,6 @@ void OnMouseButton(GLFWwindow * m_window, int button, int action, int mods)
 			m_mouseLockMode = MouseLockMode::None;
 		}
 	}
-
 	if (prevCameraMode == CameraMode::None && m_cameraMode != CameraMode::None)
 	{
 		m_mouseLockMode = MouseLockMode::RequestLock;
@@ -110,9 +108,6 @@ void OnMouseButtonStub(GLFWwindow * window, int button, int action, int mods)
 
 	OnMouseButton(window, button, action, mods);
 }
-
-double m_dx, m_dy;
-double m_prevX, m_prevY;
 
 void updateMouse(GLFWwindow * window)
 {
@@ -157,8 +152,8 @@ int main(int argc, char** argv)
 	ImGui_ImplGlfwGL3_Init(window, true);
 	ImGui::StyleColorsClassic();
 
-	kata::component::SceneGL40GraphicsComponent *scene 
-		= new kata::component::SceneGL40GraphicsComponent();
+	kata::component::SceneOBJGraphicsComponent *scene
+		= new kata::component::SceneOBJGraphicsComponent();
 
 	scene->onSingleWindowMode();
 	scene->setGLWindow(glWindow);
@@ -166,14 +161,14 @@ int main(int argc, char** argv)
 
 	scene->setup();
 
-	camera->Initialize(glm::vec3(1.f, 1.f, 1.f), 0.1f);
+	camera->Initialize(glm::vec3(0.f, 0.f, 1.f), 0.2f);
 
 	glfwSetMouseButtonCallback(window, OnMouseButtonStub);
 	glfwSetScrollCallback(window, OnScrollStub);
 
 	while (!glfwWindowShouldClose(window))
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// camera
 		updateMouse(window);
@@ -203,13 +198,18 @@ int main(int argc, char** argv)
 			{
 				camera->Pan((float)m_dx, (float)m_dy);
 			}
-			camera->UpdateMatrix();
 		}
+		//if (m_scrollY != 0 && (!ImGui::GetIO().WantCaptureMouse))
+		//{
+		//	camera->Dolly((float)m_scrollY * 0.1f);
+		//}
+		camera->UpdateMatrix();
 
 		auto world = glm::mat4(1.0);
 		auto view = camera->GetViewMatrix();
 		auto proj = camera->GetProjectionMatrix();
-		glm::mat4x4 WVP = world * view * proj;
+		glm::mat4x4 WVP = proj * view * world;
+		
 		scene->render(WVP);
 
 		glm::mat4x4 tmpMVP;

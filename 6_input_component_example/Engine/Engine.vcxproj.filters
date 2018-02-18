@@ -96,6 +96,9 @@
     <ClCompile Include="GL\GLShaderUtil.cpp">
       <Filter>GL</Filter>
     </ClCompile>
+    <ClCompile Include="component\SceneComponenet\SceneOBJComponent.cpp">
+      <Filter>component\SceneComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="util\Log.h">
@@ -166,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="GL\GLVertexUtil.h">
       <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="component\SceneComponenet\SceneOBJComponent.h">
+      <Filter>component\SceneComponent</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
