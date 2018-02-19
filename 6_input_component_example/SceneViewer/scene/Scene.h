@@ -20,7 +20,7 @@ namespace kata
 			int m_sceneSizeW = 400;
 			int m_sceneSizeH = 400;
 
-			bool isSingleMode = false;
+			bool isSingleWindow = false;
 
 		public:
 			virtual void setup() {}
@@ -42,7 +42,7 @@ namespace kata
 				m_sceneSizeH = _h;
 			}
 
-			void setSingleMode(bool _flag) { isSingleMode = _flag; }
+			void setSingleMode(bool _flag) { isSingleWindow = _flag; }
 
 			GLuint* getPixel() { return m_pixel; }
 		};

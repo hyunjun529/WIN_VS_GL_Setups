@@ -1,5 +1,5 @@
-#ifndef KATA_COMPONENT_SCENEOBJCOMPONENT_H_
-#define KATA_COMPONENT_SCENEOBJCOMPONENT_H_
+#ifndef KATA_COMPONENT_SCENEOBJWIRERENDERCOMPONENT_H_
+#define KATA_COMPONENT_SCENEOBJWIRERENDERCOMPONENT_H_
 
 #include "../../util/Log.h"
 
@@ -29,10 +29,10 @@ namespace kata
 {
 	namespace component
 	{
-		class OBJRenderComponent : public RenderComponent
+		class OBJWireRenderComponent : public RenderComponent
 		{
 		private:
-			// http://www.opengl-tutorial.org/kr/beginners-tutorials/tutorial-7-model-loading/
+			// http://openglbook.com/chapter-2-vertices-and-shapes.html
 
 			component::ImguiInputComponent *m_inputImgui = nullptr;
 
@@ -45,36 +45,6 @@ namespace kata
 				VertexShaderId,
 				FragmentShaderId,
 				ProgramId;
-
-			const GLchar *VertexShader =
-			{
-				"#version 400\n"\
-
-				"layout(location=0) in vec4 in_Position;\n"\
-				"layout(location=1) in vec4 in_Color;\n"\
-				"out vec4 ex_Color;\n"\
-
-				"uniform mat4 WVP;\n"\
-
-				"void main(void)\n"\
-				"{\n"\
-				"  gl_Position = WVP * in_Position;\n"\
-				"  ex_Color = in_Color;\n"\
-				"}\n"
-			};
-
-			const GLchar *FragmentShader =
-			{
-				"#version 400\n"\
-
-				"in vec4 ex_Color;\n"\
-				"out vec4 out_Color;\n"\
-
-				"void main(void)\n"\
-				"{\n"\
-				"  out_Color = ex_Color;\n"\
-				"}\n"
-			};
 
 			typedef struct {
 				GLuint vb_id;
@@ -102,7 +72,6 @@ namespace kata
 
 				GLenum ErrorCheckValue = glGetError();
 			
-				// load obj info
 				for (size_t s = 0; s < shapes.size(); s++)
 				{
 					for (size_t f = 0; f < shapes[s].mesh.indices.size() / 3; f++)
@@ -138,7 +107,6 @@ namespace kata
 					}
 				}
 
-				// origin function
 				glGenBuffers(1, &VboId);
 				glBindBuffer(GL_ARRAY_BUFFER, VboId);
 				glBufferData(GL_ARRAY_BUFFER, bufferV.size() * sizeof(glm::vec4), &bufferV[0], GL_STATIC_DRAW);
@@ -184,8 +152,8 @@ namespace kata
 
 				GLenum ErrorCheckValue = glGetError();
 
-				//const GLchar *VertexShader = m_world->loadShader("vert");
-				//const GLchar *FragmentShader = m_world->loadShader("frag");
+				const GLchar *VertexShader = m_world->loadShader("vert");
+				const GLchar *FragmentShader = m_world->loadShader("frag");
 
 				VertexShaderId = glCreateShader(GL_VERTEX_SHADER);
 				glShaderSource(VertexShaderId, 1, &VertexShader, NULL);
@@ -233,9 +201,9 @@ namespace kata
 
 
 		public:
-			OBJRenderComponent() {}
+			OBJWireRenderComponent() {}
 
-			~OBJRenderComponent()
+			~OBJWireRenderComponent()
 			{
 				DestroyShaders();
 				DestroyVBO();
@@ -253,7 +221,7 @@ namespace kata
 					assert("check init order");
 				}
 				
-				// load obj file
+				// load OBJ
 				bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, inputfile.c_str(), base_dir.c_str());
 				if (!err.empty())
 				{
@@ -304,8 +272,8 @@ namespace kata
 				glUniformMatrix4fv(WvpId, 1, GL_FALSE, &WVP[0][0]);
 
 				// draw
-				glPolygonMode(GL_FRONT, GL_FILL);
-				glPolygonMode(GL_BACK, GL_FILL);
+				glPolygonMode(GL_FRONT, GL_LINE);
+				glPolygonMode(GL_BACK, GL_LINE);
 				glDrawArrays(GL_TRIANGLES, 0, (GLsizei)bufferV.size());
 
 				if (!isSingleWindow) glfwSwapBuffers(m_world->m_window);
@@ -316,4 +284,4 @@ namespace kata
 	}
 }
 
-#endif // KATA_COMPONENT_SCENEOBJCOMPONENT_H_
+#endif // KATA_COMPONENT_SCENEOBJWIRERENDERCOMPONENT_H_

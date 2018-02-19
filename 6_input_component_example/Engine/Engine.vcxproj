@@ -173,6 +173,7 @@
     <ClCompile Include="component\InputComponent\ImguiViewerInputComponent.cpp" />
     <ClCompile Include="component\PhysicsComponent.cpp" />
     <ClCompile Include="component\RenderComponenet\OBJRenderComponent.cpp" />
+    <ClCompile Include="component\RenderComponenet\OBJWireRenderComponent.cpp" />
     <ClCompile Include="component\RenderComponenet\RenderComponent.cpp" />
     <ClCompile Include="component\RenderComponenet\TriangleRenderComponent.cpp" />
     <ClCompile Include="loader\OBJ\OBJLoader.cpp" />
@@ -246,6 +247,7 @@
     <ClInclude Include="component\InputComponent\ImguiViewerInputComponent.h" />
     <ClInclude Include="component\PhysicsComponent.h" />
     <ClInclude Include="component\RenderComponenet\OBJRenderComponent.h" />
+    <ClInclude Include="component\RenderComponenet\OBJWireRenderComponent.h" />
     <ClInclude Include="component\RenderComponenet\RenderComponent.h" />
     <ClInclude Include="component\RenderComponenet\TriangleRenderComponent.h" />
     <ClInclude Include="loader\OBJ\OBJLoader.h" />

@@ -18,18 +18,9 @@ namespace kata
 {
 	namespace component
 	{
-		class ScenePhysicsComponent : public PhysicsComponent
-		{
-		public:
-			ScenePhysicsComponent() {}
-			void update() {}
-		};
-
 		class RenderComponent : public GraphicsComponent
 		{
 		protected:
-			ImguiInputComponent * m_imguiInputComponenet = nullptr;
-			
 			render::World *m_world = nullptr;
 			
 			GLuint *m_pixel = nullptr;
@@ -42,11 +33,6 @@ namespace kata
 			void setGLWindow(render::World *_world)
 			{
 				m_world = _world;
-			}
-
-			void setImguiInput(ImguiInputComponent *imguiInputComponent)
-			{
-				m_imguiInputComponenet = imguiInputComponent;
 			}
 
 			void setPixel(GLuint *pixel)

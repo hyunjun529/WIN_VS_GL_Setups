@@ -115,6 +115,9 @@
     <ClCompile Include="render\World.cpp">
       <Filter>render</Filter>
     </ClCompile>
+    <ClCompile Include="component\RenderComponenet\OBJWireRenderComponent.cpp">
+      <Filter>component\RenderComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="util\Log.h">
@@ -201,6 +204,9 @@
     </ClInclude>
     <ClInclude Include="render\World.h">
       <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="component\RenderComponenet\OBJWireRenderComponent.h">
+      <Filter>component\RenderComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

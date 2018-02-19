@@ -13,20 +13,14 @@
 #include <imgui.h>
 #include <imgui_impl_glfw_gl3.h>
 
-#include <linmath.h>
-
 #include "util/Log.h"
-
-#include "../scene/Scene.h"
 
 #include "component/InputComponent.h"
 #include "component/PhysicsComponent.h"
 #include "component/GraphicsComponent.h"
 
-#include "component/InputComponent/ImguiViewerInputComponent.h"
-
-#include "component/RenderComponenet/TriangleRenderComponent.h"
-#include "component/RenderComponenet/OBJRenderComponent.h"
+#include "../scene/Scene.h"
+#include "../scene/OBJViewerScene.h"
 
 
 namespace kata
@@ -179,6 +173,7 @@ namespace kata
 
 		void addScene(int _vGL)
 		{
+			// this function is current broken
 			component::InputComponent *t_input = m_imguiComponenetsMain;
 			component::PhysicsComponent *t_physics
 				= new component::ScenePhysicsComponent();
@@ -198,6 +193,7 @@ namespace kata
 					(component::RenderComponent*) t_graphics
 					);
 
+			// 
 			m_inputComponents.push_back(t_input);
 			m_physicsComponents.push_back(t_physics);
 			m_graphicsComponents.push_back(t_graphics);

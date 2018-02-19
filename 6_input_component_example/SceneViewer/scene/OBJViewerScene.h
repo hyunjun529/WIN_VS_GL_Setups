@@ -7,6 +7,7 @@
 #include "component/InputComponent/ImguiViewerInputComponent.h"
 
 #include "component/RenderComponenet/OBJRenderComponent.h"
+#include "component/RenderComponenet/OBJWireRenderComponent.h"
 
 
 namespace kata
@@ -36,7 +37,7 @@ namespace kata
 
 			void setup()
 			{
-				if(m_world == nullptr && !isSingleMode){
+				if(m_world == nullptr && !isSingleWindow){
 					m_world = new render::World();
 				}
 
@@ -44,11 +45,11 @@ namespace kata
 
 				m_inputCamera->setWindow(m_world->m_window);
 
-				if (isSingleMode)
+				if (isSingleWindow)
 				{
 					m_renderOBJ->onSingleWindowMode();
 				}
-				m_renderOBJ->setImguiInput(m_inputImgui);
+				m_renderOBJ->setImguiInputComponent(m_inputImgui);
 				m_renderOBJ->setGLWindow(m_world);
 				m_renderOBJ->setPixel(m_pixel);
 

@@ -23,6 +23,7 @@ void OnMouseButtonStub(GLFWwindow * window, int button, int action, int mods)
 	g_camera->OnMouseButton(window, button, action, mods);
 }
 
+
 int main(int argc, char** argv)
 {
 	const int singleWindowSizeW = 800;

@@ -7,6 +7,9 @@
     <Filter Include="scene">
       <UniqueIdentifier>{264b18b3-2215-4c7a-9ef7-85b8ae8df5e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="scene\Object">
+      <UniqueIdentifier>{d390859a-33f7-445b-a3d4-46c56201ceb4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="viewer\Viewer.cpp">
@@ -19,6 +22,9 @@
     <ClCompile Include="scene\OBJViewerScene.cpp">
       <Filter>scene</Filter>
     </ClCompile>
+    <ClCompile Include="scene\Object\PureOBJObject.cpp">
+      <Filter>scene\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="viewer\Viewer.h">
@@ -29,6 +35,9 @@
     </ClInclude>
     <ClInclude Include="scene\OBJViewerScene.h">
       <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\Object\PureOBJObject.h">
+      <Filter>scene\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
