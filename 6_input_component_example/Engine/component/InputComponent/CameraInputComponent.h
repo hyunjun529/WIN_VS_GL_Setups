@@ -14,7 +14,7 @@ namespace kata
 {
 	namespace component
 	{
-		class GLCameraInputComponent : public InputComponent
+		class CameraInputComponent : public InputComponent
 		{
 		private:
 			GLFWwindow *m_window;
@@ -59,13 +59,13 @@ namespace kata
 
 
 		public:
-			GLCameraInputComponent()
+			CameraInputComponent()
 			{
 				m_camera = new render::Camera();
 				m_camera->Initialize(glm::vec3(0.f, 0.f, 1.f), 0.2f);
 			}
 			
-			~GLCameraInputComponent()
+			~CameraInputComponent()
 			{
 				delete(m_camera);
 			}
@@ -200,6 +200,7 @@ namespace kata
 				}
 			}
 
+			// 아래 두 함수는 직접 호출하는게 아니라 컴포넌트 밖에서 따로 콜백을 관리해야됨
 			void OnScrollStub(GLFWwindow * window, double offsetx, double offsety)
 			{
 				ImGui_ImplGlfwGL3_ScrollCallback(window, offsetx, offsety);

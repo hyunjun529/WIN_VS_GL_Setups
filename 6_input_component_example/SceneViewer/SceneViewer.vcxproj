@@ -20,10 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="scene\OBJViewerScene.cpp" />
     <ClCompile Include="scene\Scene.cpp" />
     <ClCompile Include="viewer\Viewer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scene\OBJViewerScene.h" />
     <ClInclude Include="scene\Scene.h" />
     <ClInclude Include="viewer\Viewer.h" />
   </ItemGroup>

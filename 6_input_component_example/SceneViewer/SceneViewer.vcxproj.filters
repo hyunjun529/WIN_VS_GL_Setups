@@ -16,12 +16,18 @@
     <ClCompile Include="scene\Scene.cpp">
       <Filter>scene</Filter>
     </ClCompile>
+    <ClCompile Include="scene\OBJViewerScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="viewer\Viewer.h">
       <Filter>viewer</Filter>
     </ClInclude>
     <ClInclude Include="scene\Scene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\OBJViewerScene.h">
       <Filter>scene</Filter>
     </ClInclude>
   </ItemGroup>

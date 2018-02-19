@@ -5,9 +5,6 @@
 
 #include "render/World.h"
 
-#include "component/InputComponent/ImguiViewerInputComponent.h"
-#include "component/RenderComponenet/RenderComponent.h"
-
 
 namespace kata
 {
@@ -15,43 +12,39 @@ namespace kata
 	{
 		class Scene
 		{
-		private:
+		protected:
 			render::World *m_world = nullptr;
-			component::ImguiInputComponent *m_input;
-			component::ScenePhysicsComponent *m_physics;
-			component::RenderComponent *m_graphics;
 
-			GLuint *m_pixel = (GLuint*)malloc(400 * 400 * 4 * sizeof(GLuint));
+			GLuint *m_pixel;
+
+			int m_sceneSizeW = 400;
+			int m_sceneSizeH = 400;
+
+			bool isSingleMode = false;
 
 		public:
-			Scene(component::ImguiInputComponent *input,
-				  component::ScenePhysicsComponent *phyiscs,
-				  component::RenderComponent *graphics)
-				: m_input(input),
-				  m_physics(phyiscs),
-				  m_graphics(graphics)
-			{
-				m_world = new render::World();
+			virtual void setup() {}
 
-				m_graphics->setImguiInput(m_input);
-				m_graphics->setGLWindow(m_world);
-				m_graphics->setPixel(m_pixel);
+			virtual void reset() {}
+
+			void setWorld(render::World *_world)
+			{
+				if (m_world != nullptr)
+				{
+					delete(m_world);
+				}
+				m_world = _world;
 			}
 
-			void reset()
+			void setSceneSize(int _w, int _h)
 			{
-
+				m_sceneSizeW = _w;
+				m_sceneSizeH = _h;
 			}
 
-			void setup()
-			{
-				m_graphics->setup();
-			}
+			void setSingleMode(bool _flag) { isSingleMode = _flag; }
 
-			GLuint* getPixel()
-			{
-				return m_pixel;
-			}
+			GLuint* getPixel() { return m_pixel; }
 		};
 	}
 }

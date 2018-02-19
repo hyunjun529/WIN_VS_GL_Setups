@@ -1,13 +1,9 @@
 #include "util/Log.h"
 
-#include "render/World.h"
-
-#include "component/InputComponent/CameraInputComponent.h"
-
-#include "component/RenderComponenet/OBJRenderComponent.h"
+#include "OBJViewerScene.h"
 
 
-kata::component::GLCameraInputComponent *g_camera;
+kata::component::CameraInputComponent *g_camera;
 
 void OnScrollStub(GLFWwindow * window, double offsetx, double offsety)
 {
@@ -29,9 +25,14 @@ void OnMouseButtonStub(GLFWwindow * window, int button, int action, int mods)
 
 int main(int argc, char** argv)
 {
+	const int singleWindowSizeW = 800;
+	const int singleWindowSizeH = 800;
+
 	if (!glfwInit()) assert("failed glfwinit");
 
-	kata::render::World *world = new kata::render::World(800, 800);
+	kata::render::World *world
+		= new kata::render::World(singleWindowSizeW, singleWindowSizeH);
+
 	world->updateWindowTitle("Single WIndow Mode");
 
 	GLFWwindow *window = world->m_window;
@@ -49,26 +50,31 @@ int main(int argc, char** argv)
 		assert("failed gl3winit");
 	}
 
-	kata::component::ImguiInputComponent *imguiComponent
-		= new kata::component::ImguiInputComponent;
-
 	ImGui_ImplGlfwGL3_Init(window, true);
 	ImGui::StyleColorsClassic();
 
-	kata::component::OBJRenderComponent *objRender
+
+	kata::component::CameraInputComponent *inputCamera
+		= new kata::component::CameraInputComponent();
+
+	kata::component::ImguiInputComponent *inputImgui
+		= new kata::component::ImguiInputComponent;
+
+	kata::component::PhysicsComponent *physics
+		 = new kata::component::PhysicsComponent();
+
+	kata::component::OBJRenderComponent *renderOBJ
 		= new kata::component::OBJRenderComponent();
 
-	objRender->onSingleWindowMode();
-	objRender->setGLWindow(world);
-	objRender->setImguiInput(imguiComponent);
+	kata::scene::OBJViewerScene *scene = new kata::scene::OBJViewerScene(inputCamera, inputImgui, physics, renderOBJ);
 
-	objRender->setup();
+	scene->setWorld(world);
+	scene->setSceneSize(800, 800);
+	scene->setSingleMode(true);
+	scene->setup();
 
-	kata::component::GLCameraInputComponent *glCameraInputComponent
-		= new kata::component::GLCameraInputComponent();
-	g_camera = glCameraInputComponent;
-	glCameraInputComponent->setWindow(window);
-
+	// set Camera on Single Window
+	g_camera = inputCamera;
 	glfwSetMouseButtonCallback(window, OnMouseButtonStub);
 	glfwSetScrollCallback(window, OnScrollStub);
 
@@ -76,18 +82,23 @@ int main(int argc, char** argv)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glCameraInputComponent->update();
+		// input
+		inputCamera->update();
 
-		objRender->render(glCameraInputComponent->getWVP());
+		// physics
+		physics->update();
+
+		// render
+		renderOBJ->render(inputCamera->getWVP());
 
 		glfwMakeContextCurrent(window);
 		ImGui_ImplGlfwGL3_NewFrame();
-		imguiComponent->render();
-		glCameraInputComponent->renderImGui();
+		inputImgui->render();
+		inputCamera->renderImGui();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-
+	ImGui_ImplGlfwGL3_Shutdown();
 	glfwDestroyWindow(window);
 	glfwTerminate();
 
