@@ -48,31 +48,40 @@ namespace kata
 
 			const GLchar *VertexShader =
 			{
-				"#version 400\n"\
+				"#version 400 core\n"\
 
-				"layout(location=0) in vec4 in_Position;\n"\
-				"layout(location=1) in vec4 in_Color;\n"\
-				"out vec4 ex_Color;\n"\
+				"layout(location = 0) in vec4 vertexPosition;\n"\
+
+				"layout(location = 1) in vec2 vertexUV;\n"\
+
+				"out vec2 UV;\n"\
 
 				"uniform mat4 WVP;\n"\
 
-				"void main(void)\n"\
-				"{\n"\
-				"  gl_Position = WVP * in_Position;\n"\
-				"  ex_Color = in_Color;\n"\
+				"void main(){\n"\
+
+				"	gl_Position =  WVP * vertexPosition;\n"\
+
+				"	UV = vertexUV;\n"\
+
 				"}\n"
 			};
 
 			const GLchar *FragmentShader =
 			{
-				"#version 400\n"\
+				"#version 400 core\n"\
 
-				"in vec4 ex_Color;\n"\
-				"out vec4 out_Color;\n"\
+				"in vec2 UV;\n"\
 
-				"void main(void)\n"\
-				"{\n"\
-				"  out_Color = ex_Color;\n"\
+				"out vec4 color;\n"\
+
+				"uniform sampler2D myTextureSampler;\n"\
+
+				"void main(){\n"\
+
+				"	//color = vec4(texture( myTextureSampler, UV ).rgb, 1.0f);\n"\
+				"	color = vec4(0.6f, 0.0f, 0.8f, 1.0f);\n"\
+
 				"}\n"
 			};
 
@@ -93,7 +102,6 @@ namespace kata
 			std::string err;
 
 			std::vector<glm::vec4> bufferV;
-			std::vector<glm::vec4> bufferC;
 
 
 			void CreateVBO(void)
@@ -112,7 +120,6 @@ namespace kata
 						tinyobj::index_t idx2 = shapes[s].mesh.indices[3 * f + 2];
 
 						glm::vec4 v[3];
-						glm::vec4 c[3];
 						for (int k = 0; k < 3; k++)
 						{
 							int f0 = idx0.vertex_index;
@@ -123,17 +130,11 @@ namespace kata
 							v[1][k] = attrib.vertices[3 * f1 + k];
 							v[2][k] = attrib.vertices[3 * f2 + k];
 							v[k][3] = 1.0f;
-							
-							c[0][k] = attrib.vertices[3 * f0 + k];
-							c[1][k] = attrib.vertices[3 * f1 + k];
-							c[2][k] = attrib.vertices[3 * f2 + k];
-							c[k][3] = 1.0f;
 						}
 
 						for (int k = 0; k < 3; k++)
 						{
 							bufferV.push_back(v[k]);
-							bufferC.push_back(c[k]);
 						}
 					}
 				}
@@ -147,7 +148,7 @@ namespace kata
 
 				glGenBuffers(1, &ColorBufferId);
 				glBindBuffer(GL_ARRAY_BUFFER, ColorBufferId);
-				glBufferData(GL_ARRAY_BUFFER, bufferC.size() * sizeof(glm::vec4), &bufferC[0], GL_STATIC_DRAW);
+				glBufferData(GL_ARRAY_BUFFER, bufferV.size() * sizeof(glm::vec4), &bufferV[0], GL_STATIC_DRAW);
 				glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0);
 				glEnableVertexAttribArray(1);
 
