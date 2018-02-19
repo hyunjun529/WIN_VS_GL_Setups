@@ -4,25 +4,25 @@
     <Filter Include="viewer">
       <UniqueIdentifier>{56df62b3-ea3e-47e2-ba38-f5fcdd12c373}</UniqueIdentifier>
     </Filter>
-    <Filter Include="viewer\scene">
-      <UniqueIdentifier>{3425b46b-2c23-4eea-a182-549efd713f4b}</UniqueIdentifier>
+    <Filter Include="scene">
+      <UniqueIdentifier>{264b18b3-2215-4c7a-9ef7-85b8ae8df5e9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="viewer\Viewer.cpp">
       <Filter>viewer</Filter>
     </ClCompile>
-    <ClCompile Include="viewer\scene\Scene.cpp">
-      <Filter>viewer\scene</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="scene\Scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="viewer\Viewer.h">
       <Filter>viewer</Filter>
     </ClInclude>
-    <ClInclude Include="viewer\scene\Scene.h">
-      <Filter>viewer\scene</Filter>
+    <ClInclude Include="scene\Scene.h">
+      <Filter>scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

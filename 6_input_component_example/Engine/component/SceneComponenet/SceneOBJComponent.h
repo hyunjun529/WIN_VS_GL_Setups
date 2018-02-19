@@ -3,10 +3,8 @@
 
 #include "../../util/Log.h"
 
-#define TINYOBJLOADER_IMPLEMENTATION
 #include "tiny_obj_loader.h"
 
-#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 #include <GL/gl3w.h>
@@ -83,8 +81,8 @@ namespace kata
 
 			std::vector<DrawObject> gDrawObjects;
 
-			std::string base_dir = "C://Users//hyunjun529//Documents//WIN_VS_GL_Setups//6_input_component_example//resource//capsule//";
-			std::string inputfile = "C://Users//hyunjun529//Documents//WIN_VS_GL_Setups//6_input_component_example//resource//capsule//capsule.obj";
+			std::string base_dir = "C://Users//hyunjun529//Documents//WIN_VS_GL_Setups//6_input_component_example//resource//cube//";
+			std::string inputfile = "C://Users//hyunjun529//Documents//WIN_VS_GL_Setups//6_input_component_example//resource//cube//cube.obj";
 			tinyobj::attrib_t attrib;
 			std::vector<tinyobj::shape_t> shapes;
 			std::vector<tinyobj::material_t> materials;
@@ -97,6 +95,8 @@ namespace kata
 
 			void CreateVBO(void)
 			{
+				glfwMakeContextCurrent(m_GLWindow->m_window);
+
 				GLenum ErrorCheckValue = glGetError();
 			
 				for (size_t s = 0; s < shapes.size(); s++)
@@ -176,6 +176,8 @@ namespace kata
 
 			void CreateShaders(void)
 			{
+				glfwMakeContextCurrent(m_GLWindow->m_window);
+
 				GLenum ErrorCheckValue = glGetError();
 
 				VertexShaderId = glCreateShader(GL_VERTEX_SHADER);
@@ -252,13 +254,18 @@ namespace kata
 				KATA_CONSOLE_INFO("# of shapes    = {}\n", (int)shapes.size());
 
 				glfwMakeContextCurrent(m_GLWindow->m_window);
-				if (!isSingleWindow) glfwHideWindow(m_GLWindow->m_window);
+				//if (!isSingleWindow) glfwHideWindow(m_GLWindow->m_window);
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 				glEnable(GL_DEPTH_TEST);
 
 				CreateShaders();
 				CreateVBO();
+			}
+
+			void render()
+			{
+				render(glm::mat4x4(1.0));
 			}
 
 			void render(const glm::mat4 &WVP)
@@ -284,7 +291,7 @@ namespace kata
 				// draw
 				glPolygonMode(GL_FRONT, GL_FILL);
 				glPolygonMode(GL_BACK, GL_FILL);
-				glDrawArrays(GL_TRIANGLES, 0, bufferV.size());
+				glDrawArrays(GL_TRIANGLES, 0, (GLsizei)bufferV.size());
 
 				if (!isSingleWindow) glfwSwapBuffers(m_GLWindow->m_window);
 

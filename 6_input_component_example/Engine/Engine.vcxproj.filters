@@ -43,6 +43,15 @@
     <Filter Include="loader\OBJ">
       <UniqueIdentifier>{d88e0f32-9377-4c03-9a50-062a2bcc8c6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external\stb">
+      <UniqueIdentifier>{6868b81f-0e07-474f-8ce9-d8150081eb7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\glm">
+      <UniqueIdentifier>{71737433-dea9-45c9-bddc-912f40ef3a62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\glm\glm">
+      <UniqueIdentifier>{1aacac14-daf6-499c-b537-0fa9101d8967}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="util\Log.cpp">
@@ -99,6 +108,7 @@
     <ClCompile Include="component\SceneComponenet\SceneOBJComponent.cpp">
       <Filter>component\SceneComponent</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="util\Log.h">
@@ -172,6 +182,13 @@
     </ClInclude>
     <ClInclude Include="component\SceneComponenet\SceneOBJComponent.h">
       <Filter>component\SceneComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\stb\stb_image.h">
+      <Filter>external\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="..\external\glm\glm\glm.hpp">
+      <Filter>external\glm\glm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

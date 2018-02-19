@@ -77,11 +77,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetExt>.lib</TargetExt>
-    <OutDir>$(SolutionDir)/Engine/build/debug</OutDir>
+    <OutDir>$(SolutionDir)/Engine/build/debug/</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetExt>.lib</TargetExt>
-    <OutDir>$(SolutionDir)/build/release</OutDir>
+    <OutDir>$(SolutionDir)/build/release/</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -103,6 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>../external/gl3w;../external/glfw-3.2.1/include;../external/imgui-1.53;../external/linmath.h;../external/spdlog;../external/tinyobjloader;../external/stb;../external/glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>../external/glfw-3.2.1/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -135,6 +136,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>../external/gl3w;../external/glfw-3.2.1/include;../external/imgui-1.53;../external/linmath.h;../external/spdlog;../external/tinyobjloader;../external/stb;../external/glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -161,11 +163,16 @@
     <ClCompile Include="GL\GLVertexUtil.cpp" />
     <ClCompile Include="GL\GLWindow.cpp" />
     <ClCompile Include="loader\OBJ\OBJLoader.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="util\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\external\gl3w\GL\gl3w.h" />
     <ClInclude Include="..\external\gl3w\GL\glcorearb.h" />
+    <ClInclude Include="..\external\glm\glm\glm.hpp" />
     <ClInclude Include="..\external\imgui-1.53\imconfig.h" />
     <ClInclude Include="..\external\imgui-1.53\imgui.h" />
     <ClInclude Include="..\external\imgui-1.53\imgui_impl_glfw_gl3.h" />
@@ -174,6 +181,7 @@
     <ClInclude Include="..\external\imgui-1.53\stb_textedit.h" />
     <ClInclude Include="..\external\imgui-1.53\stb_truetype.h" />
     <ClInclude Include="..\external\linmath.h\linmath.h" />
+    <ClInclude Include="..\external\stb\stb_image.h" />
     <ClInclude Include="..\external\tinyobjloader\tiny_obj_loader.h" />
     <ClInclude Include="component\Component.h" />
     <ClInclude Include="component\GraphicsComponent.h" />
@@ -187,6 +195,7 @@
     <ClInclude Include="GL\GLVertexUtil.h" />
     <ClInclude Include="GL\GLWindow.h" />
     <ClInclude Include="loader\OBJ\OBJLoader.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="util\Log.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

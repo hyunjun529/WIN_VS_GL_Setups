@@ -212,10 +212,8 @@ int main(int argc, char** argv)
 		auto proj = camera->GetProjectionMatrix();
 		glm::mat4x4 WVP = proj * view * world;
 		
+		//scene->render();
 		scene->render(WVP);
-
-		glm::mat4x4 tmpMVP;
-		//scene->render(tmpMVP);
 
 		glfwMakeContextCurrent(window);
 		ImGui_ImplGlfwGL3_NewFrame();

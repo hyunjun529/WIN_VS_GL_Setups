@@ -1,5 +1,3 @@
-#include "util/Log.h"
-
 #include "viewer/Viewer.h"
 
 

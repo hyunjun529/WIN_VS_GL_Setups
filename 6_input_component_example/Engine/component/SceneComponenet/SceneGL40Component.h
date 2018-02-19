@@ -205,6 +205,11 @@ namespace kata
 				CreateVBO();
 			}
 
+			void render()
+			{
+				render(glm::mat4x4(1.0));
+			}
+
 			void render(const glm::mat4 &WVP)
 			{
 				if (!m_imguiInputComponenet)

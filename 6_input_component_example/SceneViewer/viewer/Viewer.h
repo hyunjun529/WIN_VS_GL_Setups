@@ -17,7 +17,7 @@
 
 #include "util/Log.h"
 
-#include "scene/Scene.h"
+#include "../scene/Scene.h"
 
 #include "component/InputComponent.h"
 #include "component/PhysicsComponent.h"
@@ -25,8 +25,8 @@
 
 #include "component/ImguiComponent/ImguiComponent.h"
 
-#include "component/SceneComponenet/SceneComponent.h"
 #include "component/SceneComponenet/SceneGL40Component.h"
+#include "component/SceneComponenet/SceneOBJComponent.h"
 
 
 namespace kata
@@ -184,7 +184,12 @@ namespace kata
 				= new component::ScenePhysicsComponent();
 			component::GraphicsComponent *t_graphics;
 
-			t_graphics = new component::SceneGL40GraphicsComponent();
+			if (_vGL < 40) {
+				t_graphics = new component::SceneGL40GraphicsComponent();
+			}
+			else {
+				t_graphics = new component::SceneOBJGraphicsComponent();
+			}
 
 			std::shared_ptr<kata::scene::Scene> tmp_scene
 				= std::make_shared<kata::scene::Scene>(
