@@ -52,6 +52,9 @@
     <Filter Include="external\glm\glm">
       <UniqueIdentifier>{1aacac14-daf6-499c-b537-0fa9101d8967}</UniqueIdentifier>
     </Filter>
+    <Filter Include="component\GLComponent">
+      <UniqueIdentifier>{b1d6e55c-a692-419e-a147-3510b40c26cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="util\Log.cpp">
@@ -109,6 +112,12 @@
       <Filter>component\SceneComponent</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="GL\GLCamera.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="component\GLComponent\GLCameraInputComponent.cpp">
+      <Filter>component\GLComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="util\Log.h">
@@ -190,5 +199,19 @@
     <ClInclude Include="..\external\glm\glm\glm.hpp">
       <Filter>external\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="GL\GLCamera.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="component\GLComponent\GLCameraInputComponent.h">
+      <Filter>component\GLComponent</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GL\shader\color.frag">
+      <Filter>GL\shader</Filter>
+    </None>
+    <None Include="GL\shader\color.vert">
+      <Filter>GL\shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

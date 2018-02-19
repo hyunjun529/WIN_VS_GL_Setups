@@ -1,8 +1,14 @@
-#include "camera.h"
+//
+// Copyright(c) 2016-2017 benikabocha.
+// Distributed under the MIT License (http://opensource.org/licenses/MIT)
+//
+// original GitHub repo : https://github.com/benikabocha/saba
+
+#include "GLCamera.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
-Camera::Camera()
+kata::GL::Camera::Camera()
 	: m_target(0)
 	, m_eye(0, 0, 1)
 	, m_up(0, 1, 0)
@@ -15,7 +21,7 @@ Camera::Camera()
 {
 }
 
-void Camera::Initialize(const glm::vec3 & center, float radius)
+void kata::GL::Camera::Initialize(const glm::vec3 & center, float radius)
 {
 	m_target = center;
 	m_eye = center + glm::vec3(0.5f, 0.5f, 1) * radius * 5.0f;
@@ -28,7 +34,7 @@ void Camera::Initialize(const glm::vec3 & center, float radius)
 	UpdateMatrix();
 }
 
-void Camera::Initialize(const glm::vec3 & center, glm::vec3 & eye, float nearClip, float farClip, float radius)
+void kata::GL::Camera::Initialize(const glm::vec3 & center, glm::vec3 & eye, float nearClip, float farClip, float radius)
 {
 	m_target = center;
 	m_eye = eye;
@@ -65,7 +71,7 @@ namespace
 	}
 }
 
-void Camera::Orbit(float x, float y)
+void kata::GL::Camera::Orbit(float x, float y)
 {
 	auto toEye = m_eye - m_target;
 	auto toEyeLen = glm::length(toEye);
@@ -81,7 +87,7 @@ void Camera::Orbit(float x, float y)
 	m_eye = m_target + newToEye;
 }
 
-void Camera::Dolly(float z)
+void kata::GL::Camera::Dolly(float z)
 {
 	const float minLen = 0.01f * m_radius;
 	const float maxLen = 50.0f * m_radius;
@@ -101,7 +107,7 @@ void Camera::Dolly(float z)
 	}
 }
 
-void Camera::Pan(float x, float y)
+void kata::GL::Camera::Pan(float x, float y)
 {
 	float len = glm::length(m_target - m_eye);
 	float ay = std::tan(m_fovYRad) * len;
@@ -116,14 +122,14 @@ void Camera::Pan(float x, float y)
 	m_eye += dx * xAxis + dy * yAxis;
 }
 
-void Camera::LookAt(const glm::vec3 & center, const glm::vec3 & eye, const glm::vec3 & up)
+void kata::GL::Camera::LookAt(const glm::vec3 & center, const glm::vec3 & eye, const glm::vec3 & up)
 {
 	m_target = center;
 	m_eye = eye;
 	m_up = up;
 }
 
-void Camera::UpdateMatrix()
+void kata::GL::Camera::UpdateMatrix()
 {
 	m_viewMatrix = glm::lookAtRH(m_eye, m_target, m_up);
 
@@ -140,69 +146,69 @@ void Camera::UpdateMatrix()
 	);
 }
 
-const glm::mat4& Camera::GetViewMatrix() const
+const glm::mat4& kata::GL::Camera::GetViewMatrix() const
 {
 	return m_viewMatrix;
 }
 
-void Camera::SetFovY(float fovY)
+void kata::GL::Camera::SetFovY(float fovY)
 {
 	m_fovYRad = fovY;
 }
 
-void Camera::SetSize(float w, float h)
+void kata::GL::Camera::SetSize(float w, float h)
 {
 	m_width = w;
 	m_height = h;
 }
 
-void Camera::SetClip(float nearClip, float farClip)
+void kata::GL::Camera::SetClip(float nearClip, float farClip)
 {
 	m_nearClip = nearClip;
 	m_farClip = farClip;
 }
 
-const glm::mat4& Camera::GetProjectionMatrix() const
+const glm::mat4& kata::GL::Camera::GetProjectionMatrix() const
 {
 	return m_projectionMatrix;
 }
 
-glm::vec3 Camera::GetEyePostion() const
+glm::vec3 kata::GL::Camera::GetEyePostion() const
 {
 	return m_eye;
 }
 
-glm::vec3 Camera::GetUp() const
+glm::vec3 kata::GL::Camera::GetUp() const
 {
 	return glm::normalize(m_up);
 }
 
-glm::vec3 Camera::GetForward() const
+glm::vec3 kata::GL::Camera::GetForward() const
 {
 	return glm::normalize(m_target - m_eye);
 }
 
-float Camera::GetFovY() const
+float kata::GL::Camera::GetFovY() const
 {
 	return m_fovYRad;
 }
 
-float Camera::GetNearClip() const
+float kata::GL::Camera::GetNearClip() const
 {
 	return m_nearClip;
 }
 
-float Camera::GetFarClip() const
+float kata::GL::Camera::GetFarClip() const
 {
 	return m_farClip;
 }
 
-float Camera::GetWidth() const
+float kata::GL::Camera::GetWidth() const
 {
 	return m_width;
 }
 
-float Camera::GetHeight() const
+float kata::GL::Camera::GetHeight() const
 {
 	return m_height;
 }

@@ -152,6 +152,7 @@
     <ClCompile Include="..\external\imgui-1.53\imgui_draw.cpp" />
     <ClCompile Include="..\external\imgui-1.53\imgui_impl_glfw_gl3.cpp" />
     <ClCompile Include="component\Component.cpp" />
+    <ClCompile Include="component\GLComponent\GLCameraInputComponent.cpp" />
     <ClCompile Include="component\GraphicsComponent.cpp" />
     <ClCompile Include="component\ImguiComponent\ImguiComponent.cpp" />
     <ClCompile Include="component\InputComponent.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="component\SceneComponenet\SceneComponent.cpp" />
     <ClCompile Include="component\SceneComponenet\SceneGL40Component.cpp" />
     <ClCompile Include="component\SceneComponenet\SceneOBJComponent.cpp" />
+    <ClCompile Include="GL\GLCamera.cpp" />
     <ClCompile Include="GL\GLShaderUtil.cpp" />
     <ClCompile Include="GL\GLVertexUtil.cpp" />
     <ClCompile Include="GL\GLWindow.cpp" />
@@ -184,6 +186,7 @@
     <ClInclude Include="..\external\stb\stb_image.h" />
     <ClInclude Include="..\external\tinyobjloader\tiny_obj_loader.h" />
     <ClInclude Include="component\Component.h" />
+    <ClInclude Include="component\GLComponent\GLCameraInputComponent.h" />
     <ClInclude Include="component\GraphicsComponent.h" />
     <ClInclude Include="component\ImguiComponent\ImguiComponent.h" />
     <ClInclude Include="component\InputComponent.h" />
@@ -191,12 +194,17 @@
     <ClInclude Include="component\SceneComponenet\SceneComponent.h" />
     <ClInclude Include="component\SceneComponenet\SceneGL40Component.h" />
     <ClInclude Include="component\SceneComponenet\SceneOBJComponent.h" />
+    <ClInclude Include="GL\GLCamera.h" />
     <ClInclude Include="GL\GLShaderUtil.h" />
     <ClInclude Include="GL\GLVertexUtil.h" />
     <ClInclude Include="GL\GLWindow.h" />
     <ClInclude Include="loader\OBJ\OBJLoader.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="util\Log.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GL\shader\color.frag" />
+    <None Include="GL\shader\color.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,6 +18,8 @@
 
 #include "SceneComponent.h"
 
+#include <linmath.h>
+
 
 namespace kata
 {
