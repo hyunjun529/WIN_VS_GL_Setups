@@ -1,21 +1,10 @@
 #include "util/Log.h"
 
-#include <assert.h>
+#include "render/World.h"
 
-#include <GL/gl3w.h>
-#include <GLFW/glfw3.h>
+#include "component/InputComponent/CameraInputComponent.h"
 
-#include <imgui.h>
-#include <imgui_impl_glfw_gl3.h>
-
-#include "GL/GLWindow.h"
-
-#include "component/GLComponent/GLCameraInputComponent.h"
-
-#include "component/ImguiComponent/ImguiComponent.h"
-
-#include "component/SceneComponenet/SceneGL40Component.h"
-#include "component/SceneComponenet/SceneOBJComponent.h"
+#include "component/RenderComponenet/OBJRenderComponent.h"
 
 
 kata::component::GLCameraInputComponent *g_camera;
@@ -42,10 +31,10 @@ int main(int argc, char** argv)
 {
 	if (!glfwInit()) assert("failed glfwinit");
 
-	kata::GL::GLWindow *glWindow = new kata::GL::GLWindow(800, 800);
-	glWindow->updateWindowTitle("Single WIndow Mode");
+	kata::render::World *world = new kata::render::World(800, 800);
+	world->updateWindowTitle("Single WIndow Mode");
 
-	GLFWwindow *window = glWindow->m_window;
+	GLFWwindow *window = world->m_window;
 
 	if (!window)
 	{
@@ -66,14 +55,14 @@ int main(int argc, char** argv)
 	ImGui_ImplGlfwGL3_Init(window, true);
 	ImGui::StyleColorsClassic();
 
-	kata::component::SceneOBJGraphicsComponent *scene
-		= new kata::component::SceneOBJGraphicsComponent();
+	kata::component::OBJRenderComponent *objRender
+		= new kata::component::OBJRenderComponent();
 
-	scene->onSingleWindowMode();
-	scene->setGLWindow(glWindow);
-	scene->setImguiInput(imguiComponent);
+	objRender->onSingleWindowMode();
+	objRender->setGLWindow(world);
+	objRender->setImguiInput(imguiComponent);
 
-	scene->setup();
+	objRender->setup();
 
 	kata::component::GLCameraInputComponent *glCameraInputComponent
 		= new kata::component::GLCameraInputComponent();
@@ -89,7 +78,7 @@ int main(int argc, char** argv)
 
 		glCameraInputComponent->update();
 
-		scene->render(glCameraInputComponent->getWVP());
+		objRender->render(glCameraInputComponent->getWVP());
 
 		glfwMakeContextCurrent(window);
 		ImGui_ImplGlfwGL3_NewFrame();

@@ -1,6 +1,5 @@
 #include "viewer/Viewer.h"
 
-
 int main(int argc, char** argv)
 {
 	KATA_CONSOLE_INFO("start");

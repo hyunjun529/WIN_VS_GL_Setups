@@ -3,8 +3,8 @@
 
 #include "../InputComponent.h"
 
-#include "../../GL/GLWindow.h"
-#include "../../GL/GLCamera.h"
+#include "../../render/World.h"
+#include "../../render/Camera.h"
 
 #include <imgui.h>
 #include <imgui_impl_glfw_gl3.h>
@@ -18,7 +18,7 @@ namespace kata
 		{
 		private:
 			GLFWwindow *m_window;
-			GL::Camera *m_camera;
+			render::Camera *m_camera;
 
 			double m_dx, m_dy;
 			double m_prevX, m_prevY;
@@ -61,7 +61,7 @@ namespace kata
 		public:
 			GLCameraInputComponent()
 			{
-				m_camera = new GL::Camera();
+				m_camera = new render::Camera();
 				m_camera->Initialize(glm::vec3(0.f, 0.f, 1.f), 0.2f);
 			}
 			

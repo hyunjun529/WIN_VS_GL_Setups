@@ -3,10 +3,10 @@
 
 #include <malloc.h>
 
-#include "GL/GLWindow.h"
+#include "render/World.h"
 
-#include "component/ImguiComponent/ImguiComponent.h"
-#include "component/SceneComponenet/SceneComponent.h"
+#include "component/InputComponent/ImguiViewerInputComponent.h"
+#include "component/RenderComponenet/RenderComponent.h"
 
 
 namespace kata
@@ -16,25 +16,25 @@ namespace kata
 		class Scene
 		{
 		private:
-			GL::GLWindow *m_GLWindow = nullptr;
+			render::World *m_world = nullptr;
 			component::ImguiInputComponent *m_input;
 			component::ScenePhysicsComponent *m_physics;
-			component::SceneGraphicsComponent *m_graphics;
+			component::RenderComponent *m_graphics;
 
 			GLuint *m_pixel = (GLuint*)malloc(400 * 400 * 4 * sizeof(GLuint));
 
 		public:
 			Scene(component::ImguiInputComponent *input,
 				  component::ScenePhysicsComponent *phyiscs,
-				  component::SceneGraphicsComponent *graphics)
+				  component::RenderComponent *graphics)
 				: m_input(input),
 				  m_physics(phyiscs),
 				  m_graphics(graphics)
 			{
-				m_GLWindow = new GL::GLWindow();
+				m_world = new render::World();
 
 				m_graphics->setImguiInput(m_input);
-				m_graphics->setGLWindow(m_GLWindow);
+				m_graphics->setGLWindow(m_world);
 				m_graphics->setPixel(m_pixel);
 			}
 

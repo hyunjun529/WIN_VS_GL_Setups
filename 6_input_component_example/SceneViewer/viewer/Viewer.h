@@ -23,10 +23,10 @@
 #include "component/PhysicsComponent.h"
 #include "component/GraphicsComponent.h"
 
-#include "component/ImguiComponent/ImguiComponent.h"
+#include "component/InputComponent/ImguiViewerInputComponent.h"
 
-#include "component/SceneComponenet/SceneGL40Component.h"
-#include "component/SceneComponenet/SceneOBJComponent.h"
+#include "component/RenderComponenet/TriangleRenderComponent.h"
+#include "component/RenderComponenet/OBJRenderComponent.h"
 
 
 namespace kata
@@ -185,17 +185,17 @@ namespace kata
 			component::GraphicsComponent *t_graphics;
 
 			if (_vGL < 40) {
-				t_graphics = new component::SceneGL40GraphicsComponent();
+				t_graphics = new component::TriangleRenderComponent();
 			}
 			else {
-				t_graphics = new component::SceneOBJGraphicsComponent();
+				t_graphics = new component::OBJRenderComponent();
 			}
 
 			std::shared_ptr<kata::scene::Scene> tmp_scene
 				= std::make_shared<kata::scene::Scene>(
 					(component::ImguiInputComponent*) t_input,
 					(component::ScenePhysicsComponent*) t_physics,
-					(component::SceneGraphicsComponent*) t_graphics
+					(component::RenderComponent*) t_graphics
 					);
 
 			m_inputComponents.push_back(t_input);

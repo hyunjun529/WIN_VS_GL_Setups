@@ -7,16 +7,16 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "../../GL/GLWindow.h"
+#include "../../render/World.h"
 
 #include "../Component.h"
 #include "../InputComponent.h"
 #include "../PhysicsComponent.h"
 #include "../GraphicsComponent.h"
 
-#include "../ImguiComponent/ImguiComponent.h"
+#include "../InputComponent/ImguiViewerInputComponent.h"
 
-#include "SceneComponent.h"
+#include "RenderComponent.h"
 
 #include <linmath.h>
 
@@ -25,7 +25,7 @@ namespace kata
 {
 	namespace component
 	{
-		class SceneGL40GraphicsComponent : public SceneGraphicsComponent
+		class TriangleRenderComponent : public RenderComponent
 		{
 		private:
 			// http://openglbook.com/chapter-2-vertices-and-shapes.html
@@ -189,17 +189,17 @@ namespace kata
 			}
 
 		public:
-			SceneGL40GraphicsComponent() {}
+			TriangleRenderComponent() {}
 
 			void setup()
 			{
-				if (!m_GLWindow)
+				if (!m_world)
 				{
 					assert("check init order");
 				}
 
-				glfwMakeContextCurrent(m_GLWindow->m_window);
-				if (!isSingleWindow) glfwHideWindow(m_GLWindow->m_window);
+				glfwMakeContextCurrent(m_world->m_window);
+				if (!isSingleWindow) glfwHideWindow(m_world->m_window);
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
@@ -218,7 +218,7 @@ namespace kata
 				{
 					assert("check init order");
 				}
-				glfwMakeContextCurrent(m_GLWindow->m_window);
+				glfwMakeContextCurrent(m_world->m_window);
 
 				// clear buffer
 				glClearColor(
@@ -270,7 +270,7 @@ namespace kata
 
 				glDrawArrays(GL_TRIANGLES, 0, 3);
 
-				if (!isSingleWindow) glfwSwapBuffers(m_GLWindow->m_window);
+				if (!isSingleWindow) glfwSwapBuffers(m_world->m_window);
 
 				glReadPixels(0, 0, 400, 400, GL_RGBA, GL_UNSIGNED_INT, m_pixel);
 			}

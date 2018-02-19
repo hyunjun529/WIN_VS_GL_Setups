@@ -146,25 +146,40 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\external\gl3w\GL\gl3w.c" />
-    <ClCompile Include="..\external\imgui-1.53\imgui.cpp" />
-    <ClCompile Include="..\external\imgui-1.53\imgui_demo.cpp" />
-    <ClCompile Include="..\external\imgui-1.53\imgui_draw.cpp" />
-    <ClCompile Include="..\external\imgui-1.53\imgui_impl_glfw_gl3.cpp" />
+    <ClCompile Include="..\external\gl3w\GL\gl3w.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui-1.53\imgui.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui-1.53\imgui_demo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui-1.53\imgui_draw.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\external\imgui-1.53\imgui_impl_glfw_gl3.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="component\Component.cpp" />
-    <ClCompile Include="component\GLComponent\GLCameraInputComponent.cpp" />
     <ClCompile Include="component\GraphicsComponent.cpp" />
-    <ClCompile Include="component\ImguiComponent\ImguiComponent.cpp" />
     <ClCompile Include="component\InputComponent.cpp" />
+    <ClCompile Include="component\InputComponent\CameraInputComponent.cpp" />
+    <ClCompile Include="component\InputComponent\ImguiViewerInputComponent.cpp" />
     <ClCompile Include="component\PhysicsComponent.cpp" />
-    <ClCompile Include="component\SceneComponenet\SceneComponent.cpp" />
-    <ClCompile Include="component\SceneComponenet\SceneGL40Component.cpp" />
-    <ClCompile Include="component\SceneComponenet\SceneOBJComponent.cpp" />
-    <ClCompile Include="GL\GLCamera.cpp" />
-    <ClCompile Include="GL\GLShaderUtil.cpp" />
-    <ClCompile Include="GL\GLVertexUtil.cpp" />
-    <ClCompile Include="GL\GLWindow.cpp" />
+    <ClCompile Include="component\RenderComponenet\OBJRenderComponent.cpp" />
+    <ClCompile Include="component\RenderComponenet\RenderComponent.cpp" />
+    <ClCompile Include="component\RenderComponenet\TriangleRenderComponent.cpp" />
     <ClCompile Include="loader\OBJ\OBJLoader.cpp" />
+    <ClCompile Include="render\Camera.cpp" />
+    <ClCompile Include="render\ShaderUtil.cpp" />
+    <ClCompile Include="render\VertexUtil.cpp" />
+    <ClCompile Include="render\World.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -172,39 +187,78 @@
     <ClCompile Include="util\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\external\gl3w\GL\gl3w.h" />
-    <ClInclude Include="..\external\gl3w\GL\glcorearb.h" />
-    <ClInclude Include="..\external\glm\glm\glm.hpp" />
-    <ClInclude Include="..\external\imgui-1.53\imconfig.h" />
-    <ClInclude Include="..\external\imgui-1.53\imgui.h" />
-    <ClInclude Include="..\external\imgui-1.53\imgui_impl_glfw_gl3.h" />
-    <ClInclude Include="..\external\imgui-1.53\imgui_internal.h" />
-    <ClInclude Include="..\external\imgui-1.53\stb_rect_pack.h" />
-    <ClInclude Include="..\external\imgui-1.53\stb_textedit.h" />
-    <ClInclude Include="..\external\imgui-1.53\stb_truetype.h" />
-    <ClInclude Include="..\external\linmath.h\linmath.h" />
-    <ClInclude Include="..\external\stb\stb_image.h" />
-    <ClInclude Include="..\external\tinyobjloader\tiny_obj_loader.h" />
+    <ClInclude Include="..\external\gl3w\GL\gl3w.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\external\gl3w\GL\glcorearb.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\external\glm\glm\glm.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\imconfig.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\imgui.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\imgui_impl_glfw_gl3.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\imgui_internal.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\stb_rect_pack.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\stb_textedit.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\external\imgui-1.53\stb_truetype.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\external\linmath.h\linmath.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\external\stb\stb_image.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\external\tinyobjloader\tiny_obj_loader.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="component\Component.h" />
-    <ClInclude Include="component\GLComponent\GLCameraInputComponent.h" />
     <ClInclude Include="component\GraphicsComponent.h" />
-    <ClInclude Include="component\ImguiComponent\ImguiComponent.h" />
     <ClInclude Include="component\InputComponent.h" />
+    <ClInclude Include="component\InputComponent\CameraInputComponent.h" />
+    <ClInclude Include="component\InputComponent\ImguiViewerInputComponent.h" />
     <ClInclude Include="component\PhysicsComponent.h" />
-    <ClInclude Include="component\SceneComponenet\SceneComponent.h" />
-    <ClInclude Include="component\SceneComponenet\SceneGL40Component.h" />
-    <ClInclude Include="component\SceneComponenet\SceneOBJComponent.h" />
-    <ClInclude Include="GL\GLCamera.h" />
-    <ClInclude Include="GL\GLShaderUtil.h" />
-    <ClInclude Include="GL\GLVertexUtil.h" />
-    <ClInclude Include="GL\GLWindow.h" />
+    <ClInclude Include="component\RenderComponenet\OBJRenderComponent.h" />
+    <ClInclude Include="component\RenderComponenet\RenderComponent.h" />
+    <ClInclude Include="component\RenderComponenet\TriangleRenderComponent.h" />
     <ClInclude Include="loader\OBJ\OBJLoader.h" />
+    <ClInclude Include="render\Camera.h" />
+    <ClInclude Include="render\ShaderUtil.h" />
+    <ClInclude Include="render\VertexUtil.h" />
+    <ClInclude Include="render\World.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="util\Log.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GL\shader\color.frag" />
-    <None Include="GL\shader\color.vert" />
+    <None Include="render\shader\color.frag" />
+    <None Include="render\shader\color.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

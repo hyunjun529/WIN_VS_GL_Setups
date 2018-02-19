@@ -4,8 +4,8 @@
 //
 // original GitHub repo : https://github.com/benikabocha/saba
 
-#ifndef KATA_GL_CAMERA_H_
-#define KATA_GL_CAMERA_H_
+#ifndef KATA_RENDER_CAMERA_H_
+#define KATA_RENDER_CAMERA_H_
 
 #include <glm/glm.hpp>
 #include <glm/vec3.hpp>
@@ -13,7 +13,7 @@
 
 namespace kata
 {
-	namespace GL
+	namespace render
 	{
 		class Camera
 		{
@@ -66,4 +66,4 @@ namespace kata
 		};
 	}
 }
-#endif // KATA_GL_CAMERA_H_
+#endif // KATA_RENDER_CAMERA_H_

@@ -4,14 +4,14 @@
 #include <GL/gl3w.h>
 #include <GLFW/glfw3.h>
 
-#include "../../GL/GLWindow.h"
+#include "../../render/World.h"
 
 #include "../Component.h"
 #include "../InputComponent.h"
 #include "../PhysicsComponent.h"
 #include "../GraphicsComponent.h"
 
-#include "../ImguiComponent/ImguiComponent.h"
+#include "../InputComponent/ImguiViewerInputComponent.h"
 
 
 namespace kata
@@ -25,23 +25,23 @@ namespace kata
 			void update() {}
 		};
 
-		class SceneGraphicsComponent : public GraphicsComponent
+		class RenderComponent : public GraphicsComponent
 		{
 		protected:
 			ImguiInputComponent * m_imguiInputComponenet = nullptr;
 			
-			GL::GLWindow *m_GLWindow = nullptr;
+			render::World *m_world = nullptr;
 			
 			GLuint *m_pixel = nullptr;
 			
 			bool isSingleWindow = false;
 
 		public:
-			SceneGraphicsComponent() {}
+			RenderComponent() {}
 
-			void setGLWindow(GL::GLWindow *GLWindow)
+			void setGLWindow(render::World *_world)
 			{
-				m_GLWindow = GLWindow;
+				m_world = _world;
 			}
 
 			void setImguiInput(ImguiInputComponent *imguiInputComponent)

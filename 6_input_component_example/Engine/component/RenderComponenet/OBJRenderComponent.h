@@ -13,23 +13,23 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "../../GL/GLWindow.h"
+#include "../../render/World.h"
 
 #include "../Component.h"
 #include "../InputComponent.h"
 #include "../PhysicsComponent.h"
 #include "../GraphicsComponent.h"
 
-#include "../ImguiComponent/ImguiComponent.h"
+#include "../InputComponent/ImguiViewerInputComponent.h"
 
-#include "SceneComponent.h"
+#include "RenderComponent.h"
 
 
 namespace kata
 {
 	namespace component
 	{
-		class SceneOBJGraphicsComponent : public SceneGraphicsComponent
+		class OBJRenderComponent : public RenderComponent
 		{
 		private:
 			// http://openglbook.com/chapter-2-vertices-and-shapes.html
@@ -95,7 +95,7 @@ namespace kata
 
 			void CreateVBO(void)
 			{
-				glfwMakeContextCurrent(m_GLWindow->m_window);
+				glfwMakeContextCurrent(m_world->m_window);
 
 				GLenum ErrorCheckValue = glGetError();
 			
@@ -176,7 +176,7 @@ namespace kata
 
 			void CreateShaders(void)
 			{
-				glfwMakeContextCurrent(m_GLWindow->m_window);
+				glfwMakeContextCurrent(m_world->m_window);
 
 				GLenum ErrorCheckValue = glGetError();
 
@@ -231,11 +231,11 @@ namespace kata
 			}
 
 		public:
-			SceneOBJGraphicsComponent() {}
+			OBJRenderComponent() {}
 
 			void setup()
 			{
-				if (!m_GLWindow)
+				if (!m_world)
 				{
 					assert("check init order");
 				}
@@ -253,7 +253,7 @@ namespace kata
 				KATA_CONSOLE_INFO("# of materials = {}\n", (int)materials.size());
 				KATA_CONSOLE_INFO("# of shapes    = {}\n", (int)shapes.size());
 
-				glfwMakeContextCurrent(m_GLWindow->m_window);
+				glfwMakeContextCurrent(m_world->m_window);
 				//if (!isSingleWindow) glfwHideWindow(m_GLWindow->m_window);
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
@@ -274,7 +274,7 @@ namespace kata
 				{
 					assert("check init order");
 				}
-				glfwMakeContextCurrent(m_GLWindow->m_window);
+				glfwMakeContextCurrent(m_world->m_window);
 
 				// clear buffer
 				glClearColor(
@@ -293,7 +293,7 @@ namespace kata
 				glPolygonMode(GL_BACK, GL_FILL);
 				glDrawArrays(GL_TRIANGLES, 0, (GLsizei)bufferV.size());
 
-				if (!isSingleWindow) glfwSwapBuffers(m_GLWindow->m_window);
+				if (!isSingleWindow) glfwSwapBuffers(m_world->m_window);
 
 				glReadPixels(0, 0, 400, 400, GL_RGBA, GL_UNSIGNED_INT, m_pixel);
 			}

@@ -1,14 +1,14 @@
-#ifndef KATA_GL_WINDOW_H_
-#define KATA_GL_WINDOW_H_
+#ifndef KATA_RENDER_WINDOW_H_
+#define KATA_RENDER_WINDOW_H_
 
 #include <GL/gl3w.h>
 #include <GLFW/glfw3.h>
 
 namespace kata
 {
-	namespace GL
+	namespace render
 	{
-		class GLWindow
+		class World
 		{
 		private:
 			int m_windowWidth = 400;
@@ -19,7 +19,7 @@ namespace kata
 		public:
 			GLFWwindow * m_window;
 
-			GLWindow(int _w = 400, int _h = 400)
+			World(int _w = 400, int _h = 400)
 				: m_windowWidth(_w), m_windowHeight(_h)
 			{
 				m_window = glfwCreateWindow(m_windowWidth, m_windowHeight, windowTitle, NULL, NULL);
@@ -35,4 +35,4 @@ namespace kata
 }
 
 
-#endif // KATA_GL_WINDOW_H_
+#endif // KATA_RENDER_WINDOW_H_
