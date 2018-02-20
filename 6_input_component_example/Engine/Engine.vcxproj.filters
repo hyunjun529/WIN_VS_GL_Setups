@@ -22,12 +22,6 @@
     <Filter Include="external\tinyobjloaer">
       <UniqueIdentifier>{27683283-3f07-4728-b531-f9e40e7ce84f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="loader">
-      <UniqueIdentifier>{6451a1e4-64a2-41b0-9041-b4b4d879d82c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="loader\OBJ">
-      <UniqueIdentifier>{d88e0f32-9377-4c03-9a50-062a2bcc8c6a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="external\stb">
       <UniqueIdentifier>{6868b81f-0e07-474f-8ce9-d8150081eb7f}</UniqueIdentifier>
     </Filter>
@@ -84,9 +78,6 @@
     <ClCompile Include="..\external\imgui-1.53\imgui_draw.cpp">
       <Filter>external\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="loader\OBJ\OBJLoader.cpp">
-      <Filter>loader\OBJ</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="component\InputComponent\ImguiViewerInputComponent.cpp">
       <Filter>component\InputComponent</Filter>
@@ -117,6 +108,12 @@
     </ClCompile>
     <ClCompile Include="component\RenderComponenet\OBJWireRenderComponent.cpp">
       <Filter>component\RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="render\DrawObject.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="render\OBJLoader.cpp">
+      <Filter>render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -168,9 +165,6 @@
     <ClInclude Include="..\external\tinyobjloader\tiny_obj_loader.h">
       <Filter>external\tinyobjloaer</Filter>
     </ClInclude>
-    <ClInclude Include="loader\OBJ\OBJLoader.h">
-      <Filter>loader\OBJ</Filter>
-    </ClInclude>
     <ClInclude Include="..\external\stb\stb_image.h">
       <Filter>external\stb</Filter>
     </ClInclude>
@@ -207,6 +201,12 @@
     </ClInclude>
     <ClInclude Include="component\RenderComponenet\OBJWireRenderComponent.h">
       <Filter>component\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="render\DrawObject.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="render\OBJLoader.h">
+      <Filter>render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

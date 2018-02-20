@@ -176,8 +176,9 @@
     <ClCompile Include="component\RenderComponenet\OBJWireRenderComponent.cpp" />
     <ClCompile Include="component\RenderComponenet\RenderComponent.cpp" />
     <ClCompile Include="component\RenderComponenet\TriangleRenderComponent.cpp" />
-    <ClCompile Include="loader\OBJ\OBJLoader.cpp" />
     <ClCompile Include="render\Camera.cpp" />
+    <ClCompile Include="render\DrawObject.cpp" />
+    <ClCompile Include="render\OBJLoader.cpp" />
     <ClCompile Include="render\ShaderUtil.cpp" />
     <ClCompile Include="render\VertexUtil.cpp" />
     <ClCompile Include="render\World.cpp" />
@@ -250,8 +251,9 @@
     <ClInclude Include="component\RenderComponenet\OBJWireRenderComponent.h" />
     <ClInclude Include="component\RenderComponenet\RenderComponent.h" />
     <ClInclude Include="component\RenderComponenet\TriangleRenderComponent.h" />
-    <ClInclude Include="loader\OBJ\OBJLoader.h" />
     <ClInclude Include="render\Camera.h" />
+    <ClInclude Include="render\DrawObject.h" />
+    <ClInclude Include="render\OBJLoader.h" />
     <ClInclude Include="render\ShaderUtil.h" />
     <ClInclude Include="render\VertexUtil.h" />
     <ClInclude Include="render\World.h" />

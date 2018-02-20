@@ -41,6 +41,8 @@ namespace kata
 			{
 				if (strcmp(_path, "vert") >= 0) return shaderUtil.VertexShader;
 				if (strcmp(_path, "frag") >= 0) return shaderUtil.FragmentShader;
+				if (strcmp(_path, "UVonlyV") >= 0) return shaderUtil.vertUVonly;
+				if (strcmp(_path, "UVonlyF") >= 0) return shaderUtil.fragUVonly;
 				return "";
 			}
 		};
