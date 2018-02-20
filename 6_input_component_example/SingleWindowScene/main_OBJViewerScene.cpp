@@ -90,7 +90,7 @@ int main(int argc, char** argv)
 		physics->update();
 
 		// render
-		renderOBJ->render(inputCamera->getWVP());
+		renderOBJ->render(inputCamera->getMVP());
 
 		glfwMakeContextCurrent(window);
 		ImGui_ImplGlfwGL3_NewFrame();

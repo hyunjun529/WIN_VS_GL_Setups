@@ -216,5 +216,11 @@
     <None Include="render\shader\color.vert">
       <Filter>render\shader</Filter>
     </None>
+    <None Include="render\shader\UVonly.frag">
+      <Filter>render\shader</Filter>
+    </None>
+    <None Include="render\shader\UVonly.vert">
+      <Filter>render\shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

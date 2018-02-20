@@ -20,11 +20,11 @@ namespace kata
 				"layout(location=1) in vec4 in_Color;\n"\
 				"out vec4 ex_Color;\n"\
 
-				"uniform mat4 WVP;\n"\
+				"uniform mat4 MVP;\n"\
 
 				"void main(void)\n"\
 				"{\n"\
-				"  gl_Position = WVP * in_Position;\n"\
+				"  gl_Position = MVP * in_Position;\n"\
 				"  ex_Color = in_Color;\n"\
 				"}\n"
 			};
@@ -51,11 +51,11 @@ namespace kata
 
 				"out vec2 UV;\n"\
 
-				"uniform mat4 WVP;\n"\
+				"uniform mat4 MVP;\n"\
 
 				"void main(){\n"\
 
-				"	gl_Position =  WVP * vertexPosition;\n"\
+				"	gl_Position =  MVP * vertexPosition;\n"\
 
 				"	UV = vertexUV;\n"\
 

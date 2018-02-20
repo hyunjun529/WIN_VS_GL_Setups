@@ -34,16 +34,17 @@ namespace kata
 
 			GLuint
 				TextureId,
-				WvpId;
+				MvpId;
 
 			GLuint
 				VertexShaderId,
 				FragmentShaderId,
 				ProgramId;
 
-			render::OBJLoader *objLoader = nullptr;
+			GLuint
+				cntTirangle = 0;
 
-			std::vector<render::DrawObject> gDrawObjects;
+			std::vector<std::vector<render::DrawObject>> m_drawObjects;
 
 
 			void CreateVBO(void)
@@ -52,42 +53,52 @@ namespace kata
 
 				GLenum ErrorCheckValue = glGetError();
 			
-				// texture
-				int w, h, comp;
-				unsigned char *image = objLoader->tmpLoadImage(w, h, comp);
-				glActiveTexture(GL_TEXTURE0);
-				glGenTextures(1, &TextureId);
-				glBindTexture(GL_TEXTURE_2D, TextureId);
-				if (comp == 3) {
-					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB,
-						GL_UNSIGNED_BYTE, image);
-				}
-				else if (comp == 4) {
-					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA,
-						GL_UNSIGNED_BYTE, image);
-				}
-				else {
-					assert(0);  // TODO
-				}
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-				glUniform1i(TextureId, 0);
-				stbi_image_free(image);
+				for (std::vector<render::DrawObject> vo : m_drawObjects)
+				{
+					for (render::DrawObject o : vo)
+					{
+						// texture
+						glActiveTexture(GL_TEXTURE0);
+						glGenTextures(1, &TextureId);
+						glBindTexture(GL_TEXTURE_2D, TextureId);
+						if (o.icomp == 3) {
+							glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, o.iw, o.ih, 0, GL_RGB,
+								GL_UNSIGNED_BYTE, o.image);
+						}
+						else if (o.icomp == 4) {
+							glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, o.iw, o.ih, 0, GL_RGBA,
+								GL_UNSIGNED_BYTE, o.image);
+						}
+						else {
+							assert(0);  // TODO
+						}
+						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+						glUniform1i(TextureId, 0);
+						//stbi_image_free(image);
 
-				// origin function
-				glGenBuffers(1, &VboVId);
-				glBindBuffer(GL_ARRAY_BUFFER, VboVId);
-				glBufferData(GL_ARRAY_BUFFER, objLoader->bufferV.size() * sizeof(glm::vec4), &objLoader->bufferV[0], GL_STATIC_DRAW);
-				glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
-				glEnableVertexAttribArray(0);
+						// Position
+						glGenBuffers(1, &VboVId);
+						glBindBuffer(GL_ARRAY_BUFFER, VboVId);
+						glBufferData(GL_ARRAY_BUFFER, o.bufferPosition.size() * sizeof(glm::vec4), &o.bufferPosition[0], GL_STATIC_DRAW);
+						glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
+						glEnableVertexAttribArray(0);
 
-				glGenBuffers(1, &VboUVId);
-				glBindBuffer(GL_ARRAY_BUFFER, VboUVId);
-				glBufferData(GL_ARRAY_BUFFER, objLoader->bufferUV.size() * sizeof(glm::vec2), &objLoader->bufferUV[0], GL_STATIC_DRAW);
-				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
-				glEnableVertexAttribArray(1);
+						// UV
+						glGenBuffers(1, &VboUVId);
+						glBindBuffer(GL_ARRAY_BUFFER, VboUVId);
+						glBufferData(GL_ARRAY_BUFFER, o.bufferUV.size() * sizeof(glm::vec2), &o.bufferUV[0], GL_STATIC_DRAW);
+						glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
+						glEnableVertexAttribArray(1);
+
+						// Normal
+
+						// count Tirangle
+						cntTirangle += o.numTriangles;
+					}
+				}
 
 				ErrorCheckValue = glGetError();
 				if (ErrorCheckValue != GL_NO_ERROR)
@@ -139,7 +150,7 @@ namespace kata
 				glLinkProgram(ProgramId);
 				glUseProgram(ProgramId);
 
-				WvpId = glGetUniformLocation(ProgramId, "WVP");
+				MvpId = glGetUniformLocation(ProgramId, "MVP");
 				TextureId = glGetUniformLocation(ProgramId, "myTextureSampler");
 
 				ErrorCheckValue = glGetError();
@@ -200,8 +211,8 @@ namespace kata
 				
 				glEnable(GL_DEPTH_TEST);
 
-				objLoader = new render::OBJLoader();
-				objLoader->tmpLoadOBJ();
+				render::OBJLoader objLoader;
+				m_drawObjects.push_back(objLoader.loadOBJ("file", "path"));
 
 				CreateShaders();
 				CreateVBO();
@@ -212,7 +223,7 @@ namespace kata
 				render(glm::mat4x4(1.0));
 			}
 
-			void render(const glm::mat4 &WVP)
+			void render(const glm::mat4 &MVP)
 			{
 				if (!m_inputImgui)
 				{
@@ -230,12 +241,12 @@ namespace kata
 				if (!isSingleWindow) glClear(GL_COLOR_BUFFER_BIT);
 
 				// WVP
-				glUniformMatrix4fv(WvpId, 1, GL_FALSE, &WVP[0][0]);
+				glUniformMatrix4fv(MvpId, 1, GL_FALSE, &MVP[0][0]);
 
 				// draw
 				glPolygonMode(GL_FRONT, GL_FILL);
 				glPolygonMode(GL_BACK, GL_FILL);
-				glDrawArrays(GL_TRIANGLES, 0, (GLsizei)objLoader->bufferV.size());
+				glDrawArrays(GL_TRIANGLES, 0, 3 * cntTirangle); // need cnt all positions
 
 				if (!isSingleWindow) glfwSwapBuffers(m_world->m_window);
 

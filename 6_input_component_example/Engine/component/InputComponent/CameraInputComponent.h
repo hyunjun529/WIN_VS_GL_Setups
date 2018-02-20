@@ -70,7 +70,7 @@ namespace kata
 				delete(m_camera);
 			}
 
-			glm::mat4x4 getWVP()
+			glm::mat4x4 getMVP()
 			{
 				auto world = glm::mat4(1.0);
 				auto view = m_camera->GetViewMatrix();
@@ -80,12 +80,12 @@ namespace kata
 
 			void renderImGui()
 			{
-				glm::mat4x4 WVP = getWVP();
+				glm::mat4x4 MVP = getMVP();
 
 				ImGui::Begin("WVP");
 				for (int i = 0; i < 4; i++) {
 					for (int j = 0; j < 4; j++) {
-						ImGui::Text("%d %d : %lf", i, j, WVP[i][j]);
+						ImGui::Text("%d %d : %lf", i, j, MVP[i][j]);
 					}
 				}
 				ImGui::End();

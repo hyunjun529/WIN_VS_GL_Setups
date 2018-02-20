@@ -169,7 +169,7 @@ namespace kata
 				glLinkProgram(ProgramId);
 				glUseProgram(ProgramId);
 
-				WvpId = glGetUniformLocation(ProgramId, "WVP");
+				WvpId = glGetUniformLocation(ProgramId, "MVP");
 
 				ErrorCheckValue = glGetError();
 				if (ErrorCheckValue != GL_NO_ERROR)

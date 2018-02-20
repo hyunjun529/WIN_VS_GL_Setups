@@ -12,32 +12,31 @@ namespace kata
 {
 	namespace render
 	{
+		// https://github.com/syoyo/tinyobjloader/blob/master/examples/viewer/viewer.cc
 		class OBJLoader
 		{
 		private:
-			std::vector<DrawObject> m_do;
-
 			std::string base_dir = "C://Users//hyunjun529//Documents//WIN_VS_GL_Setups//6_input_component_example//resource//cube//";
 			std::string inputfile = "C://Users//hyunjun529//Documents//WIN_VS_GL_Setups//6_input_component_example//resource//cube//cube.obj";
+			//std::string base_dir = "C://Users//hyunjun529//Documents//WIN_VS_GL_Setups//6_input_component_example//resource//kizunaai//";
+			//std::string inputfile = "C://Users//hyunjun529//Documents//WIN_VS_GL_Setups//6_input_component_example//resource//kizunaai//kizunaai.obj";
 			std::string texturefile = "C://Users//hyunjun529//Documents//WIN_VS_GL_Setups//6_input_component_example//resource//cube//default.png";
+			
 			tinyobj::attrib_t attrib;
 			std::vector<tinyobj::shape_t> shapes;
 			std::vector<tinyobj::material_t> materials;
-			std::map<std::string, GLuint> textures;
+			
 			std::string err;
 
 
 		public:
-			std::vector<glm::vec4> bufferV;
-			std::vector<glm::vec2> bufferUV;
-
-			unsigned char *tmpLoadImage(int &w, int &h, int &comp)
+			// vector가 아니라 map이나 이름 붙어있는 다른 collection으로 바꿔야 할 수도 있음
+			std::vector<DrawObject> loadOBJ(const char *_file, const char *_path)
 			{
-				return stbi_load(texturefile.c_str(), &w, &h, &comp, STBI_default);
-			}
+				std::vector<DrawObject> o;
 
-			void tmpLoadOBJ()
-			{
+				DrawObject tmp_o;
+
 				// load obj file
 				bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, inputfile.c_str(), base_dir.c_str());
 				if (!err.empty())
@@ -51,7 +50,10 @@ namespace kata
 				KATA_CONSOLE_INFO("# of materials = {}\n", (int)materials.size());
 				KATA_CONSOLE_INFO("# of shapes    = {}\n", (int)shapes.size());
 
-				// load obj info
+				// load texture
+				tmp_o.image = stbi_load(texturefile.c_str(), &tmp_o.iw, &tmp_o.ih, &tmp_o.icomp, STBI_default);
+
+				// load obj position, uv, normal
 				for (size_t s = 0; s < shapes.size(); s++)
 				{
 					for (size_t f = 0; f < shapes[s].mesh.indices.size() / 3; f++)
@@ -115,11 +117,16 @@ namespace kata
 						// push buffer
 						for (int k = 0; k < 3; k++)
 						{
-							bufferV.push_back(v[k]);
-							bufferUV.push_back(tc[k]);
+							tmp_o.bufferPosition.push_back(v[k]);
+							tmp_o.bufferUV.push_back(tc[k]);
+							tmp_o.numTriangles++;
 						}
 					}
 				}
+
+				o.push_back(tmp_o);
+				
+				return o;
 			}
 		};
 	}
