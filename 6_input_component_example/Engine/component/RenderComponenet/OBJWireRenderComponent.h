@@ -13,6 +13,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <imgui.h>
+#include <imgui_impl_glfw_gl3.h>
+
 #include "../../render/World.h"
 
 #include "../Component.h"

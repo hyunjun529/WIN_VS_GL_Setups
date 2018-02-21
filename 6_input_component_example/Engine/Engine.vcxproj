@@ -81,7 +81,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetExt>.lib</TargetExt>
-    <OutDir>$(SolutionDir)/build/release/</OutDir>
+    <OutDir>$(SolutionDir)/Engine/build/release/</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -175,7 +175,10 @@
     <ClCompile Include="component\RenderComponenet\OBJRenderComponent.cpp" />
     <ClCompile Include="component\RenderComponenet\OBJWireRenderComponent.cpp" />
     <ClCompile Include="component\RenderComponenet\RenderComponent.cpp" />
-    <ClCompile Include="component\RenderComponenet\TriangleRenderComponent.cpp" />
+    <ClCompile Include="component\RenderComponenet\TriangleRenderComponent.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="render\Camera.cpp" />
     <ClCompile Include="render\DrawObject.cpp" />
     <ClCompile Include="render\OBJLoader.cpp" />
@@ -250,7 +253,10 @@
     <ClInclude Include="component\RenderComponenet\OBJRenderComponent.h" />
     <ClInclude Include="component\RenderComponenet\OBJWireRenderComponent.h" />
     <ClInclude Include="component\RenderComponenet\RenderComponent.h" />
-    <ClInclude Include="component\RenderComponenet\TriangleRenderComponent.h" />
+    <ClInclude Include="component\RenderComponenet\TriangleRenderComponent.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="render\Camera.h" />
     <ClInclude Include="render\DrawObject.h" />
     <ClInclude Include="render\OBJLoader.h" />

@@ -9,6 +9,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <imgui.h>
+#include <imgui_impl_glfw_gl3.h>
+
 #include "RenderComponent.h"
 
 #include "../InputComponent/ImguiViewerInputComponent.h"
@@ -214,6 +217,8 @@ namespace kata
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 				
 				glEnable(GL_DEPTH_TEST);
+				glEnable(GL_BLEND);
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 				render::OBJLoader objLoader;
 				m_drawObjects.push_back(objLoader.loadOBJ("file", "path"));
