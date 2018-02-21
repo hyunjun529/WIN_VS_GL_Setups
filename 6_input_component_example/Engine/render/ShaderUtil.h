@@ -74,7 +74,7 @@ namespace kata
 
 				"void main(){\n"\
 
-				"	color = vec4(texture( myTextureSampler, UV ).rgb, 1.0f);\n"\
+				"	color = texture( myTextureSampler, UV ).rgba;\n"\
 
 				"}\n"
 			};

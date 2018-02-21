@@ -44,7 +44,7 @@ namespace kata
 			GLuint
 				cntTirangle = 0;
 
-			std::vector<std::vector<render::DrawObject>> m_drawObjects;
+			std::vector<render::DrawObject> m_drawObjects;
 
 
 			void CreateVBO(void)
@@ -52,52 +52,56 @@ namespace kata
 				glfwMakeContextCurrent(m_world->m_window);
 
 				GLenum ErrorCheckValue = glGetError();
-			
-				for (std::vector<render::DrawObject> vo : m_drawObjects)
+
+				for (int k = 0; k < m_drawObjects.size(); k++)
 				{
-					for (render::DrawObject o : vo)
+					render::DrawObject *o = &m_drawObjects[k];
+					// texture
+					for (int i = 0; i < o->subMeshs.size(); i++)
 					{
-						// texture
-						glActiveTexture(GL_TEXTURE0);
-						glGenTextures(1, &TextureId);
-						glBindTexture(GL_TEXTURE_2D, TextureId);
-						if (o.icomp == 3) {
-							glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, o.iw, o.ih, 0, GL_RGB,
-								GL_UNSIGNED_BYTE, o.image);
+						render::DrawObject::SubMesh *sm = &o->subMeshs[i];
+						if (sm->textureId == 0)
+						{
+							glActiveTexture(GL_TEXTURE0);
+							glGenTextures(1, &sm->textureId);
+							glBindTexture(GL_TEXTURE_2D, sm->textureId);
+							if (o->textures[sm->texname].comp == 3) {
+								glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, o->textures[sm->texname].w, o->textures[sm->texname].h, 0, GL_RGB,
+									GL_UNSIGNED_BYTE, o->textures[sm->texname].image);
+							}
+							else if (o->textures[sm->texname].comp == 4) {
+								glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, o->textures[sm->texname].w, o->textures[sm->texname].h, 0, GL_RGBA,
+									GL_UNSIGNED_BYTE, o->textures[sm->texname].image);
+							}
+							else {
+								assert(0);  // TODO
+							}
+							glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+							glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+							glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+							glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 						}
-						else if (o.icomp == 4) {
-							glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, o.iw, o.ih, 0, GL_RGBA,
-								GL_UNSIGNED_BYTE, o.image);
-						}
-						else {
-							assert(0);  // TODO
-						}
-						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-						glUniform1i(TextureId, 0);
-						//stbi_image_free(image);
-
-						// Position
-						glGenBuffers(1, &VboVId);
-						glBindBuffer(GL_ARRAY_BUFFER, VboVId);
-						glBufferData(GL_ARRAY_BUFFER, o.bufferPosition.size() * sizeof(glm::vec4), &o.bufferPosition[0], GL_STATIC_DRAW);
-						glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
-						glEnableVertexAttribArray(0);
-
-						// UV
-						glGenBuffers(1, &VboUVId);
-						glBindBuffer(GL_ARRAY_BUFFER, VboUVId);
-						glBufferData(GL_ARRAY_BUFFER, o.bufferUV.size() * sizeof(glm::vec2), &o.bufferUV[0], GL_STATIC_DRAW);
-						glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
-						glEnableVertexAttribArray(1);
-
-						// Normal
-
-						// count Tirangle
-						cntTirangle += o.numTriangles;
 					}
+					// stbi_image_free(o->textures[sm.texname].image);
+
+					// Position
+					glGenBuffers(1, &VboVId);
+					glBindBuffer(GL_ARRAY_BUFFER, VboVId);
+					glBufferData(GL_ARRAY_BUFFER, o->bufferPosition.size() * sizeof(glm::vec4), &o->bufferPosition[0], GL_STATIC_DRAW);
+					glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
+					glEnableVertexAttribArray(0);
+
+					// UV
+					glGenBuffers(1, &VboUVId);
+					glBindBuffer(GL_ARRAY_BUFFER, VboUVId);
+					glBufferData(GL_ARRAY_BUFFER, o->bufferUV.size() * sizeof(glm::vec2), &o->bufferUV[0], GL_STATIC_DRAW);
+					glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
+					glEnableVertexAttribArray(1);
+
+					// Normal
+
+					// count Tirangle
+					cntTirangle += o->numTriangles;
 				}
 
 				ErrorCheckValue = glGetError();
@@ -246,7 +250,19 @@ namespace kata
 				// draw
 				glPolygonMode(GL_FRONT, GL_FILL);
 				glPolygonMode(GL_BACK, GL_FILL);
-				glDrawArrays(GL_TRIANGLES, 0, 3 * cntTirangle); // need cnt all positions
+
+				for (render::DrawObject o : m_drawObjects)
+				{
+					for (render::DrawObject::SubMesh sm : o.subMeshs)
+					{
+						glActiveTexture(GL_TEXTURE0);
+						glBindTexture(GL_TEXTURE_2D, sm.textureId);
+						glUniform1i(TextureId, 0);
+
+						glDrawArrays(GL_TRIANGLES, sm.idxBegin, sm.cntVertex);
+						glBindTexture(GL_TEXTURE_2D, 0);
+					}
+				}
 
 				if (!isSingleWindow) glfwSwapBuffers(m_world->m_window);
 

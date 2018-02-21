@@ -15,16 +15,26 @@ namespace kata
 			int m_idx = -1;
 
 		public:
-			int numTriangles = 0; // not safe 
-			GLuint vb_id;
-			GLuint texture_id;
-
+			int numTriangles = 0;
 			std::vector<glm::vec4> bufferPosition;
 			std::vector<glm::vec2> bufferUV;
 			std::vector<glm::vec3> bufferNormal;
 
-			int iw, ih, icomp;
-			unsigned char* image = nullptr;
+			typedef struct {
+				int w;
+				int h;
+				int comp;
+				unsigned char* image = nullptr;
+			} Texture;
+			std::map<std::string, Texture> textures;
+
+			typedef struct {
+				std::string texname;
+				GLuint textureId;
+				GLuint idxBegin;
+				GLuint cntVertex;
+			} SubMesh;
+			std::vector<SubMesh> subMeshs;
 		};
 	}
 }
