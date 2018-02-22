@@ -294,4 +294,4 @@ imgui.ini
 !2_using_CMake/external/glfw-3.2.1/build/lib/glfw3.lib
 !4_imp_scene_in_imgui/external/glfw-3.2.1/lib/glfw3.lib
 !5_compare_GL_Version/external/glfw-3.2.1/lib/glfw3.lib
-!6_input_component_example/external/glfw-3.2.1/lib/glfw3.lib
+!6_obj_viewer/external/glfw-3.2.1/lib/glfw3.lib
