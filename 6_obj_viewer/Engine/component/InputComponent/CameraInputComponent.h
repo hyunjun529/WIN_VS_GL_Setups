@@ -70,6 +70,15 @@ namespace kata
 				delete(m_camera);
 			}
 
+			void setWindow(GLFWwindow *_window)
+			{
+				m_window = _window;
+				
+				int w, h;
+				glfwGetWindowSize(_window, &w, &h);
+				m_camera->SetSize((float)w, (float)h);
+			}
+
 			glm::mat4x4 getMVP()
 			{
 				auto world = glm::mat4(1.0);
@@ -101,11 +110,6 @@ namespace kata
 				ImGui::End();
 
 				ImGui::Render();
-			}
-
-			void setWindow(GLFWwindow *_window)
-			{
-				m_window = _window;
 			}
 
 			void update()

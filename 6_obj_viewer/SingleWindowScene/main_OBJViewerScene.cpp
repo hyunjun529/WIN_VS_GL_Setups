@@ -26,8 +26,8 @@ void OnMouseButtonStub(GLFWwindow * window, int button, int action, int mods)
 
 int main(int argc, char** argv)
 {
-	const int singleWindowSizeW = 800;
-	const int singleWindowSizeH = 800;
+	const int singleWindowSizeW = 1280;
+	const int singleWindowSizeH = 1024;
 
 	if (!glfwInit()) assert("failed glfwinit");
 
@@ -89,13 +89,15 @@ int main(int argc, char** argv)
 		// physics
 		physics->update();
 
-		// render
+		// render OBJ
 		renderOBJ->render(inputCamera->getMVP());
 
+		// render ImGui
 		glfwMakeContextCurrent(window);
 		ImGui_ImplGlfwGL3_NewFrame();
 		inputImgui->render();
 		inputCamera->renderImGui();
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}

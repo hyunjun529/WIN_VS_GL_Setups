@@ -225,16 +225,19 @@ namespace kata
 
 			void clear()
 			{
-				DestroyShaders();
 				DestroyVBO();
+
+				m_drawObjects.clear();
+
+				CreateVBO();
 			}
 
 			void load(const char *_file, const char *_path)
 			{
 				DestroyVBO();
-				
+
 				render::OBJLoader objLoader;
-				m_drawObjects.push_back(objLoader.loadOBJ(_file, _path));	
+				m_drawObjects.push_back(objLoader.loadOBJ(_file, _path));
 
 				CreateVBO();
 			}
@@ -280,8 +283,7 @@ namespace kata
 
 				if (m_inputImgui->funcReset)
 				{
-					m_drawObjects.clear();
-					DestroyVBO();
+					clear();
 					m_inputImgui->funcReset = false;
 				}
 				if (m_inputImgui->funcLoad)
