@@ -53,7 +53,7 @@ namespace kata
 				m_renderOBJ->setPixel(m_pixel);
 
 				m_renderOBJ->setup();
-				m_renderOBJ->load("kizunaai.obj", "C://Users//hyunjun529//Documents//WIN_VS_GL_Setups//6_obj_viewer//resource//kizunaai//");
+				m_renderOBJ->load("capsule.obj", "C://Users//hyunjun529//Documents//WIN_VS_GL_Setups//6_obj_viewer//resource//capsule//");
 			}
 		};
 	}

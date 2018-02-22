@@ -91,7 +91,7 @@ namespace kata
 			{
 				glm::mat4x4 MVP = getMVP();
 
-				ImGui::Begin("WVP");
+				ImGui::Begin("MVP");
 				for (int i = 0; i < 4; i++) {
 					for (int j = 0; j < 4; j++) {
 						ImGui::Text("%d %d : %lf", i, j, MVP[i][j]);
@@ -107,6 +107,13 @@ namespace kata
 				ImGui::Text("m_prevY = %lf", m_prevY);
 				ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
 				ImGui::Text("m_cameraMode = %d", m_cameraMode);
+				ImGui::End();
+
+				ImGui::Begin("Camera Position");
+				glm::vec3 ep = m_camera->GetEyePostion();
+				ImGui::Text("x = %lf", ep.x);
+				ImGui::Text("y = %lf", ep.y);
+				ImGui::Text("z = %lf", ep.z);
 				ImGui::End();
 
 				ImGui::Render();

@@ -27,6 +27,11 @@ namespace kata
 			DrawObject loadOBJ(const char *_file, const char *_path)
 			{
 				DrawObject o;
+				o.vaoId = 0;
+				o.vboVId = 0;
+				o.vboUvId = 0;
+				o.vboNorId = 0;
+
 				std::string base_dir = _path;
 				std::string inputfile = "";
 				inputfile.append(_path);
@@ -85,7 +90,7 @@ namespace kata
 						tinyobj::index_t idx2 = shapes[s].mesh.indices[3 * f + 2];
 
 						// v = vertex = bufferPosition
-						glm::vec4 v[3];
+						glm::vec3 v[3];
 						for (int k = 0; k < 3; k++)
 						{
 							int f0 = idx0.vertex_index;
@@ -95,7 +100,6 @@ namespace kata
 							v[0][k] = attrib.vertices[3 * f0 + k];
 							v[1][k] = attrib.vertices[3 * f1 + k];
 							v[2][k] = attrib.vertices[3 * f2 + k];
-							v[k][3] = 1.0f;
 						}
 
 						// vt = tc = uv = bufferUV

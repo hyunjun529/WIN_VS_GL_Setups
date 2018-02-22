@@ -16,7 +16,7 @@ namespace kata
 			{
 				"#version 400 core\n"\
 
-				"layout(location = 0) in vec4 vertexPosition;\n"\
+				"layout(location = 0) in vec3 vertexPosition;\n"\
 				"layout(location = 1) in vec2 vertexUV;\n"\
 
 				"out vec2 UV;\n"\
@@ -25,7 +25,7 @@ namespace kata
 
 				"void main(){\n"\
 
-				"	gl_Position =  MVP * vertexPosition;\n"\
+				"	gl_Position =  MVP * vec4(vertexPosition, 1.0f);\n"\
 
 				"	UV = vertexUV;\n"\
 

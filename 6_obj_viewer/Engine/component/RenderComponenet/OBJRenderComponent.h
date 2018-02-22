@@ -32,10 +32,6 @@ namespace kata
 			component::ImguiInputComponent *m_inputImgui = nullptr;
 
 			GLuint
-				VboVId,
-				VboUVId;
-
-			GLuint
 				TextureId,
 				MvpId;
 
@@ -59,10 +55,13 @@ namespace kata
 				{
 					render::DrawObject *o = &m_drawObjects[k];
 
+					if (o->vaoId != 0) continue;
+
 					// texture
 					for (int i = 0; i < o->subMeshs.size(); i++)
 					{
 						render::DrawObject::SubMesh *sm = &o->subMeshs[i];
+
 						if (sm->textureId == 0)
 						{
 							glActiveTexture(GL_TEXTURE0);
@@ -87,16 +86,20 @@ namespace kata
 						}
 					}
 
+					// VAO
+					glGenVertexArrays(1, &o->vaoId);
+					glBindVertexArray(o->vaoId);
+
 					// Position
-					glGenBuffers(1, &VboVId);
-					glBindBuffer(GL_ARRAY_BUFFER, VboVId);
-					glBufferData(GL_ARRAY_BUFFER, o->bufferPosition.size() * sizeof(glm::vec4), &o->bufferPosition[0], GL_STATIC_DRAW);
-					glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
+					glGenBuffers(1, &o->vboVId);
+					glBindBuffer(GL_ARRAY_BUFFER, o->vboVId);
+					glBufferData(GL_ARRAY_BUFFER, o->bufferPosition.size() * sizeof(glm::vec3), &o->bufferPosition[0], GL_STATIC_DRAW);
+					glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 					glEnableVertexAttribArray(0);
 
 					// UV
-					glGenBuffers(1, &VboUVId);
-					glBindBuffer(GL_ARRAY_BUFFER, VboUVId);
+					glGenBuffers(1, &o->vboUvId);
+					glBindBuffer(GL_ARRAY_BUFFER, o->vboUvId);
 					glBufferData(GL_ARRAY_BUFFER, o->bufferUV.size() * sizeof(glm::vec2), &o->bufferUV[0], GL_STATIC_DRAW);
 					glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 					glEnableVertexAttribArray(1);
@@ -122,8 +125,12 @@ namespace kata
 				glDisableVertexAttribArray(0);
 
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
-				glDeleteBuffers(1, &VboVId);
-				glDeleteBuffers(1, &VboUVId);
+				for (int k = 0; k < m_drawObjects.size(); k++)
+				{
+					render::DrawObject *o = &m_drawObjects[k];
+					glDeleteBuffers(1, &o->vboVId);
+					glDeleteBuffers(1, &o->vboUvId);
+				}
 
 				glBindVertexArray(0);
 
@@ -132,6 +139,8 @@ namespace kata
 				{
 					assert("errer");
 				}
+
+				m_drawObjects.clear();
 			}
 
 			void CreateShaders(void)
@@ -227,15 +236,13 @@ namespace kata
 			{
 				DestroyVBO();
 
-				m_drawObjects.clear();
+				// load Grid
 
 				CreateVBO();
 			}
 
 			void load(const char *_file, const char *_path)
 			{
-				DestroyVBO();
-
 				render::OBJLoader objLoader;
 				m_drawObjects.push_back(objLoader.loadOBJ(_file, _path));
 
@@ -268,15 +275,22 @@ namespace kata
 				glUniformMatrix4fv(MvpId, 1, GL_FALSE, &MVP[0][0]);
 
 				// draw
-				for (render::DrawObject o : m_drawObjects)
+				for (int k = 0; k < m_drawObjects.size(); k++)
 				{
-					for (render::DrawObject::SubMesh sm : o.subMeshs)
+					render::DrawObject *o = &m_drawObjects[k];
+
+					glBindVertexArray(o->vaoId);
+
+					for (int i = 0; i < o->subMeshs.size(); i++)
 					{
+						render::DrawObject::SubMesh *sm = &o->subMeshs[i];
+
 						glActiveTexture(GL_TEXTURE0);
-						glBindTexture(GL_TEXTURE_2D, sm.textureId);
+						glBindTexture(GL_TEXTURE_2D, sm->textureId);
 						glUniform1i(TextureId, 0);
 
-						glDrawArrays(GL_TRIANGLES, sm.idxBegin, sm.cntVertex);
+						glDrawArrays(GL_TRIANGLES, sm->idxBegin, sm->cntVertex);
+
 						glBindTexture(GL_TEXTURE_2D, 0);
 					}
 				}

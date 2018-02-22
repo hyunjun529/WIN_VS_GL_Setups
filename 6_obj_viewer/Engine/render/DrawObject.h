@@ -20,8 +20,14 @@ namespace kata
 			int m_idx = -1;
 
 		public:
+			GLuint vaoId;
+
+			GLuint vboVId;
+			GLuint vboUvId;
+			GLuint vboNorId;
+
 			int numTriangles = 0;
-			std::vector<glm::vec4> bufferPosition;
+			std::vector<glm::vec3> bufferPosition;
 			std::vector<glm::vec2> bufferUV;
 			std::vector<glm::vec3> bufferNormal;
 

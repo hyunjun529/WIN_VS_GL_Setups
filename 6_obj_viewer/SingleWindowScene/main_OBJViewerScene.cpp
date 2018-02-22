@@ -54,7 +54,7 @@ int main(int argc, char** argv)
 	ImGui_ImplGlfwGL3_Init(window, true);
 	ImGui::StyleColorsClassic();
 
-
+	// init Components
 	kata::component::CameraInputComponent *inputCamera
 		= new kata::component::CameraInputComponent();
 
