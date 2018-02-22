@@ -62,7 +62,7 @@ namespace kata
 					{
 						render::DrawObject::SubMesh *sm = &o->subMeshs[i];
 
-						if (sm->textureId == 0)
+						if (sm->textureId == 0 && sm->texname != "")
 						{
 							glActiveTexture(GL_TEXTURE0);
 							glGenTextures(1, &sm->textureId);
@@ -226,6 +226,7 @@ namespace kata
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 				
 				glEnable(GL_DEPTH_TEST);
+
 				glEnable(GL_BLEND);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -302,7 +303,27 @@ namespace kata
 				}
 				if (m_inputImgui->funcLoad)
 				{
-					load("cube.obj", "C://Users//hyunjun529//Documents//WIN_VS_GL_Setups//6_obj_viewer//resource//cube//");
+					switch (m_inputImgui->param_load_obj)
+					{
+					case 1:
+						load("cube.obj", "..//resource//cube//");
+						break;
+					case 2:
+						load("bunny.obj", "..//resource//bunny//");
+						break;
+					case 3:
+						load("teapot.obj", "..//resource//teapot//");
+						break;
+					case 4:
+						load("capsule.obj", "..//resource//capsule//");
+						break;
+					case 5:
+						load("white_oak.obj", "..//resource//white_oak//");
+						break;
+					case 6:
+						load("kizunaai.obj", "..//resource//kizunaai//");
+						break;
+					}
 					m_inputImgui->funcLoad = false;
 				}
 

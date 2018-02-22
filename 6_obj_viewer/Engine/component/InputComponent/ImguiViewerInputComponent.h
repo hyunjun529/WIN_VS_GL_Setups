@@ -20,11 +20,11 @@ namespace kata
 			
 
 		public:
-			int spin = -1;
-
 			bool show_demo_window = false;
+			
 			bool funcReset = false;
 			bool funcLoad = false;
+			int param_load_obj = 0;
 
 			ImVec4 param_color_clear = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
@@ -43,16 +43,21 @@ namespace kata
 				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
 					1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 				if (ImGui::Button("Demo Window")) show_demo_window ^= 1;
-				
-				ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
-
-				ImGui::Text("reset or load .obj file");
-				if (ImGui::Button("reset")) funcReset = true;
-				if (ImGui::Button("load")) funcLoad = true;
 
 				ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
 
 				ImGui::ColorEdit3("clear color", (float*)&param_color_clear);
+
+				ImGui::Spacing(); ImGui::Separator(); ImGui::Spacing();
+
+				ImGui::Text("reset or load .obj file");
+				if (ImGui::Button("reset")) funcReset = true;
+				if (ImGui::Button("load cube")) { funcLoad = true; param_load_obj = 1; }
+				if (ImGui::Button("load bunny")) { funcLoad = true; param_load_obj = 2; }
+				if (ImGui::Button("load teapot")) { funcLoad = true; param_load_obj = 3; }
+				if (ImGui::Button("load capsule")) { funcLoad = true; param_load_obj = 4; }
+				if (ImGui::Button("load white_oak")) { funcLoad = true; param_load_obj = 5; }
+				if (ImGui::Button("load Kizuna A.I")) { funcLoad = true; param_load_obj = 6; }
 
 
 				if (show_demo_window)

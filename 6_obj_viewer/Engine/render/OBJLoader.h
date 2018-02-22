@@ -74,14 +74,20 @@ namespace kata
 				}
 
 				// load obj position, uv, normal from shapes
+				DrawObject::SubMesh sm;
+				sm.idxBegin = 0;
+				sm.cntVertex = 0;
+				sm.textureId = 0;
+				sm.texname = "";
+
 				for (size_t s = 0; s < shapes.size(); s++)
 				{
-					DrawObject::SubMesh sm;
-					int current_material_id = shapes[s].mesh.material_ids[0];
-					sm.idxBegin = 0;
-					sm.cntVertex = 0;
-					sm.textureId = 0;
-					sm.texname = materials[current_material_id].diffuse_texname;
+					int current_material_id = 0;
+					if (materials.size() > 0)
+					{
+						current_material_id = shapes[s].mesh.material_ids[0];
+						sm.texname = materials[current_material_id].diffuse_texname;
+					}
 
 					for (size_t f = 0; f < shapes[s].mesh.indices.size() / 3; f++)
 					{
@@ -202,8 +208,11 @@ namespace kata
 						else
 						{
 							o.subMeshs.push_back(sm);
-
-							sm.texname = materials[material_id].diffuse_texname;
+							
+							if (materials.size() > 0)
+							{
+								sm.texname = materials[material_id].diffuse_texname;
+							}
 							sm.idxBegin += sm.cntVertex;
 							sm.cntVertex = 3;
 
