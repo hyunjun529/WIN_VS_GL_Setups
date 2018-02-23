@@ -305,6 +305,7 @@ namespace kata
 				{
 					switch (m_inputImgui->param_load_obj)
 					{
+					// 빌드 설정에 따라서 상대 경로가 달라질 수 있습니다.
 					case 1:
 						load("cube.obj", "..//resource//cube//");
 						break;
